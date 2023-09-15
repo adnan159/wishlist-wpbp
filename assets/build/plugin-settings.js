@@ -1,0 +1,1 @@
+!function(){"use strict";var t;(t=jQuery)((()=>{t("#tabs").tabs()}))}();

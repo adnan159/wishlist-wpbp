@@ -60,6 +60,8 @@ class Settings_Page extends Base {
 		 *
 		 */
 		\add_menu_page( \__( 'WooCommerce Wishlist Settings', WW_TEXTDOMAIN ), WW_NAME, 'manage_options', WW_TEXTDOMAIN, array( $this, 'display_plugin_admin_page' ), 'dashicons-hammer', 90 );
+
+        add_submenu_page( WW_TEXTDOMAIN, 'Settings', \__( 'Wishlist Settings', WW_TEXTDOMAIN ), 'manage_options', 'wishlist-settings', array( $this, 'display_wishlist_settings' ));
 	}
 
 	/**
@@ -71,6 +73,10 @@ class Settings_Page extends Base {
 	public function display_plugin_admin_page() {
 		include_once WW_PLUGIN_ROOT . 'backend/views/admin.php';
 	}
+
+    public function display_wishlist_settings() {
+        echo '<div>Hello from settings page</div>';
+    }
 
 	/**
 	 * Add settings action link to the plugins page.

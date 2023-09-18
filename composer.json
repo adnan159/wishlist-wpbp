@@ -67,6 +67,7 @@
 	"autoload": {
 		"psr-4": {
 			"WooCommerce_Wishlist\\Backend\\": "backend/",
+			"WooCommerce_Wishlist\\App\\": "app/",
 			"WooCommerce_Wishlist\\Frontend\\": "frontend/",
 			"WooCommerce_Wishlist\\Rest\\": "rest/",
 			"WooCommerce_Wishlist\\Ajax\\": "ajax/",

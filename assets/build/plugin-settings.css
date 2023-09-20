@@ -1,1 +1,64 @@
-.ui-state-default{background:none repeat scroll 0 0 #e4e4e4;border:solid #ccc;border-width:1px 1px 0;display:inline;padding:12px 0}.ui-tabs-nav{border-bottom:1px solid #ccc;color:var(--my-plugin_color-primary);padding-bottom:9px;padding-left:10px}.ui-tabs-anchor,.ui-tabs-anchor:focus{box-shadow:none;color:#7f7f7f;font-size:15px;font-weight:600;line-height:24px;padding:10px;text-decoration:none}.ui-state-active a,.ui-tabs-anchor:hover{color:#000}.ui-tabs-active,.ui-tabs-active:active,.ui-tabs-active:hover{background:#efefef!important;color:#000}.metabox-holder .postbox{max-width:100%}.metabox-holder .postbox h3{border-bottom:1px solid #e0e0e0;padding-left:10px}.metabox-holder .postbox img{max-width:240px}.settings-tab{float:left}.right-column-settings-page{float:right;max-width:270px}
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./assets/src/styles/settings.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+.ui-state-default {
+  display: inline;
+  border-color: rgb(204, 204, 204);
+  border-width: 1px;
+  border-style: solid;
+  border-bottom-width: 0;
+  padding: 12px 0;
+  background: none repeat scroll 0 0 rgb(228, 228, 228);
+}
+
+.ui-tabs-nav {
+  padding-bottom: 9px;
+  padding-left: 10px;
+  border-bottom: 1px solid rgb(204, 204, 204);
+  color: var(--my-plugin_color-primary);
+}
+
+.ui-tabs-anchor,
+.ui-tabs-anchor:focus {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: rgb(127, 127, 127);
+  padding: 10px;
+  box-shadow: none;
+}
+
+.ui-tabs-anchor:hover,
+.ui-state-active a {
+  color: #000;
+}
+
+.ui-tabs-active,
+.ui-tabs-active:hover,
+.ui-tabs-active:active {
+  color: #000;
+  background: rgb(239, 239, 239) !important;
+}
+
+.metabox-holder .postbox {
+  max-width: 100%;
+}
+.metabox-holder .postbox h3 {
+  padding-left: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.metabox-holder .postbox img {
+  max-width: 240px;
+}
+
+.settings-tab {
+  float: left;
+}
+
+.right-column-settings-page {
+  max-width: 270px;
+  float: right;
+}
+
+/*# sourceMappingURL=plugin-settings.css.map*/

@@ -24,7 +24,7 @@ class Api {
     }
 
     public function ww_custom_api() {
-        $general_settings = new GeneralSettings();
+        $general_settings = new GlobalSettings();
         $general_settings->register_route();
     }
 }

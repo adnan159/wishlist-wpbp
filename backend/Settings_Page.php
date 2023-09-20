@@ -75,7 +75,7 @@ class Settings_Page extends Base {
 	}
 
     public function display_wishlist_settings() {
-        echo '<div>Hello from settings page</div>';
+        echo '<div id="ww-admin"></div>';
     }
 
 	/**

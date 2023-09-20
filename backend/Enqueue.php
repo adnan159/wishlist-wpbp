@@ -81,6 +81,9 @@ class Enqueue extends Base {
 		$styles[1] = new Style( WW_TEXTDOMAIN . '-admin-style', \plugins_url( 'assets/build/plugin-admin.css', WW_PLUGIN_ABSOLUTE ) );
 		$styles[1]->forLocation( Asset::BACKEND )->withVersion( WW_VERSION );
 		$styles[1]->withDependencies( 'dashicons' );
+        $styles[2] = new Style( WW_TEXTDOMAIN . '-admin-tailwind-style', \plugins_url( 'backend/views/asset/tailwind.css', WW_PLUGIN_ABSOLUTE ) );
+        $styles[2]->forLocation( Asset::BACKEND )->withVersion( WW_VERSION );
+        $styles[2]->withDependencies( 'dashicons' );
 
 		return $styles;
 	}

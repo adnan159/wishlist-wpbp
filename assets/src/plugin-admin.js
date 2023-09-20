@@ -1,6 +1,11 @@
+import { createRoot } from 'react-dom/client';
+import App from '../../backend/views/page/App';
 import './styles/admin.scss';
 
-// hello test
+const admin = document.getElementById( 'ww-admin' );
+
+const root = createRoot( admin );
+root.render( <App /> );
 
 /**
  * A void function.

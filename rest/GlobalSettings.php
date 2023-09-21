@@ -137,8 +137,6 @@ class GlobalSettings extends WP_REST_Controller {
         $data 	= [];
         $fields = $this->get_fields_for_response( $request );
 
-        error_log(print_r($item, true));
-
         if( in_array( 'enable_wishlist_for', $fields, true ) ) {
             $data['enable_wishlist_for'] = $item['enable_wishlist_for'];
         }
@@ -258,7 +256,7 @@ class GlobalSettings extends WP_REST_Controller {
 
         $links = [
             'self'	=> [
-                'href' => rest_url( trailingslashit( $base ) . $item->id ),
+                'href' => rest_url( trailingslashit( $base ) ),
             ],
             'collection' => [
                 'href'	=> rest_url( $base ),

@@ -88,6 +88,39 @@ class GlobalSettings extends WP_REST_Controller {
         if( isset( $request['cart_page_wishlist'] ) ) {
             $prepared['cart_page_wishlist'] = $request['cart_page_wishlist'];
         }
+        if( isset( $request['popup_enable'] ) ) {
+            $prepared['popup_enable'] = $request['popup_enable'];
+        }
+        if( isset( $request['popup_title'] ) ) {
+            $prepared['popup_title'] = $request['popup_title'];
+        }
+        if( isset( $request['popup_button_text'] ) ) {
+            $prepared['popup_button_text'] = $request['popup_button_text'];
+        }
+        if( isset( $request['popup_feature_image_enable'] ) ) {
+            $prepared['popup_feature_image_enable'] = $request['popup_feature_image_enable'];
+        }
+        if( isset( $request['popup_icon_image'] ) ) {
+            $prepared['popup_icon_image'] = $request['popup_icon_image'];
+        }
+        if( isset( $request['theme_default_button_style'] ) ) {
+            $prepared['theme_default_button_style'] = $request['theme_default_button_style'];
+        }
+        if( isset( $request['popup_button_color'] ) ) {
+            $prepared['popup_button_color'] = $request['popup_button_color'];
+        }
+        if( isset( $request['popup_button_size'] ) ) {
+            $prepared['popup_button_size'] = $request['popup_button_size'];
+        }
+        if( isset( $request['popup_notification_text'] ) ) {
+            $prepared['popup_notification_text'] = $request['popup_notification_text'];
+        }
+        if( isset( $request['popup_notification_icon'] ) ) {
+            $prepared['popup_notification_icon'] = $request['popup_notification_icon'];
+        }
+        if( isset( $request['popup_notification_button_text'] ) ) {
+            $prepared['popup_notification_button_text'] = $request['popup_notification_button_text'];
+        }
 
         return $prepared;
     }
@@ -144,6 +177,50 @@ class GlobalSettings extends WP_REST_Controller {
 
         if( in_array( 'cart_page_wishlist', $fields, true ) ) {
             $data['cart_page_wishlist'] = $item['cart_page_wishlist'];
+        }
+
+        if( in_array( 'popup_enable', $fields, true ) ) {
+            $data['popup_enable'] = $item['popup_enable'];
+        }
+
+        if( in_array( 'popup_title', $fields, true ) ) {
+            $data['popup_title'] = $item['popup_title'];
+        }
+
+        if( in_array( 'popup_button_text', $fields, true ) ) {
+            $data['popup_button_text'] = $item['popup_button_text'];
+        }
+
+        if( in_array( 'popup_feature_image_enable', $fields, true ) ) {
+            $data['popup_feature_image_enable'] = $item['popup_feature_image_enable'];
+        }
+
+        if( in_array( 'popup_icon_image', $fields, true ) ) {
+            $data['popup_icon_image'] = $item['popup_icon_image'];
+        }
+
+        if( in_array( 'theme_default_button_style', $fields, true ) ) {
+            $data['theme_default_button_style'] = $item['theme_default_button_style'];
+        }
+
+        if( in_array( 'popup_button_color', $fields, true ) ) {
+            $data['popup_button_color'] = $item['popup_button_color'];
+        }
+
+        if( in_array( 'popup_button_size', $fields, true ) ) {
+            $data['popup_button_size'] = $item['popup_button_size'];
+        }
+
+        if( in_array( 'popup_notification_text', $fields, true ) ) {
+            $data['popup_notification_text'] = $item['popup_notification_text'];
+        }
+
+        if( in_array( 'popup_notification_icon', $fields, true ) ) {
+            $data['popup_notification_icon'] = $item['popup_notification_icon'];
+        }
+
+        if( in_array( 'popup_notification_button_text', $fields, true ) ) {
+            $data['popup_notification_button_text'] = $item['popup_notification_button_text'];
         }
 
         $context 	= ! empty( $request['context'] ) ? $request['context'] : 'view';
@@ -270,6 +347,90 @@ class GlobalSettings extends WP_REST_Controller {
                     'type'			=> 'boolean',
                     'context'		=> [ 'view', 'edit' ],
                     'required'		=> false,
+                ],
+                'popup_enable' => [
+                    'description'	=> __('Popup Enable/Disable' ),
+                    'type'			=> 'boolean',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                ],
+                'popup_title' => [
+                    'description'	=> __('Popup Title' ),
+                    'type'			=> 'string',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                    'arg_options'	=> [
+                        'sanitize_callback'	=> 'sanitize_text_field',
+                    ],
+                ],
+                'popup_button_text' => [
+                    'description'	=> __('Popup Button Text' ),
+                    'type'			=> 'string',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                    'arg_options'	=> [
+                        'sanitize_callback'	=> 'sanitize_text_field',
+                    ],
+                ],
+                'popup_feature_image_enable' => [
+                    'description'	=> __('Popup feature image Enable/Disable' ),
+                    'type'			=> 'boolean',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                ],
+                'popup_icon_image' => [
+                    'description'	=> __('Popup Icon Image' ),
+                    'type'			=> 'url',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                    'arg_options'	=> [
+                        'sanitize_callback'	=> 'sanitize_url',
+                    ],
+                ],
+                'theme_default_button_style' => [
+                    'description'	=> __('Popup button style Enable/Disable' ),
+                    'type'			=> 'boolean',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                ],
+                'popup_button_color' => [
+                    'description'	=> __('Popup Button Color' ),
+                    'type'			=> 'array',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                ],
+                'popup_button_size' => [
+                    'description'	=> __('Popup Button Size' ),
+                    'type'			=> 'array',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                ],
+                'popup_notification_text' => [
+                    'description'	=> __('Popup Notification Text' ),
+                    'type'			=> 'string',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                    'arg_options'	=> [
+                        'sanitize_callback'	=> 'sanitize_text_field',
+                    ],
+                ],
+                'popup_notification_icon' => [
+                    'description'	=> __('Popup Notification Icon' ),
+                    'type'			=> 'url',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                    'arg_options'	=> [
+                        'sanitize_callback'	=> 'sanitize_url',
+                    ],
+                ],
+                'popup_notification_button_text' => [
+                    'description'	=> __('Popup Notification Button Text' ),
+                    'type'			=> 'string',
+                    'context'		=> [ 'view', 'edit' ],
+                    'required'		=> false,
+                    'arg_options'	=> [
+                        'sanitize_callback'	=> 'sanitize_text_field',
+                    ],
                 ],
             ],
         ];

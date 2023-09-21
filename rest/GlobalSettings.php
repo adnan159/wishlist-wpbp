@@ -107,10 +107,32 @@ class GlobalSettings extends WP_REST_Controller {
             $prepared['theme_default_button_style'] = $request['theme_default_button_style'];
         }
         if( isset( $request['popup_button_color'] ) ) {
-            $prepared['popup_button_color'] = $request['popup_button_color'];
+            if( $request['popup_button_color'][0]['background_color'] ) {
+                $prepared['popup_button_color'][0]['background_color'] = $request['popup_button_color'][0]['background_color'];
+            }
+            if( $request['popup_button_color'][0]['background_hover_color'] ) {
+                $prepared['popup_button_color'][0]['background_hover_color'] = $request['popup_button_color'][0]['background_hover_color'];
+            }
+            if( $request['popup_button_color'][0]['border_color'] ) {
+                $prepared['popup_button_color'][0]['border_color'] = $request['popup_button_color'][0]['border_color'];
+            }
+            if( $request['popup_button_color'][0]['border_hover_color'] ) {
+                $prepared['popup_button_color'][0]['border_hover_color'] = $request['popup_button_color'][0]['border_hover_color'];
+            }
         }
         if( isset( $request['popup_button_size'] ) ) {
-            $prepared['popup_button_size'] = $request['popup_button_size'];
+            if( $request['popup_button_size'][0]['border_width'] ) {
+                $prepared['popup_button_size'][0]['border_width'] = $request['popup_button_size'][0]['border_width'];
+            }
+            if( $request['popup_button_size'][0]['border_height'] ) {
+                $prepared['popup_button_size'][0]['border_height'] = $request['popup_button_size'][0]['border_height'];
+            }
+            if( $request['popup_button_size'][0]['border_radios'] ) {
+                $prepared['popup_button_size'][0]['border_radios'] = $request['popup_button_size'][0]['border_radios'];
+            }
+            if( $request['popup_button_size'][0]['popup_button_margin'] ) {
+                $prepared['popup_button_size'][0]['popup_button_margin'] = $request['popup_button_size'][0]['popup_button_margin'];
+            }
         }
         if( isset( $request['popup_notification_text'] ) ) {
             $prepared['popup_notification_text'] = $request['popup_notification_text'];
@@ -393,15 +415,63 @@ class GlobalSettings extends WP_REST_Controller {
                 ],
                 'popup_button_color' => [
                     'description'	=> __('Popup Button Color' ),
-                    'type'			=> 'array',
-                    'context'		=> [ 'view', 'edit' ],
-                    'required'		=> false,
+                    'type'			=> 'object',
+                    'properties'    => [
+                        'background_color' => [
+                            'description'	=> __('Popup button Background Color' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                        ],
+                        'background_hover_color' => [
+                            'description'	=> __('Popup button Background Hover Color' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                        ],
+                        'border_color' => [
+                            'description'	=> __('Popup button Border Color' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                        ],
+                        'border_hover_color' => [
+                            'description'	=> __('Popup button Border Hover Color' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                        ],
+                    ]
                 ],
                 'popup_button_size' => [
                     'description'	=> __('Popup Button Size' ),
-                    'type'			=> 'array',
-                    'context'		=> [ 'view', 'edit' ],
-                    'required'		=> false,
+                    'type'			=> 'object',
+                    'properties'    => [
+                        'border_width' => [
+                            'description'	=> __('Popup button Border Width' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                        ],
+                        'border_height' => [
+                            'description'	=> __('Popup button Border Height' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                        ],
+                        'popup_button_margin' => [
+                            'description'	=> __('Popup button margin' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                        ],
+                        'border_radios' => [
+                            'description'	=> __('Popup button Border radios' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                        ],
+                    ]
                 ],
                 'popup_notification_text' => [
                     'description'	=> __('Popup Notification Text' ),

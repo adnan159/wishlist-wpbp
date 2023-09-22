@@ -307,6 +307,9 @@ class GlobalSettings extends WP_REST_Controller {
                     'type'			=> 'string',
                     'context'		=> [ 'view', 'edit' ],
                     'required'		=> true,
+                    'arg_options'	=> [
+                        'sanitize_callback'	=> 'sanitize_text_field',
+                    ],
                 ],
                 'default_wishlist_name' => [
                     'description'	=> __('Name of Wishlist' ),
@@ -422,24 +425,36 @@ class GlobalSettings extends WP_REST_Controller {
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'background_hover_color' => [
                             'description'	=> __('Popup button Background Hover Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'border_color' => [
                             'description'	=> __('Popup button Border Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'border_hover_color' => [
                             'description'	=> __('Popup button Border Hover Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                     ]
                 ],
@@ -452,24 +467,36 @@ class GlobalSettings extends WP_REST_Controller {
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'border_height' => [
                             'description'	=> __('Popup button Border Height' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'popup_button_margin' => [
                             'description'	=> __('Popup button margin' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'border_radios' => [
                             'description'	=> __('Popup button Border radios' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                     ]
                 ],

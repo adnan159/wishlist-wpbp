@@ -39,6 +39,11 @@ class ProductListingSettings extends WP_REST_Controller {
                 'icon_color'        => '#958303',
                 'icon_hover_color'  => '#4359078'
             ],
+            'listing_text_style'    => [
+                'text_size'         => '10px',
+                'text_color'        => '#48957435',
+                'text_hover_color'  => '#439578'
+            ],
             'listing_button_color'  => [
                 'background_color'          => '#349058',
                 'background_hover_color'    => '#458943',
@@ -111,6 +116,17 @@ class ProductListingSettings extends WP_REST_Controller {
                 $prepared['listing_icon_style']['icon_hover_color'] = $request['listing_icon_style']['icon_hover_color'];
             }
         }
+        if( isset( $request['listing_text_style'] ) ) {
+            if( $request['listing_text_style']['text_size'] ) {
+                $prepared['listing_text_style']['text_size'] = $request['listing_text_style']['text_size'];
+            }
+            if( $request['listing_text_style']['text_color'] ) {
+                $prepared['listing_text_style']['text_color'] = $request['listing_text_style']['text_color'];
+            }
+            if( $request['listing_text_style']['text_hover_color'] ) {
+                $prepared['listing_text_style']['text_hover_color'] = $request['listing_text_style']['text_hover_color'];
+            }
+        }
         if( isset( $request['listing_button_color'] ) ) {
             if( $request['listing_button_color']['background_color'] ) {
                 $prepared['listing_button_color']['background_color'] = $request['listing_button_color']['background_color'];
@@ -179,6 +195,10 @@ class ProductListingSettings extends WP_REST_Controller {
             $data['listing_icon_style'] = $item['listing_icon_style'];
         }
 
+        if( in_array( 'listing_text_style', $fields, true ) ) {
+            $data['listing_text_style'] = $item['listing_text_style'];
+        }
+
         if( in_array( 'listing_button_color', $fields, true ) ) {
             $data['listing_button_color'] = $item['listing_button_color'];
         }
@@ -218,7 +238,7 @@ class ProductListingSettings extends WP_REST_Controller {
      * @return array link for the given post
      */
     public function prepare_links( $item ) {
-        $base = sprintf( '%s/%s', 'wp/wishlist/v1', 'global-settings' );
+        $base = sprintf( '%s/%s', 'wp/wishlist/v1', 'product-listing-settings' );
 
         $links = [
             'self'	=> [
@@ -273,13 +293,13 @@ class ProductListingSettings extends WP_REST_Controller {
             'type'				=> 'object',
             'properties'		=> [
                 'listing_settings_enable' => [
-                    'description'	=> __('Item count' ),
+                    'description'	=> __('Listing enable satatus' ),
                     'type'			=> 'boolean',
                     'context'		=> [ 'view', 'edit' ],
                     'required'		=> false,
                 ],
                 'listing_button_position' => [
-                    'description'	=> __('Enter Days ' ),
+                    'description'	=> __('Listing button position ' ),
                     'type'			=> 'string',
                     'context'		=> [ 'view', 'edit' ],
                     'required'		=> false,
@@ -288,7 +308,7 @@ class ProductListingSettings extends WP_REST_Controller {
                     ],
                 ],
                 'listing_button_type' => [
-                    'description'	=> __('Enter Days ' ),
+                    'description'	=> __('Listing Button type' ),
                     'type'			=> 'string',
                     'context'		=> [ 'view', 'edit' ],
                     'required'		=> false,
@@ -297,7 +317,7 @@ class ProductListingSettings extends WP_REST_Controller {
                     ],
                 ],
                 'listing_icon' => [
-                    'description'	=> __('Popup Icon Image' ),
+                    'description'	=> __('Listing Icon' ),
                     'type'			=> 'url',
                     'context'		=> [ 'view', 'edit' ],
                     'required'		=> false,
@@ -306,7 +326,7 @@ class ProductListingSettings extends WP_REST_Controller {
                     ],
                 ],
                 'listing_theme_default' => [
-                    'description'	=> __('Item count' ),
+                    'description'	=> __('Listing theme default status' ),
                     'type'			=> 'boolean',
                     'context'		=> [ 'view', 'edit' ],
                     'required'		=> false,
@@ -317,83 +337,151 @@ class ProductListingSettings extends WP_REST_Controller {
                     'type'			=> 'object',
                     'properties'    => [
                         'icon_size' => [
-                            'description'	=> __('Popup button Background Color' ),
+                            'description'	=> __('Listing icon size' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'icon_color' => [
-                            'description'	=> __('Popup button Background Hover Color' ),
+                            'description'	=> __('Listing icon Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'icon_hover_color' => [
-                            'description'	=> __('Popup button Border Hover Color' ),
+                            'description'	=> __('Listing icon Hover Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
+                        ],
+                    ]
+                ],
+                'listing_text_style' => [
+//                    '$schema'			=> 'http://json-schema.org/draft-04/schema#',
+                    'description'	=> __('Listing text style' ),
+                    'type'			=> 'object',
+                    'properties'    => [
+                        'text_size' => [
+                            'description'	=> __('Listing custom text size' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
+                        ],
+                        'text_color' => [
+                            'description'	=> __('Listing custom text color' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
+                        ],
+                        'text_hover_color' => [
+                            'description'	=> __('Listing custom Hover Color' ),
+                            'type'			=> 'string',
+                            'context'		=> [ 'view', 'edit' ],
+                            'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                     ]
                 ],
                 'listing_button_color' => [
-                    'description'	=> __('Popup Button Color' ),
+                    'description'	=> __('Listing Button Color' ),
                     'type'			=> 'object',
                     'properties'    => [
                         'background_color' => [
-                            'description'	=> __('Popup button Background Color' ),
+                            'description'	=> __('Listing Background Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'background_hover_color' => [
-                            'description'	=> __('Popup button Background Hover Color' ),
+                            'description'	=> __('Listing Background Hover Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'border_color' => [
-                            'description'	=> __('Popup button Border Color' ),
+                            'description'	=> __('Listing Border Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'border_hover_color' => [
-                            'description'	=> __('Popup button Border Hover Color' ),
+                            'description'	=> __('Listing Border Hover Color' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                     ]
                 ],
                 'listing_button_size' => [
-                    'description'	=> __('Popup Button Size' ),
+                    'description'	=> __('Listing Button Size' ),
                     'type'			=> 'object',
                     'properties'    => [
                         'border_width' => [
-                            'description'	=> __('Popup button Border Width' ),
+                            'description'	=> __('Listing button Border Width' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'border_height' => [
-                            'description'	=> __('Popup button Border Height' ),
+                            'description'	=> __('Listing button Border Height' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'popup_button_margin' => [
-                            'description'	=> __('Popup button margin' ),
+                            'description'	=> __('Listing button margin' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
                         'border_radios' => [
-                            'description'	=> __('Popup button Border radios' ),
+                            'description'	=> __('Listing button Border radios' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],
                             'required'		=> false,
+                            'arg_options'	=> [
+                                'sanitize_callback'	=> 'sanitize_text_field',
+                            ],
                         ],
+
                     ]
                 ]
             ],

@@ -24,8 +24,11 @@ class Api {
     }
 
     public function ww_custom_api() {
-        $general_settings = new GlobalSettings();
-        $general_settings->register_route();
+        $global_settings = new GlobalSettings();
+        $global_settings->register_route();
+
+        $product_listing_settings = new ProductListingSettings();
+        $product_listing_settings->register_route();
     }
 }
 

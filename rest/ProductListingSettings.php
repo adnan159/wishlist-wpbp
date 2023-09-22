@@ -101,42 +101,42 @@ class ProductListingSettings extends WP_REST_Controller {
             $prepared['listing_theme_default'] = $request['listing_theme_default'];
         }
         if( isset( $request['listing_icon_style'] ) ) {
-            if( $request['listing_icon_style'][0]['icon_size'] ) {
-                $prepared['listing_icon_style'][0]['icon_size'] = $request['listing_icon_style'][0]['icon_size'];
+            if( $request['listing_icon_style']['icon_size'] ) {
+                $prepared['listing_icon_style']['icon_size'] = $request['listing_icon_style']['icon_size'];
             }
-            if( $request['listing_icon_style'][0]['icon_color'] ) {
-                $prepared['listing_icon_style'][0]['icon_color'] = $request['listing_icon_style'][0]['icon_color'];
+            if( $request['listing_icon_style']['icon_color'] ) {
+                $prepared['listing_icon_style']['icon_color'] = $request['listing_icon_style']['icon_color'];
             }
-            if( $request['listing_icon_style'][0]['icon_hover_color'] ) {
-                $prepared['listing_icon_style'][0]['icon_hover_color'] = $request['listing_icon_style'][0]['icon_hover_color'];
+            if( $request['listing_icon_style']['icon_hover_color'] ) {
+                $prepared['listing_icon_style']['icon_hover_color'] = $request['listing_icon_style']['icon_hover_color'];
             }
         }
         if( isset( $request['listing_button_color'] ) ) {
-            if( $request['listing_button_color'][0]['background_color'] ) {
-                $prepared['listing_button_color'][0]['background_color'] = $request['listing_button_color'][0]['background_color'];
+            if( $request['listing_button_color']['background_color'] ) {
+                $prepared['listing_button_color']['background_color'] = $request['listing_button_color']['background_color'];
             }
-            if( $request['listing_button_color'][0]['background_hover_color'] ) {
-                $prepared['listing_button_color'][0]['background_hover_color'] = $request['listing_button_color'][0]['background_hover_color'];
+            if( $request['listing_button_color']['background_hover_color'] ) {
+                $prepared['listing_button_color']['background_hover_color'] = $request['listing_button_color']['background_hover_color'];
             }
-            if( $request['listing_button_color'][0]['border_color'] ) {
-                $prepared['listing_button_color'][0]['border_color'] = $request['listing_button_color'][0]['border_color'];
+            if( $request['listing_button_color']['border_color'] ) {
+                $prepared['listing_button_color']['border_color'] = $request['listing_button_color']['border_color'];
             }
-            if( $request['listing_button_color'][0]['border_hover_color'] ) {
-                $prepared['listing_button_color'][0]['border_hover_color'] = $request['listing_button_color'][0]['border_hover_color'];
+            if( $request['listing_button_color']['border_hover_color'] ) {
+                $prepared['listing_button_color']['border_hover_color'] = $request['listing_button_color']['border_hover_color'];
             }
         }
         if( isset( $request['listing_button_size'] ) ) {
-            if( $request['listing_button_size'][0]['border_width'] ) {
-                $prepared['listing_button_size'][0]['border_width'] = $request['listing_button_size'][0]['border_width'];
+            if( $request['listing_button_size']['border_width'] ) {
+                $prepared['listing_button_size']['border_width'] = $request['listing_button_size']['border_width'];
             }
-            if( $request['listing_button_size'][0]['border_height'] ) {
-                $prepared['listing_button_size'][0]['border_height'] = $request['listing_button_size'][0]['border_height'];
+            if( $request['listing_button_size']['border_height'] ) {
+                $prepared['listing_button_size']['border_height'] = $request['listing_button_size']['border_height'];
             }
-            if( $request['listing_button_size'][0]['border_radios'] ) {
-                $prepared['listing_button_size'][0]['border_radios'] = $request['listing_button_size'][0]['border_radios'];
+            if( $request['listing_button_size']['border_radios'] ) {
+                $prepared['listing_button_size']['border_radios'] = $request['listing_button_size']['border_radios'];
             }
-            if( $request['listing_button_size'][0]['margin'] ) {
-                $prepared['listing_button_size'][0]['margin'] = $request['listing_button_size'][0]['margin'];
+            if( $request['listing_button_size']['margin'] ) {
+                $prepared['listing_button_size']['margin'] = $request['listing_button_size']['margin'];
             }
         }
 
@@ -312,6 +312,7 @@ class ProductListingSettings extends WP_REST_Controller {
                     'required'		=> false,
                 ],
                 'listing_icon_style' => [
+//                    '$schema'			=> 'http://json-schema.org/draft-04/schema#',
                     'description'	=> __('Popup Button Color' ),
                     'type'			=> 'object',
                     'properties'    => [

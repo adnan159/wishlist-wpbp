@@ -29,6 +29,9 @@ class Api {
 
         $product_listing_settings = new ProductListingSettings();
         $product_listing_settings->register_route();
+
+        $single_product_page_settings = new SingleProductPageSettings();
+        $single_product_page_settings->register_route();
     }
 }
 

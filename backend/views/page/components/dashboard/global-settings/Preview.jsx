@@ -1,6 +1,11 @@
+import Button from '../../common/Button';
 import Select from '../../common/Select';
 import Page from '../../pages/Page';
-export default function Preview() {
+export default function Preview( { buttonBackgroundColor } ) {
+	// console.log( colors );
+	const buttonStyle = {
+		backgroundColor: buttonBackgroundColor,
+	};
 	return (
 		<>
 			<Page classes="">
@@ -12,7 +17,7 @@ export default function Preview() {
 					</div>
 
 					<div className="wawl-py-8 wawl-px-8 wawl-border wawl-border-gray-200  wawl-rounded-lg wawl-mx-auto">
-						<div className=" wawl-mx-auto wawl-bg-white wawl-border-4 wawl-p-6 wawl-text-center">
+						<div className=" wawl-mx-auto wawl-bg-white wawl-border-4 wawl-text-center wawl-py-6">
 							<div className="wawl-border wawl-border-gray-300 wawl-w-max wawl-py-2 wawl-mb-3 wawl-px-4 wawl-block wawl-mx-auto">
 								<img
 									className="wawl-mx-auto"
@@ -22,8 +27,29 @@ export default function Preview() {
 							<span className=" wawl-text-base">
 								Chose a wishlist
 							</span>
-							<div className="wawl-my-4 wawl-px-6">
-								<Select />
+							<div
+								className="wawl-my-4 wawl-px-6 "
+								style={ buttonStyle }
+							>
+								<Select
+									classes=""
+									size="wawl-h-12 wawl-w-full wawl-my-6"
+								/>
+								<Button
+									onClick={ () => {
+										window.open();
+									} }
+									// style={ {
+									// 	backgroundColor: ,
+									// } }
+									buttonStyle={ 'button-default' }
+									iconPosition={ 'after' }
+									addBgColor={ true }
+									classNames={ 'wawl-w-full wawl-bg-default' }
+									icon={ '' }
+								>
+									{ 'Add to wishlist' }
+								</Button>
 							</div>
 						</div>
 					</div>

@@ -35,6 +35,7 @@ module.exports = {
 			colors: {
 				primary: '#2C2C2C',
 				accent: '#22577A',
+				default: '#4B6F23',
 			},
 			boxShadow: {
 				primary: '0px 1px 4px rgba(0, 0, 0, 0.16) !important',

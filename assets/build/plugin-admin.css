@@ -56,4 +56,62 @@ input[type=search] {
   border: 1px solid rgb(241, 243, 247);
 }
 
+input[type=color] {
+  border: none;
+  border-radius: 4px;
+}
+
+.color-input-container {
+  position: relative;
+  display: inline-block;
+}
+
+.color-input-container input[type=color] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: #b7b7b7;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  color: #110ee4;
+  border: 1.5px solid #b7b7b7;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Style for the pen icon */
+.color-input-container .pen-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #df2d2d; /* Adjust the icon color as needed */
+  font-size: 20px; /* Adjust the icon size as needed */
+  cursor: pointer;
+}
+
+*:focus {
+  border-radius: 4px;
+  outline: none;
+}
+
+::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+::-webkit-color-swatch {
+  border: 0;
+  border-radius: 4px;
+}
+
+::-moz-color-swatch,
+::-moz-focus-inner {
+  border: 0;
+}
+
+::-moz-focus-inner {
+  padding: 0;
+}
+
 /*# sourceMappingURL=plugin-admin.css.map*/

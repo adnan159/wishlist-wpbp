@@ -563,6 +563,10 @@ video {
   z-index: 10;
 }
 
+.wawl-col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
 .wawl-col-span-12 {
   grid-column: span 12 / span 12;
 }
@@ -577,9 +581,33 @@ video {
   margin-right: auto;
 }
 
+.wawl-my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.wawl-my-2\.5 {
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+}
+
 .wawl-my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.wawl-my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.wawl-my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.-wawl-mb-8 {
+  margin-bottom: -2rem;
 }
 
 .-wawl-mt-1 {
@@ -614,8 +642,8 @@ video {
   margin-left: 0.75rem;
 }
 
-.wawl-ml-4 {
-  margin-left: 1rem;
+.wawl-mr-8 {
+  margin-right: 2rem;
 }
 
 .wawl-mt-1 {
@@ -640,6 +668,10 @@ video {
 
 .wawl-mt-2 {
   margin-top: 0.5rem;
+}
+
+.wawl-mt-20 {
+  margin-top: 5rem;
 }
 
 .wawl-mt-3 {
@@ -726,6 +758,10 @@ video {
   width: 2.75rem;
 }
 
+.wawl-w-16 {
+  width: 4rem;
+}
+
 .wawl-w-32 {
   width: 8rem;
 }
@@ -772,6 +808,10 @@ video {
 
 .wawl-max-w-full {
   max-width: 100%;
+}
+
+.wawl-max-w-max {
+  max-width: max-content;
 }
 
 .wawl-flex-1 {
@@ -838,6 +878,14 @@ video {
 .wawl-select-none {
   -webkit-user-select: none;
           user-select: none;
+}
+
+.wawl-grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.wawl-grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .wawl-flex-row {
@@ -971,9 +1019,19 @@ video {
   background-color: rgb(34 87 122 / var(--tw-bg-opacity));
 }
 
+.wawl-bg-default {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 111 35 / var(--tw-bg-opacity));
+}
+
 .wawl-bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.wawl-bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 
 .wawl-bg-white {
@@ -996,10 +1054,6 @@ video {
 
 .wawl-p-4 {
   padding: 1rem;
-}
-
-.wawl-p-6 {
-  padding: 1.5rem;
 }
 
 .\!wawl-px-4 {
@@ -1055,6 +1109,11 @@ video {
 .wawl-py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.wawl-py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .wawl-py-7 {

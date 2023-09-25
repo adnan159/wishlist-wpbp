@@ -2,9 +2,24 @@ import { useState } from 'react';
 import IconImage from '../../common/IconImage';
 import Input from '../../common/Input';
 import InputColorPicker from '../../common/InputColorPicker';
+import PopupBtnCustomStyle from '../../common/PopupBtnCustomStyle';
 import Toggle from '../../common/Toggle';
 import Page from '../../pages/Page';
-export default function PopupSettingsLeft() {
+export default function PopupSettingsLeft( {
+	onColorChange,
+	buttonBackgroundColor,
+} ) {
+	const [ buttonBackgroundColor, setButtonBackgroundColor ] =
+		useState( '#ffffff' );
+
+	const handleColorChange = ( name, value ) => {
+		// Update the background color state based on the input name
+		if ( name === 'bgColor' ) {
+			setButtonBackgroundColor( value );
+		}
+		console.log( value );
+	};
+
 	const globalSettingsRadio = [
 		{
 			id: '1',
@@ -72,19 +87,19 @@ export default function PopupSettingsLeft() {
 		},
 		default_button_style: {
 			label: 'Theme Default Button Style',
-			component: <InputColorPicker />,
+			component: <Toggle />,
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
 		popup_button_color: {
 			label: 'Popup button color',
-			component: <Toggle />,
+			component: <InputColorPicker onColorChange={ handleColorChange } />,
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
 		popup_button_size: {
 			label: 'Popup button Size',
-			component: <Toggle />,
+			component: <PopupBtnCustomStyle />,
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
@@ -109,17 +124,7 @@ export default function PopupSettingsLeft() {
 		},
 		icon_image_after: {
 			label: 'Icon Image',
-			component: (
-				<Input
-					classNamees={ '' }
-					size={ 'wawl-w-40 wawl-h-12' }
-					placeholder={ 'Enter Days' }
-					name={ 'icon_image_after' }
-					type={ 'text' }
-					id={ 'wishlist' }
-					required={ true }
-				/>
-			),
+			component: <IconImage />,
 		},
 		button_text: {
 			label: 'Icon Image',
@@ -151,7 +156,20 @@ export default function PopupSettingsLeft() {
 						{ Object.keys( globalWishlistSettingsItems ).map(
 							( itemKey ) => (
 								<div key={ itemKey }>
-									<div className="wawl-flex wawl-justify-between wawl-mt-12">
+									{ globalWishlistSettingsItems[ itemKey ]
+										.title && (
+										<div className="wawl-w-full">
+											<h2 className="wawl-text-xl wawl-font-semibold wawl-mt-20 -wawl-mb-8">
+												{
+													globalWishlistSettingsItems[
+														itemKey
+													].title
+												}
+											</h2>
+										</div>
+									) }
+
+									<div className="wawl-flex wawl-justify-between wawl-my-8">
 										<div className="wawl-basis-2/5">
 											<h3 className="wawl-text-base wawl-font-medium">
 												{
@@ -168,7 +186,7 @@ export default function PopupSettingsLeft() {
 												}
 											</p>
 										</div>
-										<div className="wawl-basis-3/5 wawl-flex wawl-gap-8 wawl-justify-start">
+										<div className="wawl-basis wawl-basis-3/5 wawl-flex wawl-gap-8 wawl-justify-start">
 											{
 												globalWishlistSettingsItems[
 													itemKey

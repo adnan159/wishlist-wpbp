@@ -32,6 +32,9 @@ class Api {
 
         $single_product_page_settings = new SingleProductPageSettings();
         $single_product_page_settings->register_route();
+
+        $my_wishlist_page = new MyWishlistPage();
+        $my_wishlist_page->register_route();
     }
 }
 

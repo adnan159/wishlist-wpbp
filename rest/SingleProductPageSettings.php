@@ -75,10 +75,8 @@ class SingleProductPageSettings extends WP_REST_Controller {
 
         $updated_data = $single_product_page_settings->create_single_product_page_settings( $prepared );
 
-//        return $updated_data;
-
         $response = $this->prepare_item_for_response( $updated_data, $request );
-//        $response = rest_ensure_response( $response );
+        $response = rest_ensure_response( $response );
 
         return $response;
     }
@@ -178,8 +176,6 @@ class SingleProductPageSettings extends WP_REST_Controller {
         $data 	= [];
         $fields = $this->get_fields_for_response( $request );
 
-        error_log(print_r($fields, true));
-
         if( in_array( 'single_product_page_status', $fields, true ) ) {
             $data['single_product_page_status'] = $item['single_product_page_status'];
         }
@@ -251,7 +247,7 @@ class SingleProductPageSettings extends WP_REST_Controller {
      * @return array link for the given post
      */
     public function prepare_links( $item ) {
-        $base = sprintf( '%s/%s', 'wp/wishlist/v1', 'product-listing-settings' );
+        $base = sprintf( '%s/%s', 'wp/wishlist/v1', 'single-product-page-settings' );
 
         $links = [
             'self'	=> [

@@ -9,7 +9,7 @@ use WP_REST_Controller;
 class GlobalSettings extends WP_REST_Controller {
     public function register_route(){
         register_rest_route(
-            'wp/wishlist/v1',
+            WW_API_NAME_SPACE,
         'global-settings', array(
             array(
                 'methods'             => WP_REST_Server::READABLE,
@@ -274,7 +274,7 @@ class GlobalSettings extends WP_REST_Controller {
      * @return array link for the given post
      */
     public function prepare_links( $item ) {
-        $base = sprintf( '%s/%s', 'wp/wishlist/v1', 'global-settings' );
+        $base = sprintf( '%s/%s', WW_API_NAME_SPACE, 'global-settings' );
 
         $links = [
             'self'	=> [

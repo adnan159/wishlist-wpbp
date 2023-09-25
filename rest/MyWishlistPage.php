@@ -9,7 +9,7 @@ use WP_REST_Controller;
 class MyWishlistPage extends WP_REST_Controller {
     public function register_route(){
         register_rest_route(
-            'wp/wishlist/v1',
+            WW_API_NAME_SPACE,
             'my-wishlist-page', array(
             array(
                 'methods'             => WP_REST_Server::READABLE,
@@ -257,7 +257,7 @@ class MyWishlistPage extends WP_REST_Controller {
      * @return array link for the given post
      */
     public function prepare_links( $item ) {
-        $base = sprintf( '%s/%s', 'wp/wishlist/v1', 'my-wishlist-page' );
+        $base = sprintf( '%s/%s', WW_API_NAME_SPACE, 'my-wishlist-page' );
 
         $links = [
             'self'	=> [

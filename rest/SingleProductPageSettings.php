@@ -10,7 +10,7 @@ use WP_REST_Controller;
 class SingleProductPageSettings extends WP_REST_Controller {
     public function register_route(){
         register_rest_route(
-            'wp/wishlist/v1',
+            WW_API_NAME_SPACE,
             'single-product-page-settings', array(
             array(
                 'methods'             => WP_REST_Server::READABLE,
@@ -247,7 +247,7 @@ class SingleProductPageSettings extends WP_REST_Controller {
      * @return array link for the given post
      */
     public function prepare_links( $item ) {
-        $base = sprintf( '%s/%s', 'wp/wishlist/v1', 'single-product-page-settings' );
+        $base = sprintf( '%s/%s', WW_API_NAME_SPACE, 'single-product-page-settings' );
 
         $links = [
             'self'	=> [

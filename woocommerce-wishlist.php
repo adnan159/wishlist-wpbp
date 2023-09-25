@@ -33,6 +33,7 @@ define( 'WW_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'WW_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'WW_MIN_PHP_VERSION', '7.4' );
 define( 'WW_WP_VERSION', '5.3' );
+define( 'WW_API_NAME_SPACE', 'wp/wishlist/v1');
 
 add_action(
 	'init',

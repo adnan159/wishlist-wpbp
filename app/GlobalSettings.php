@@ -10,6 +10,7 @@ class GlobalSettings {
     }
 
     public function create_global_settings( $prepared ) {
+
         $global_settings_default_value  = maybe_unserialize( get_option('ww_global_settings') );
 
         $updated = array_merge( (array) $global_settings_default_value, $prepared );

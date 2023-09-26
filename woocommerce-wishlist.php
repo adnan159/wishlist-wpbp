@@ -136,7 +136,7 @@ function ww_fs() {
 Puc_v4_Factory::buildUpdateChecker( 'https://github.com/user-name/repo-name/', __FILE__, 'unique-plugin-or-theme-slug' );
 
 if ( ! wp_installing() ) {
-	register_activation_hook( WW_TEXTDOMAIN . '/' . WW_TEXTDOMAIN . '.php', array( new \WooCommerce_Wishlist\Backend\ActDeact, 'activate' ) );
+	register_activation_hook( __FILE__, array( new \WooCommerce_Wishlist\Backend\ActDeact, 'activate' ) );
 	register_deactivation_hook( WW_TEXTDOMAIN . '/' . WW_TEXTDOMAIN . '.php', array( new \WooCommerce_Wishlist\Backend\ActDeact, 'deactivate' ) );
 	add_action(
 		'plugins_loaded',

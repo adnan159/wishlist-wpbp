@@ -13,6 +13,7 @@
 namespace WooCommerce_Wishlist\Backend;
 
 use WooCommerce_Wishlist\Engine\Base;
+use WooCommerce_Wishlist\App;
 
 /**
  * Activate and deactive method of the plugin and relates.
@@ -220,6 +221,11 @@ class ActDeact extends Base {
 	 */
 	private static function single_activate() {
 		// @TODO: Define activation functionality here
+        /*
+         * add plugin default value by this class
+        */
+        new App\SettingsDefault();
+
 		// add_role( 'advanced', __( 'Advanced' ) ); //Add a custom roles
 		self::add_capabilities();
 		self::upgrade_procedure();

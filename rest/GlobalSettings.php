@@ -27,8 +27,8 @@ class GlobalSettings extends WP_REST_Controller {
     }
 
     public function get_global_settings() {
-        $general_settings = new App\GlobalSettings();
-        $response = array( 'message' => 'Global Settings', 'data' => $general_settings->get_global_settings() );
+        $global_settings = new App\GlobalSettings();
+        $response = array( 'message' => 'Global Settings', 'data' => $global_settings->get_global_settings() );
         return new \WP_REST_Response( $response );
     }
 

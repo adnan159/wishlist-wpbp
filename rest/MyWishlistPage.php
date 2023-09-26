@@ -27,37 +27,12 @@ class MyWishlistPage extends WP_REST_Controller {
     }
 
     public function get_my_wishlist_settings() {
-        $wish_list_page = [
-            'wishlist_content'          => 'Temp Content',
-            'wishlist_page'             => 'true',
-            'wishlist_privacy'          => 'true',
-            'wishlist_creation_date'    => 'true',
-            'wishlist_counted_item'     => 'true',
-            'wishlist_action_button'             => [
-                'share'     => 'true',
-                'download'  => 'true',
-                'delete'    => 'true'
-            ],
-            'wishlist_add_to_cart'      => 'true',
-            'wishlist_add_recent_view'  => 'true',
-            'wishlist_share'            => 'true',
-            'wishlist_bulk_action'      => 'true',
-            'wishlist_product'          => 'true',
-            'wishlist_unit_price'       => 'true',
-            'wishlist_quantity'         => 'true',
-            'wishlist_stock_status'     => 'true'
-        ];
-
-//        update_option( 'my_wishlist_settings', $wish_list_page );
-
         $my_wishlist_page_settings = new App\MyWishlistPageSettings();
         $response = array( 'message' => 'My Wishlist Page Settings', 'data' => $my_wishlist_page_settings->get_my_wishlist_settings() );
         return new \WP_REST_Response( $response );
     }
 
     public function edit_my_wishlist_settings( $request ) {
-
-
         $my_wishlist_page_settings = new App\MyWishlistPageSettings();
         $prepared = $this->prepare_item_for_database( $request );
 
@@ -148,27 +123,6 @@ class MyWishlistPage extends WP_REST_Controller {
     public function prepare_item_for_response( $item, $request ) {
         $data 	= [];
         $fields = $this->get_fields_for_response( $request );
-
-        $wish_list_page = [
-            'wishlist_content'          => 'Temp Content',
-            'wishlist_page'             => 'true',
-            'wishlist_privacy'          => 'true',
-            'wishlist_creation_date'    => 'true',
-            'wishlist_counted_item'     => 'true',
-            'wishlist_action_button'             => [
-                'share'     => 'true',
-                'download'  => 'true',
-                'delete'    => 'true'
-            ],
-            'wishlist_add_to_cart'      => 'true',
-            'wishlist_add_recent_view'  => 'true',
-            'wishlist_share'            => 'true',
-            'wishlist_bulk_action'      => 'true',
-            'wishlist_product'          => 'true',
-            'wishlist_unit_price'       => 'true',
-            'wishlist_quantity'         => 'true',
-            'wishlist_stock_status'     => 'true'
-        ];
 
         if( in_array( 'wishlist_content', $fields, true ) ) {
             $data['wishlist_content'] = $item['wishlist_content'];

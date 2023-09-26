@@ -28,37 +28,6 @@ class SingleProductPageSettings extends WP_REST_Controller {
     }
 
     public function get_single_product_page_settings() {
-        $data = [
-            'single_product_page_status'            => 'true',
-            'single_product_page_button_position'   => 'On image top left',
-            'single_product_page_button_type'       => 'icon',
-            'single_product_page_button_text'       => 'Add to wishlist',
-            'single_product_page_icon'              => 'heart',
-            'single_product_page_theme_default'     => 'true',
-            'single_product_page_icon_style'        => [
-                'icon_size'         => '10px',
-                'icon_color'        => '#958303',
-                'icon_hover_color'  => '#4359078'
-            ],
-            'single_product_page_text_style'        => [
-                'text_size'         => '10px',
-                'text_color'        => '#48957435',
-                'text_hover_color'  => '#439578'
-            ],
-            'single_product_page__button_color'     => [
-                'background_color'          => '#349058',
-                'background_hover_color'    => '#458943',
-                'border_color'              => '#456544',
-                'border_hover_color'        => '#349054'
-            ],
-            'single_product_page_button_size'       => [
-                'border_width'      => '10px',
-                'border_height'     => '10px',
-                'border_radios'     => '10px',
-                'margin'            => '10px'
-            ]
-        ];
-
         $general_settings = new App\SingleProductPageSettings();
         $response = array( 'message' => 'Product Listing Settings', 'data' => $general_settings->get_single_product_page_settings() );
         return new \WP_REST_Response( $response );
@@ -270,37 +239,6 @@ class SingleProductPageSettings extends WP_REST_Controller {
         if( $this->schema ) {
             return $this->add_additional_fields_schema( $this->schema );
         }
-
-        $data = [
-            'single_product_page_status'            => 'true',
-            'single_product_page_button_position'   => 'On image top left',
-            'single_product_page_button_type'       => 'icon',
-            'single_product_page_button_text'       => 'Add to wishlist',
-            'single_product_page_icon'              => 'heart',
-            'single_product_page_theme_default'     => 'true',
-            'single_product_page_icon_style'        => [
-                'icon_size'         => '10px',
-                'icon_color'        => '#958303',
-                'icon_hover_color'  => '#4359078'
-            ],
-            'single_product_page_text_style'        => [
-                'text_size'         => '10px',
-                'text_color'        => '#48957435',
-                'text_hover_color'  => '#439578'
-            ],
-            'single_product_page__button_color'     => [
-                'background_color'          => '#349058',
-                'background_hover_color'    => '#458943',
-                'border_color'              => '#456544',
-                'border_hover_color'        => '#349054'
-            ],
-            'single_product_page_button_size'       => [
-                'border_width'      => '10px',
-                'border_height'     => '10px',
-                'border_radios'     => '10px',
-                'margin'            => '10px'
-            ]
-        ];
 
         $schema = [
             '$schema'			=> 'http://json-schema.org/draft-04/schema#',

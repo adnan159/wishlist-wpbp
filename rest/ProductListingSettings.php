@@ -28,35 +28,6 @@ class ProductListingSettings extends WP_REST_Controller {
     }
 
     public function get_product_listing_settings() {
-        $data = [
-            'listing_settings_enable'   => 'true',
-            'listing_button_position'   => 'On image top left',
-            'listing_button_type'       => 'icon',
-            'listing_icon'              => 'heart',
-            'listing_theme_default'     => 'true',
-            'listing_icon_style'        => [
-                'icon_size'         => '10px',
-                'icon_color'        => '#958303',
-                'icon_hover_color'  => '#4359078'
-            ],
-            'listing_text_style'    => [
-                'text_size'         => '10px',
-                'text_color'        => '#48957435',
-                'text_hover_color'  => '#439578'
-            ],
-            'listing_button_color'  => [
-                'background_color'          => '#349058',
-                'background_hover_color'    => '#458943',
-                'border_color'              => '#456544',
-                'border_hover_color'        => '#349054'
-            ],
-            'listing_button_size'       => [
-                'border_width'      => '10px',
-                'border_height'     => '10px',
-                'border_radios'     => '10px',
-                'margin'            => '10px'
-            ]
-        ];
 
         $general_settings = new App\ProductListingSettings();
         $response = array( 'message' => 'Product Listing Settings', 'data' => $general_settings->get_product_listing_settings() );
@@ -261,31 +232,6 @@ class ProductListingSettings extends WP_REST_Controller {
         if( $this->schema ) {
             return $this->add_additional_fields_schema( $this->schema );
         }
-
-        $data = [
-            'listing_settings_enable'   => 'true',
-            'listing_button_position'   => 'On image top left',
-            'listing_button_type'       => 'icon',
-            'listing_icon'              => 'heart',
-            'listing_theme_default'     => 'true',
-            'listing_icon_style'        => [
-                'icon_size'         => '10px',
-                'icon_color'        => '#958303',
-                'icon_hover_color'  => '#4359078'
-            ],
-            'listing_button_color'  => [
-                'background_color'          => '#349058',
-                'background_hover_color'    => '#458943',
-                'border_color'              => '#456544',
-                'border_hover_color'        => '#349054'
-            ],
-            'listing_button_size'       => [
-                'border_width'      => '10px',
-                'border_height'     => '10px',
-                'border_radios'     => '10px',
-                'margin'            => '10px'
-            ]
-        ];
 
         $schema = [
             '$schema'			=> 'http://json-schema.org/draft-04/schema#',

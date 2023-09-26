@@ -29,7 +29,10 @@ class Notices extends Base {
 			return;
 		}
 
-		\wpdesk_wp_notice( \__( 'Updated Messages', WW_TEXTDOMAIN ), 'updated' );
+        if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+            \wpdesk_wp_notice(\__('<strong><code>Wishlist</code> required <code>WooCommerce</code> install and active</strong>', WW_TEXTDOMAIN), 'warning');
+        }
+
 
 		$builder = new \Page_Madness_Detector(); // phpcs:ignore
 

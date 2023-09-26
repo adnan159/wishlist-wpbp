@@ -29,12 +29,19 @@ class Settings_Page extends Base {
 			return;
 		}
 
-		// Add the options page and menu item.
-		\add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
-		$realpath        = (string) \realpath( __DIR__ );
-		$plugin_basename = \plugin_basename( \plugin_dir_path( $realpath ) . WW_TEXTDOMAIN . '.php' );
-		\add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+        /*
+         * Add the options page and menu item.
+         *
+         * Load only when WooCommerce is active
+         */
+        if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+            \add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+        }
+
+        $realpath        = (string) \realpath( __DIR__ );
+        $plugin_basename = \plugin_basename( \plugin_dir_path( $realpath ) . WW_TEXTDOMAIN . '.php' );
+        \add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 	}
 
 	/**

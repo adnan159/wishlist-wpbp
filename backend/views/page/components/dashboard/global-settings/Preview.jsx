@@ -1,11 +1,15 @@
+import { useData } from '../../DataContext';
 import Button from '../../common/Button';
 import Select from '../../common/Select';
 import Page from '../../pages/Page';
-export default function Preview( { buttonBackgroundColor } ) {
-	// console.log( colors );
+export default function Preview( { onColorChange } ) {
+	const { butonStyles } = useData();
+	const { bgColor } = useData();
 	const buttonStyle = {
-		backgroundColor: buttonBackgroundColor,
+		backgroundColor: butonStyles,
 	};
+	console.log( 'buttonStyles', butonStyles, bgColor );
+
 	return (
 		<>
 			<Page classes="">
@@ -27,10 +31,7 @@ export default function Preview( { buttonBackgroundColor } ) {
 							<span className=" wawl-text-base">
 								Chose a wishlist
 							</span>
-							<div
-								className="wawl-my-4 wawl-px-6 "
-								style={ buttonStyle }
-							>
+							<div className="wawl-my-4 wawl-px-6 ">
 								<Select
 									classes=""
 									size="wawl-h-12 wawl-w-full wawl-my-6"
@@ -39,14 +40,13 @@ export default function Preview( { buttonBackgroundColor } ) {
 									onClick={ () => {
 										window.open();
 									} }
-									// style={ {
-									// 	backgroundColor: ,
-									// } }
+									style={ buttonStyle }
 									buttonStyle={ 'button-default' }
 									iconPosition={ 'after' }
 									addBgColor={ true }
 									classNames={ 'wawl-w-full wawl-bg-default' }
 									icon={ '' }
+									// onColorChange={ handleColorChange }
 								>
 									{ 'Add to wishlist' }
 								</Button>

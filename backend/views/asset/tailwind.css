@@ -686,6 +686,18 @@ video {
   margin-top: 2rem;
 }
 
+.wawl-ml-4 {
+  margin-left: 1rem;
+}
+
+.wawl-mr-0 {
+  margin-right: 0px;
+}
+
+.wawl-mr-0\.5 {
+  margin-right: 0.125rem;
+}
+
 .wawl-block {
   display: block;
 }
@@ -908,6 +920,10 @@ video {
   justify-content: flex-end;
 }
 
+.wawl-justify-center {
+  justify-content: center;
+}
+
 .wawl-justify-between {
   justify-content: space-between;
 }
@@ -918,6 +934,10 @@ video {
 
 .wawl-gap-8 {
   gap: 2rem;
+}
+
+.wawl-gap-6 {
+  gap: 1.5rem;
 }
 
 .wawl-divide-y > :not([hidden]) ~ :not([hidden]) {

@@ -1,24 +1,31 @@
 import { useState } from 'react';
+import { useData } from '../../DataContext';
+import Button from '../../common/Button';
 import IconImage from '../../common/IconImage';
 import Input from '../../common/Input';
 import InputColorPicker from '../../common/InputColorPicker';
 import PopupBtnCustomStyle from '../../common/PopupBtnCustomStyle';
 import Toggle from '../../common/Toggle';
 import Page from '../../pages/Page';
-export default function PopupSettingsLeft( {
-	onColorChange,
-	buttonBackgroundColor,
-} ) {
-	const [ buttonBackgroundColor, setButtonBackgroundColor ] =
-		useState( '#ffffff' );
+export default function PopupSettingsLeft( {} ) {
+	// const { butonStyles, updateButtonStyles } = useData();
+	const { updateButtonStyles } = useData();
+	const [ inputStyles, setInputStyles ] = useState( {} );
 
 	const handleColorChange = ( name, value ) => {
-		// Update the background color state based on the input name
+		const newInputStyles = setInputStyles( {
+			...inputStyles,
+			[ name ]: value,
+		} );
+		updateButtonStyles( newInputStyles );
 		if ( name === 'bgColor' ) {
-			setButtonBackgroundColor( value );
+			updateButtonStyles( value );
 		}
-		console.log( value );
+		if ( name === 'bgHoverColor' ) {
+			updateButtonStyles( value );
+		}
 	};
+	console.log( 'first color', inputStyles );
 
 	const globalSettingsRadio = [
 		{
@@ -199,6 +206,18 @@ export default function PopupSettingsLeft( {
 						) }
 					</div>
 				</div>
+				<Button
+					onClick={ () => {
+						window.open();
+					} }
+					buttonStyle={ 'button-primary' }
+					iconPosition={ 'after' }
+					addBgColor={ true }
+					classNames={ '' }
+					icon={ '' }
+				>
+					{ 'Save' }
+				</Button>
 			</Page>
 		</>
 	);

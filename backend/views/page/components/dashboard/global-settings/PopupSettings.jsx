@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { DataProvider } from '../../DataContext';
 import DisclosureWList from '../../common/DisclosureWList';
 import Input from '../../common/Input';
 import RadioButton from '../../common/RadioButton';
@@ -10,6 +11,7 @@ import PageLeft from '../../pages/PageLeft';
 import PageRight from '../../pages/PageRight';
 import PopupSettingsLeft from './PopupSettingsLeft';
 import Preview from './Preview';
+
 export default function PopupSettings() {
 	const globalSettingsRadio = [
 		{
@@ -115,6 +117,16 @@ export default function PopupSettings() {
 		setList( e.target.value );
 	};
 	console.log( list );
+	const [ buttonBackgroundColor, setButtonBackgroundColor ] = useState( '' );
+
+	const handleColorChange = ( name, value ) => {
+		// Update the background color state based on the input name
+		if ( name === 'bgColor' ) {
+			setButtonBackgroundColor( value );
+		}
+		console.log( value );
+	};
+	console.log( 'first color', buttonBackgroundColor );
 	return (
 		<>
 			<Page classes="wawl-mt-8 wawl-py-8 wawl-px-16 wawl-border wawl-border-gray-200 wawl-shadow-lg wawl-rounded-lg">
@@ -124,12 +136,22 @@ export default function PopupSettings() {
 						children={
 							<>
 								<Page>
-									<PageLeft>
-										<PopupSettingsLeft />
-									</PageLeft>
-									<PageRight>
-										<Preview />
-									</PageRight>
+									<DataProvider>
+										<PageLeft>
+											<PopupSettingsLeft
+												onColorChange={
+													handleColorChange
+												}
+											/>
+										</PageLeft>
+										<PageRight>
+											<Preview
+												buttonBackgroundColor={
+													buttonBackgroundColor
+												}
+											/>
+										</PageRight>
+									</DataProvider>
 								</Page>
 							</>
 						}

@@ -11,6 +11,7 @@ export default function PopupSettingsLeft( {} ) {
 	// const { butonStyles, updateButtonStyles } = useData();
 	const { updateButtonStyles } = useData();
 	const [ inputStyles, setInputStyles ] = useState( {} );
+	const [ selectedImages, setSelectedImages ] = useState( {} );
 
 	const handleColorChange = ( name, value ) => {
 		const newInputStyles = setInputStyles( {
@@ -18,13 +19,27 @@ export default function PopupSettingsLeft( {} ) {
 			[ name ]: value,
 		} );
 		updateButtonStyles( newInputStyles );
-		if ( name === 'bgColor' ) {
+		if ( name === 'background_color' ) {
 			updateButtonStyles( value );
-		}
-		if ( name === 'bgHoverColor' ) {
+		} else if ( name === 'background_hover_color' ) {
+			updateButtonStyles( value );
+		} else if ( name === 'border_color' ) {
+			updateButtonStyles( value );
+		} else if ( name === 'border_hover_color' ) {
 			updateButtonStyles( value );
 		}
 	};
+	const handleImageChange = ( selected ) => {
+		setSelectedImages( selected );
+	};
+	console.log( 'selectedImages', selectedImages );
+	const handleSaveClick = () => {
+		const popup_button_color = JSON.stringify( inputStyles, null, 2 );
+		const popup_icon_image = JSON.stringify( selectedImages );
+		console.log( popup_button_color, popup_icon_image );
+		// You can also send the JSON data to your server or perform other actions here.
+	};
+
 	console.log( 'first color', inputStyles );
 
 	const globalSettingsRadio = [
@@ -90,7 +105,7 @@ export default function PopupSettingsLeft( {} ) {
 		},
 		icon_image: {
 			label: 'Icon Image',
-			component: <IconImage />,
+			component: <IconImage onChange={ handleImageChange } />,
 		},
 		default_button_style: {
 			label: 'Theme Default Button Style',
@@ -131,7 +146,7 @@ export default function PopupSettingsLeft( {} ) {
 		},
 		icon_image_after: {
 			label: 'Icon Image',
-			component: <IconImage />,
+			component: <IconImage onChange={ handleImageChange } />,
 		},
 		button_text: {
 			label: 'Icon Image',
@@ -207,9 +222,7 @@ export default function PopupSettingsLeft( {} ) {
 					</div>
 				</div>
 				<Button
-					onClick={ () => {
-						window.open();
-					} }
+					onClick={ handleSaveClick }
 					buttonStyle={ 'button-primary' }
 					iconPosition={ 'after' }
 					addBgColor={ true }

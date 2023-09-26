@@ -8,10 +8,10 @@ export const useData = () => {
 
 export const DataProvider = ( { children } ) => {
 	const [ butonStyles, setButonStyles ] = useState( {
-		bgColor: '',
-		bgHoverColor: '',
-		borderColor: '',
-		borderHoverColor: '',
+		background_color: '',
+		background_hover_color: '',
+		border_color: '',
+		border_hover_color: '',
 	} );
 
 	const updateButtonStyles = ( newValue = {} ) => {

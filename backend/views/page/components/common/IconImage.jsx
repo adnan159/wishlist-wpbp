@@ -2,23 +2,28 @@ import { useState } from 'react';
 import Img from '../../../asset/img/image.png';
 import Button from './Button';
 
-export default function IconImage() {
-	const [ selected, setSelected ] = useState( [] );
+export default function IconImage( { onChange } ) {
+	const [ selected, setSelected ] = useState( {} );
 	const [ color, setColor ] = useState( '' );
 
 	const onSelectFile = ( event ) => {
 		const selectedFiles = event.target.files;
-		const selectedFilesArray = Array.from( selectedFiles );
+		const selectedFilesArray = Array.from( ...selectedFiles ).map(
+			( file ) => {
+				return URL.createObjectURL( file );
+			}
+		);
 
-		const imageArray = selectedFilesArray.map( ( file ) => {
-			return URL.createObjectURL( file );
-		} );
+		setSelected( selectedFilesArray );
 
-		setSelected( imageArray );
+		// Call the parent component's onChange callback to update selected images
+		if ( onChange ) {
+			onChange( selectedFilesArray );
+		}
 	};
 
 	const handleRemoveClick = () => {
-		setSelected( [] ); // Clear the selected images
+		setSelected( {} ); // Clear the selected images
 		setColor( '#f00' ); // Change background color to red
 	};
 

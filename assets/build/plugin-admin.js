@@ -72,10 +72,10 @@ const DataProvider = ({
   children
 }) => {
   const [butonStyles, setButonStyles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    bgColor: '',
-    bgHoverColor: '',
-    borderColor: '',
-    borderHoverColor: ''
+    background_color: '',
+    background_hover_color: '',
+    border_color: '',
+    border_hover_color: ''
   });
   const updateButtonStyles = (newValue = {}) => {
     setButonStyles(newValue);
@@ -206,19 +206,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function IconImage() {
-  const [selected, setSelected] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+function IconImage({
+  onChange
+}) {
+  const [selected, setSelected] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
   const [color, setColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
   const onSelectFile = event => {
     const selectedFiles = event.target.files;
-    const selectedFilesArray = Array.from(selectedFiles);
-    const imageArray = selectedFilesArray.map(file => {
+    const selectedFilesArray = Array.from(...selectedFiles).map(file => {
       return URL.createObjectURL(file);
     });
-    setSelected(imageArray);
+    setSelected(selectedFilesArray);
+
+    // Call the parent component's onChange callback to update selected images
+    if (onChange) {
+      onChange(selectedFilesArray);
+    }
   };
   const handleRemoveClick = () => {
-    setSelected([]); // Clear the selected images
+    setSelected({}); // Clear the selected images
     setColor('#f00'); // Change background color to red
   };
 
@@ -606,10 +612,10 @@ function InputColorPicker({
   onColorChange
 }) {
   const [colors, setColors] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    bgColor: '',
-    bgHoverColor: '',
-    borderColor: '',
-    borderHoverColor: ''
+    background_color: '',
+    background_hover_color: '',
+    border_color: '',
+    border_hover_color: ''
   });
   const handleColorChange = e => {
     const {
@@ -621,19 +627,22 @@ function InputColorPicker({
       [name]: value
     });
     onColorChange(name, value);
+    if (onColorChange) {
+      onColorChange('popup_button_color', colors);
+    }
   };
   const colorValue = [{
     label: 'Background color',
-    name: 'bgColor' // Use a colon instead of an equal sign
+    name: 'background_color' // Use a colon instead of an equal sign
   }, {
     label: 'Border color',
-    name: 'borderColor' // Use a colon instead of an equal sign
+    name: 'border_color' // Use a colon instead of an equal sign
   }, {
     label: 'Background hover color',
-    name: 'bgHoverColor' // Use a colon instead of an equal sign
+    name: 'background_hover_color' // Use a colon instead of an equal sign
   }, {
     label: 'Border hover color',
-    name: 'borderHoverColor' // Use a colon instead of an equal sign
+    name: 'border_hover_color' // Use a colon instead of an equal sign
   }];
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -1446,19 +1455,34 @@ function PopupSettingsLeft({}) {
     updateButtonStyles
   } = (0,_DataContext__WEBPACK_IMPORTED_MODULE_2__.useData)();
   const [inputStyles, setInputStyles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
+  const [selectedImages, setSelectedImages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
   const handleColorChange = (name, value) => {
     const newInputStyles = setInputStyles({
       ...inputStyles,
       [name]: value
     });
     updateButtonStyles(newInputStyles);
-    if (name === 'bgColor') {
+    if (name === 'background_color') {
       updateButtonStyles(value);
-    }
-    if (name === 'bgHoverColor') {
+    } else if (name === 'background_hover_color') {
+      updateButtonStyles(value);
+    } else if (name === 'border_color') {
+      updateButtonStyles(value);
+    } else if (name === 'border_hover_color') {
       updateButtonStyles(value);
     }
   };
+  const handleImageChange = selected => {
+    setSelectedImages(selected);
+  };
+  console.log('selectedImages', selectedImages);
+  const handleSaveClick = () => {
+    const popup_button_color = JSON.stringify(inputStyles, null, 2);
+    const popup_icon_image = JSON.stringify(selectedImages);
+    console.log(popup_button_color, popup_icon_image);
+    // You can also send the JSON data to your server or perform other actions here.
+  };
+
   console.log('first color', inputStyles);
   const globalSettingsRadio = [{
     id: '1',
@@ -1514,7 +1538,9 @@ function PopupSettingsLeft({}) {
     },
     icon_image: {
       label: 'Icon Image',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], null)
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        onChange: handleImageChange
+      })
     },
     default_button_style: {
       label: 'Theme Default Button Style',
@@ -1555,7 +1581,9 @@ function PopupSettingsLeft({}) {
     },
     icon_image_after: {
       label: 'Icon Image',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], null)
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        onChange: handleImageChange
+      })
     },
     button_text: {
       label: 'Icon Image',
@@ -1598,9 +1626,7 @@ function PopupSettingsLeft({}) {
   }, globalWishlistSettingsItems[itemKey].info)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-basis wawl-basis-3/5 wawl-flex wawl-gap-8 wawl-justify-start"
   }, globalWishlistSettingsItems[itemKey].component)))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    onClick: () => {
-      window.open();
-    },
+    onClick: handleSaveClick,
     buttonStyle: 'button-primary',
     iconPosition: 'after',
     addBgColor: true,

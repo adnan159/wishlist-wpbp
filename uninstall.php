@@ -112,11 +112,15 @@ function ww_uninstall() { // phpcs:ignore
 		'manage_demoes',
 	);
 
-	foreach ( $wp_roles as $role ) {
-		foreach ( $caps as $cap ) {
-			$role->remove_cap( $cap );
-		}
-	}
+    foreach ( $wp_roles as $role ) {
+        foreach ( $role as $role_key => $role_name ) {
+            $role_cap = get_role( $role_key );
+
+            foreach ( $caps as $cap ) {
+                $role_cap->remove_cap( $cap );
+            }
+        }
+    }
 }
 
 ww_uninstall_multisite();

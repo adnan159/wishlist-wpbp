@@ -1,14 +1,21 @@
-import { useData } from '../../DataContext';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectTahira } from '../../../redux/reducers/tahira';
 import Button from '../../common/Button';
 import Select from '../../common/Select';
 import Page from '../../pages/Page';
-export default function Preview( { onColorChange } ) {
-	const { butonStyles } = useData();
-	const { bgColor } = useData();
-	const buttonStyle = {
-		backgroundColor: butonStyles,
-	};
-	console.log( 'buttonStyles', butonStyles, bgColor );
+
+export default function Preview({ onColorChange }) {
+	const wishlistSettings = useSelector(selectTahira);
+	const [buttonStyle, setButtonStyle] = useState(wishlistSettings);
+
+	useEffect(() => {
+		console.log(
+			`📌 ~ file: Preview.jsx:15 ~ Preview ~ wishlistSettings:`,
+			wishlistSettings
+		);
+		setButtonStyle(wishlistSettings);
+	}, [wishlistSettings, buttonStyle]);
 
 	return (
 		<>
@@ -37,18 +44,24 @@ export default function Preview( { onColorChange } ) {
 									size="wawl-h-12 wawl-w-full wawl-my-6"
 								/>
 								<Button
-									onClick={ () => {
+									onClick={() => {
 										window.open();
-									} }
-									style={ buttonStyle }
-									buttonStyle={ 'button-default' }
-									iconPosition={ 'after' }
-									addBgColor={ true }
-									classNames={ 'wawl-w-full wawl-bg-default' }
-									icon={ '' }
+									}}
+									style={{
+										backgroundColor: `${
+											buttonStyle.background_color
+												? buttonStyle.background_color
+												: '#f00'
+										}`,
+									}}
+									buttonStyle={'button-default'}
+									iconPosition={'after'}
+									addBgColor={true}
+									classNames={'wawl-w-full wawl-bg-default'}
+									icon={''}
 									// onColorChange={ handleColorChange }
 								>
-									{ 'Add to wishlist' }
+									{'Add to wishlist 1'}
 								</Button>
 							</div>
 						</div>

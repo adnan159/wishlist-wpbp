@@ -1,7 +1,11 @@
+import { useSelector } from 'react-redux';
 import Button from './components/common/Button';
 import Dashboard from './components/dashboard/Dashboard';
+import { selectTahira } from './redux/reducers/tahira';
 
 const App = () => {
+	const wishlistSettings = useSelector(selectTahira);
+
 	return (
 		<>
 			<div className="wawl-border wawl-border-[#E2E2E2] wawl-bg-white wawl-p-14">
@@ -13,28 +17,28 @@ const App = () => {
 				<Dashboard />
 				<div className="wawl-flex wawl-gap-4 wawl-justify-end wawl-mt-16 wawl-mb-10">
 					<Button
-						onClick={ () => {
+						onClick={() => {
 							window.open();
-						} }
-						buttonStyle={ 'buttonPrimary' }
-						iconPosition={ 'after' }
-						addBgColor={ false }
-						classNames={ '' }
-						icon={ '' }
+						}}
+						buttonStyle={'buttonPrimary'}
+						iconPosition={'after'}
+						addBgColor={false}
+						classNames={''}
+						icon={''}
 					>
-						{ 'Reset' }
+						{'Reset'}
 					</Button>
 					<Button
-						onClick={ () => {
-							window.open();
-						} }
-						buttonStyle={ 'button-primary' }
-						iconPosition={ 'after' }
-						addBgColor={ true }
-						classNames={ '' }
-						icon={ '' }
+						onClick={() => {
+							console.log('hello world', wishlistSettings);
+						}}
+						buttonStyle={'button-primary'}
+						iconPosition={'after'}
+						addBgColor={true}
+						classNames={''}
+						icon={''}
 					>
-						{ 'Save' }
+						{'Save'}
 					</Button>
 				</div>
 			</div>

@@ -38,6 +38,9 @@ class Api {
 
         $search_product = new SearchProduct();
         $search_product->register_route();
+
+        $search_categories = new SearchCategories();
+        $search_categories->register_route();
     }
 }
 

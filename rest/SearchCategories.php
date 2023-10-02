@@ -4,45 +4,43 @@ namespace WooCommerce_Wishlist\Rest;
 use WP_REST_Server;
 use WP_REST_Controller;
 
-class SearchProduct extends WP_REST_Controller {
+class SearchCategories extends WP_REST_Controller {
     public function register_route(){
         register_rest_route(
             WW_API_NAME_SPACE,
-            'search-product', array(
+            'search-categories', array(
             array(
                 'methods'             => WP_REST_Server::READABLE,
-                'callback'            => array( $this, 'get_search_product' ),
+                'callback'            => array( $this, 'get_search_categories' ),
                 'permission_callback' => array( $this, 'get_item_permissions_check' ),
                 'args'                => $this->get_collection_params()
             )
         ) );
     }
 
-    public function get_search_product( $request ) {
+    public function get_search_categories( $request ) {
         $search_term = $request->get_param( 'search-params' );
 
-        // Check if the search term is numeric (potential product ID)
+        // Check if the search term is numeric (potential category ID)
         if ( is_numeric( $search_term ) ) {
-            // Search by product ID
+            // Search by category ID
             $args = array(
-                'post_type' => 'product',
-                'post__in' => array( intval( $search_term ) ),
-                'posts_per_page' => 1,
+                'taxonomy' => 'product_cat',
+                'include' => array( intval( $search_term ) ),
             );
         } else {
-            // Search by product title
+            // Search by category name
             $args = array(
-                'post_type' => 'product',
-                's' => $search_term,
-                'posts_per_page' => -1,
+                'taxonomy' => 'product_cat',
+                'name__like' => $search_term,
             );
         }
 
-        $products = get_posts( $args );
+        $categories = get_terms($args);
 
         $data  = [];
-        foreach ( $products as $product ) {
-            $data[] = $this->prepare_item_for_response( (array)$product, $request );
+        foreach ( $categories as $category ) {
+            $data[] = $this->prepare_item_for_response( (array)$category, $request );
         }
 
         $total = count( $data );
@@ -67,19 +65,13 @@ class SearchProduct extends WP_REST_Controller {
         $data 	= [];
         $fields = $this->get_fields_for_response( $request );
 
-        error_log(print_r($fields, true));
-
-        if( in_array( 'ID', $fields, true ) ) {
-            $data['ID'] = $item['ID'];
+        if( in_array( 'term_id', $fields, true ) ) {
+            $data['term_id'] = $item['term_id'];
         }
 
-        if( in_array( 'post_title', $fields, true ) ) {
-            $data['post_title'] = $item['post_title'];
+        if( in_array( 'name', $fields, true ) ) {
+            $data['name'] = $item['name'];
         }
-
-//        if( in_array( 'product_image', $fields, true ) ) {
-//            $data['product_image'] = $item['product_image'];
-//        }
 
         $context 	= ! empty( $request['context'] ) ? $request['context'] : 'view';
         $data 		= $this->filter_response_by_context( $data, $context );
@@ -98,15 +90,15 @@ class SearchProduct extends WP_REST_Controller {
         }
         $schema = [
             '$schema'			=> 'http://json-schema.org/draft-04/schema#',
-            'title'				=> 'products',
+            'title'				=> 'categories',
             'type'				=> 'object',
             'properties'		=> [
-                'ID' => [
+                'term_id' => [
                     'type'			=> 'string',
                     'context'		=> [ 'view' ],
                     'required'		=> true,
                 ],
-                'post_title' => [
+                'name' => [
                     'type'			=> 'string',
                     'context'		=> [ 'view' ],
                     'required'		=> false,

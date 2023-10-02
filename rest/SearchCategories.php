@@ -66,11 +66,11 @@ class SearchCategories extends WP_REST_Controller {
         $fields = $this->get_fields_for_response( $request );
 
         if( in_array( 'term_id', $fields, true ) ) {
-            $data['term_id'] = $item['term_id'];
+            $data['id'] = $item['term_id'];
         }
 
         if( in_array( 'name', $fields, true ) ) {
-            $data['name'] = $item['name'];
+            $data['category_name'] = $item['name'];
         }
 
         $context 	= ! empty( $request['context'] ) ? $request['context'] : 'view';
@@ -94,11 +94,13 @@ class SearchCategories extends WP_REST_Controller {
             'type'				=> 'object',
             'properties'		=> [
                 'term_id' => [
-                    'type'			=> 'string',
+                    'description'	=> __('Product category id' ),
+                    'type'			=> 'integer',
                     'context'		=> [ 'view' ],
                     'required'		=> true,
                 ],
                 'name' => [
+                    'description'	=> __('Product category name' ),
                     'type'			=> 'string',
                     'context'		=> [ 'view' ],
                     'required'		=> false,

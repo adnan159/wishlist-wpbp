@@ -67,14 +67,12 @@ class SearchProduct extends WP_REST_Controller {
         $data 	= [];
         $fields = $this->get_fields_for_response( $request );
 
-        error_log(print_r($fields, true));
-
         if( in_array( 'ID', $fields, true ) ) {
-            $data['ID'] = $item['ID'];
+            $data['id'] = $item['ID'];
         }
 
         if( in_array( 'post_title', $fields, true ) ) {
-            $data['post_title'] = $item['post_title'];
+            $data['product_name'] = $item['post_title'];
         }
 
 //        if( in_array( 'product_image', $fields, true ) ) {
@@ -102,11 +100,13 @@ class SearchProduct extends WP_REST_Controller {
             'type'				=> 'object',
             'properties'		=> [
                 'ID' => [
-                    'type'			=> 'string',
+                    'description'	=> __('Product id' ),
+                    'type'			=> 'integer',
                     'context'		=> [ 'view' ],
                     'required'		=> true,
                 ],
                 'post_title' => [
+                    'description'	=> __('Product name' ),
                     'type'			=> 'string',
                     'context'		=> [ 'view' ],
                     'required'		=> false,

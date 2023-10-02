@@ -1,37 +1,65 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWishlistSetting } from '../../redux/reducers/wishlistSlice';
 import InputCSS from './InputCSS';
 
-export default function PopupBtnCustomStyle() {
-	const [ borderStyles, setBorderStyles ] = useState( {
-		boderWidth: '',
-		borderHeight: '',
-		borderRadius: '',
-		margin: '',
+export default function PopupBtnCustomStyle( onBtnBorderStyleChange ) {
+	const [ btnBorderStyles, setBtnBorderStyles ] = useState( {
+		border_width: '',
+		border_height: '',
+		border_radius: '',
+		popup_button_margin: '',
 	} );
+	useEffect( () => {
+		handleUpdateSettings();
+	}, [ btnBorderStyles ] );
 
-	const handleColorChange = ( e ) => {
-		const { name, value } = e.target;
-		setBorderStyles( { ...borderStyles, [ name ]: value } );
-		console.log( e.target );
+	const dispatch = useDispatch();
+
+	const handleUpdateSettings = () => {
+		// Example: Update the "default_wishlist_name" property
+
+		dispatch(
+			updateWishlistSetting( {
+				popup_button_size: { ...btnBorderStyles },
+			} )
+		);
 	};
+	const handleBtnBorderStyleChange = ( e ) => {
+		const { name, value } = e.target;
+		console.log(
+			`📌 ~ file: InputColorPicker.jsx:14 ~ handleColorChange ~ name, value:`,
+			name,
+			value
+		);
+		// const updatedValue = value.endsWith( 'px' ) ? value : value + 'px'; // Add 'px' if not present
+		// setBtnBorderStyles( { ...btnBorderStyles, [ name ]: updatedValue } );
+		setBtnBorderStyles( { ...btnBorderStyles, [ name ]: value } );
+	};
+
+	// const handleColorChange = ( e ) => {
+	// 	const { name, value } = e.target;
+	// 	setBtnBorderStyles( { ...btnBorderStyles, [ name ]: value } );
+	// 	console.log( e.target );
+	// };
 
 	const borderStyleValue = [
 		{
 			label: 'Boder width',
-			name: 'boderWidth', // Use a colon instead of an equal sign
+			name: 'border_width', // Use a colon instead of an equal sign
 		},
 
 		{
 			label: 'Border radius',
-			name: 'borderRadius', // Use a colon instead of an equal sign
+			name: 'border_height', // Use a colon instead of an equal sign
 		},
 		{
 			label: 'Border height',
-			name: 'borderHeight', // Use a colon instead of an equal sign
+			name: 'border_radius', // Use a colon instead of an equal sign
 		},
 		{
 			label: 'Margin',
-			name: 'margin', // Use a colon instead of an equal sign
+			name: 'popup_button_margin', // Use a colon instead of an equal sign
 		},
 	];
 
@@ -53,13 +81,11 @@ export default function PopupBtnCustomStyle() {
 							className="wawl-h-10 wawl-w-10"
 							id={ style.name }
 							name={ style.name }
-							value={
-								borderStyles[ style.name ]
-									? borderStyles[ style.name ]
-									: ''
-							}
+							value={ btnBorderStyles[ style.name ] || '' }
 							placeholder={ '10px' }
-							onChange={ handleColorChange }
+							onChange={ ( e ) => {
+								handleBtnBorderStyleChange( e );
+							} }
 						/>
 					</div>
 				) ) }

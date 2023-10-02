@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectWishlist } from '../../../redux/reducers/wishlistSlice';
 import Input from '../../common/Input';
 import RadioButton from '../../common/RadioButton';
 import Search from '../../common/Search';
 import Select from '../../common/Select';
 import Toggle from '../../common/Toggle';
 export default function GlobalSettings() {
+	const wishlistSettings = useSelector( selectWishlist );
+
 	const globalSettingsRadio = [
 		{
 			id: '1',
@@ -57,9 +61,14 @@ export default function GlobalSettings() {
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
-		show_status: {
+		item_count: {
 			label: 'Show status for each product',
-			component: <Toggle active={ false } />,
+			component: (
+				<Toggle
+					active={ wishlistSettings.item_count }
+					settingName="item_count"
+				/>
+			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: 'How many times product was added to a wishlist',
 		},
@@ -77,27 +86,47 @@ export default function GlobalSettings() {
 				/>
 			),
 		},
-		enable_wishlist_variations_product: {
+		enable_for_variation: {
 			label: 'Enable Wishlist for variations product',
-			component: <Toggle />,
+			component: (
+				<Toggle
+					active={ wishlistSettings.enable_for_variation }
+					settingName="enable_for_variation"
+				/>
+			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
-		enable_wishlist_my_account: {
+		enable_for_myaccount: {
 			label: 'Enable wishlist in my account',
-			component: <Toggle />,
+			component: (
+				<Toggle
+					active={ wishlistSettings.enable_for_myaccount }
+					settingName="enable_for_myaccount"
+				/>
+			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
 		multi_wishlist_settings: {
 			label: 'Multi wishlist settings',
-			component: <Toggle />,
+			component: (
+				<Toggle
+					active={ wishlistSettings.multi_wishlist_settings }
+					settingName="multi_wishlist_settings"
+				/>
+			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
 		cart_page_wishlist: {
 			label: 'Cart page wishlist',
-			component: <Toggle />,
+			component: (
+				<Toggle
+					active={ wishlistSettings.cart_page_wishlist }
+					settingName="cart_page_wishlist"
+				/>
+			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: 'Enable wishlist icon on cart page beside delete button',
 		},

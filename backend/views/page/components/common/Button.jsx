@@ -9,6 +9,8 @@ export default function Button( {
 	addBgColor = true,
 	type = 'button',
 	disabled = false,
+	onMouseLeave,
+	onMouseEnter,
 } ) {
 	const buttons = {
 		buttonPrimary:
@@ -49,6 +51,8 @@ export default function Button( {
 			type={ type }
 			style={ style }
 			disabled={ disabled }
+			onMouseLeave={ onMouseLeave }
+			onMouseEnter={ onMouseEnter }
 		>
 			{ iconPosition === 'after' ? (
 				<>

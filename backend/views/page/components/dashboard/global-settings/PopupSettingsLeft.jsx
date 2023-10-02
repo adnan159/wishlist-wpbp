@@ -1,65 +1,33 @@
 import { useState } from 'react';
-import { useData } from '../../DataContext';
-import Button from '../../common/Button';
+import { useSelector } from 'react-redux';
+import { selectWishlist } from '../../../redux/reducers/wishlistSlice';
 import IconImage from '../../common/IconImage';
 import Input from '../../common/Input';
 import InputColorPicker from '../../common/InputColorPicker';
 import PopupBtnCustomStyle from '../../common/PopupBtnCustomStyle';
 import Toggle from '../../common/Toggle';
 import Page from '../../pages/Page';
-export default function PopupSettingsLeft( {} ) {
-	// const { butonStyles, updateButtonStyles } = useData();
-	const { updateButtonStyles } = useData();
-	const [ inputStyles, setInputStyles ] = useState( {} );
+
+export default function PopupSettingsLeft() {
 	const [ selectedImages, setSelectedImages ] = useState( {} );
+	const wishlistSettings = useSelector( selectWishlist );
 
-	const handleColorChange = ( name, value ) => {
-		const newInputStyles = setInputStyles( {
-			...inputStyles,
-			[ name ]: value,
-		} );
-		updateButtonStyles( newInputStyles );
-		if ( name === 'background_color' ) {
-			updateButtonStyles( value );
-		} else if ( name === 'background_hover_color' ) {
-			updateButtonStyles( value );
-		} else if ( name === 'border_color' ) {
-			updateButtonStyles( value );
-		} else if ( name === 'border_hover_color' ) {
-			updateButtonStyles( value );
-		}
-	};
 	const handleImageChange = ( selected ) => {
-		setSelectedImages( selected );
-	};
-	console.log( 'selectedImages', selectedImages );
-	const handleSaveClick = () => {
-		const popup_button_color = JSON.stringify( inputStyles, null, 2 );
-		const popup_icon_image = JSON.stringify( selectedImages );
-		console.log( popup_button_color, popup_icon_image );
-		// You can also send the JSON data to your server or perform other actions here.
+		// Handle image change logic here
 	};
 
-	console.log( 'first color', inputStyles );
+	const isIconImageEnabled = wishlistSettings.popup_feature_image_enable;
+	const themeDefaultButtonStyle = wishlistSettings.theme_default_button_style;
 
-	const globalSettingsRadio = [
-		{
-			id: '1',
-			title: 'All Users',
-			value: 'allUsers',
-			caurrent: true,
-		},
-		{
-			id: '2',
-			title: 'Login user',
-			value: 'loginUser',
-			current: false,
-		},
-	];
 	const globalWishlistSettingsItems = {
-		enable_disable_popup: {
+		popup_enable: {
 			label: 'Enable/Disable',
-			component: <Toggle active={ true } />,
+			component: (
+				<Toggle
+					active={ wishlistSettings.popup_enable }
+					settingName="popup_enable"
+				/>
+			),
 			info: '',
 		},
 		popup_title: {
@@ -74,6 +42,8 @@ export default function PopupSettingsLeft( {} ) {
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
+					value={ '' }
+					onChange={ ( e ) => updatePopupTitle( e.target.value ) }
 				/>
 			),
 			info: '',
@@ -94,41 +64,53 @@ export default function PopupSettingsLeft( {} ) {
 					/>
 				</>
 			),
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
-		popup_featured_image: {
+		popup_feature_image_enable: {
 			label: 'Use Product Featured Image For Pop Up',
-			component: <Toggle active={ true } />,
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
+			component: (
+				<Toggle
+					active={ wishlistSettings.popup_feature_image_enable }
+					settingName="popup_feature_image_enable"
+				/>
+			),
 			info: '',
 		},
-		icon_image: {
-			label: 'Icon Image',
-			component: <IconImage onChange={ handleImageChange } />,
-		},
-		default_button_style: {
+		...( isIconImageEnabled && {
+			popup_icon_image: {
+				label: 'Icon Image',
+				component: <IconImage iconName="popup_icon_image" />,
+			},
+		} ),
+		theme_default_button_style: {
 			label: 'Theme Default Button Style',
-			component: <Toggle />,
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
+			component: (
+				<>
+					<Toggle
+						active={ wishlistSettings.theme_default_button_style }
+						settingName="theme_default_button_style"
+					/>
+				</>
+			),
 			info: '',
 		},
-		popup_button_color: {
-			label: 'Popup button color',
-			component: <InputColorPicker onColorChange={ handleColorChange } />,
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
-			info: '',
-		},
-		popup_button_size: {
-			label: 'Popup button Size',
-			component: <PopupBtnCustomStyle />,
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
-			info: '',
-		},
+		...( themeDefaultButtonStyle && {
+			popup_button_color: {
+				label: 'Popup button color',
+				component: <InputColorPicker />,
+				info: '',
+			},
+			popup_button_size: {
+				label: 'Popup button Size',
+				component: <PopupBtnCustomStyle />,
+				info: '',
+			},
+		} ),
+
 		succesfully_added_wishlist: {
 			title: 'After successfully added to wishlist popup',
 		},
-		title_text: {
+		popup_notification_text: {
 			label: 'Title Text',
 			component: (
 				<Input
@@ -141,15 +123,14 @@ export default function PopupSettingsLeft( {} ) {
 					required={ true }
 				/>
 			),
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
-			info: 'Enable wishlist icon on cart page beside delete button',
+			info: 'Enable wishlist icon on the cart page beside the delete button',
 		},
-		icon_image_after: {
+		popup_notification_icon: {
 			label: 'Icon Image',
-			component: <IconImage onChange={ handleImageChange } />,
+			component: <IconImage iconName="popup_notification_icon" />,
 		},
-		button_text: {
-			label: 'Icon Image',
+		popup_notification_button_text: {
+			label: 'Button text',
 			component: (
 				<Input
 					classNames={ '' }
@@ -170,6 +151,7 @@ export default function PopupSettingsLeft( {} ) {
 		setList( e.target.value );
 	};
 	console.log( list );
+
 	return (
 		<>
 			<Page classes="wawl-mt-14">
@@ -221,16 +203,16 @@ export default function PopupSettingsLeft( {} ) {
 						) }
 					</div>
 				</div>
-				<Button
-					onClick={ handleSaveClick }
-					buttonStyle={ 'button-primary' }
-					iconPosition={ 'after' }
-					addBgColor={ true }
-					classNames={ '' }
-					icon={ '' }
-				>
-					{ 'Save' }
-				</Button>
+				{ /* <Button
+          onClick={handleSaveClick}
+          buttonStyle={'button-primary'}
+          iconPosition={'after'}
+          addBgColor={true}
+          classNames={''}
+          icon={''}
+        >
+          {'Save'}
+        </Button> */ }
 			</Page>
 		</>
 	);

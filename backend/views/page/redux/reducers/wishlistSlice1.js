@@ -7,17 +7,17 @@ const initialState = {
 	default_wishlist_name: 'New list',
 	exclude_type: 'product',
 	exclude_items: [ 1, 2, 3 ],
-	item_count: false,
+	item_count: true,
 	guest_user_wishlist_days: 90,
-	enable_for_variation: false,
+	enable_for_variation: true,
 	enable_for_myaccount: false,
-	multi_wishlist_settings: false,
-	cart_page_wishlist: false,
+	multi_wishlist_settings: true,
+	cart_page_wishlist: true,
 	popup_enable: true,
 	popup_title: 'Popup title',
 	popup_button_text: 'Button Text',
 	popup_feature_image_enable: true,
-	popup_icon_image: '',
+	popup_icon_image: 'http://www.gmail.com',
 	theme_default_button_style: true,
 	popup_button_color: {
 		background_color: '#458947',
@@ -32,15 +32,15 @@ const initialState = {
 		popup_button_margin: '10px',
 	},
 	popup_notification_text: 'hello',
-	popup_notification_icon: '',
+	popup_notification_icon: 'http://test/gmail.com',
 	popup_notification_button_text: 'hello',
 };
 
-const wishlistSlice = createSlice( {
-	name: 'wishlist',
+const wishlistSlice1 = createSlice( {
+	name: 'wishlist1',
 	initialState,
 	reducers: {
-		updateWishlistSetting( state, action ) {
+		updateWishlistSetting1( state, action ) {
 			// Merge the action payload with the current state to update specific properties
 			return {
 				...state,
@@ -49,8 +49,8 @@ const wishlistSlice = createSlice( {
 		},
 	},
 } );
-export const selectWishlist = ( state ) => state.wishlist;
+export const selectWishlist1 = ( state ) => state.wishlist1;
 
 // Export the reducer and actions
-export const { updateWishlistSetting } = wishlistSlice.actions;
-export default wishlistSlice.reducer;
+export const { updateWishlistSetting1 } = wishlistSlice1.actions;
+export default wishlistSlice1.reducer;

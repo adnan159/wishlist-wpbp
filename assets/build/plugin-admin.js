@@ -2095,14 +2095,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_common_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/common/Button */ "./backend/views/page/components/common/Button.jsx");
 /* harmony import */ var _components_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/dashboard/Dashboard */ "./backend/views/page/components/dashboard/Dashboard.jsx");
-/* harmony import */ var _redux_reducers_tahira__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./redux/reducers/tahira */ "./backend/views/page/redux/reducers/tahira.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
 
 
 
 
 
 const App = () => {
-  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_redux_reducers_tahira__WEBPACK_IMPORTED_MODULE_4__.selectTahira);
+  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_4__.selectWishlist);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-border wawl-border-[#E2E2E2] wawl-bg-white wawl-p-14"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
@@ -2133,49 +2133,6 @@ const App = () => {
 
 /***/ }),
 
-/***/ "./backend/views/page/components/DataContext.jsx":
-/*!*******************************************************!*\
-  !*** ./backend/views/page/components/DataContext.jsx ***!
-  \*******************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DataProvider: function() { return /* binding */ DataProvider; },
-/* harmony export */   useData: function() { return /* binding */ useData; }
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-
-
-const DataContext = (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)();
-const useData = () => {
-  return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(DataContext);
-};
-const DataProvider = ({
-  children
-}) => {
-  const [butonStyles, setButonStyles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    background_color: '',
-    background_hover_color: '',
-    border_color: '',
-    border_hover_color: ''
-  });
-  const updateButtonStyles = (newValue = {}) => {
-    setButonStyles(newValue);
-  };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(DataContext.Provider, {
-    value: {
-      butonStyles,
-      updateButtonStyles
-    }
-  }, children);
-};
-
-/***/ }),
-
 /***/ "./backend/views/page/components/common/Button.jsx":
 /*!*********************************************************!*\
   !*** ./backend/views/page/components/common/Button.jsx ***!
@@ -2201,7 +2158,9 @@ function Button({
   style = {},
   addBgColor = true,
   type = 'button',
-  disabled = false
+  disabled = false,
+  onMouseLeave,
+  onMouseEnter
 }) {
   const buttons = {
     buttonPrimary: 'wawl-px-5 wawl-py-3 wawl-text-sm wawl-rounded-[0.1375rem] wawl-leading-4 ',
@@ -2230,7 +2189,9 @@ function Button({
     onClick: onClick,
     type: type,
     style: style,
-    disabled: disabled
+    disabled: disabled,
+    onMouseLeave: onMouseLeave,
+    onMouseEnter: onMouseEnter
   }, iconPosition === 'after' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, children + ' ', " ", icon) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, ' ', icon, " ", ' ' + children, ' '));
 }
 
@@ -2286,58 +2247,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _asset_img_image_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../asset/img/image.png */ "./backend/views/asset/img/image.png");
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Button */ "./backend/views/page/components/common/Button.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _asset_img_image_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../asset/img/image.png */ "./backend/views/asset/img/image.png");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Button */ "./backend/views/page/components/common/Button.jsx");
+
+
 
 
 
 
 function IconImage({
-  onChange
+  iconName
 }) {
-  const [selected, setSelected] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
-  const [color, setColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
-  const onSelectFile = event => {
-    const selectedFiles = event.target.files;
-    const selectedFilesArray = Array.from(...selectedFiles).map(file => {
-      return URL.createObjectURL(file);
-    });
-    setSelected(selectedFilesArray);
-
-    // Call the parent component's onChange callback to update selected images
-    if (onChange) {
-      onChange(selectedFilesArray);
+  const [icons, setIcons] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  const onImageChange = event => {
+    if (event.target.files && event.target.files[0]) {
+      setIcons(URL.createObjectURL(event.target.files[0]));
     }
   };
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    handleUpdateSettings();
+  }, [icons]);
   const handleRemoveClick = () => {
-    setSelected({}); // Clear the selected images
-    setColor('#f00'); // Change background color to red
+    setIcons([]);
   };
-
+  const handleUpdateSettings = () => {
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_4__.updateWishlistSetting)({
+      [iconName]: icons
+    }));
+    setIcons(icons);
+  };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-flex wawl-mx-auto wawl-items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " wawl-border wawl-border-gray-300 wawl-h-full wawl-rounded-md wawl-block wawl-mx-auto"
-  }, selected.length > 0 ? selected.map((image, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }, icons.length > 0 ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     className: "wawl-mx-auto wawl-object-fit wawl-h-32 wawl-w-32 wawl-px-4 wawl-py-2 ",
-    src: image
-  }))) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: icons,
+    alt: ''
+  })) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     className: "wawl-mx-auto wawl-object-cover wawl-h-32 wawl-w-auto",
-    src: _asset_img_image_png__WEBPACK_IMPORTED_MODULE_2__,
+    src: _asset_img_image_png__WEBPACK_IMPORTED_MODULE_3__,
     alt: "Default"
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-pl-4 wawl-grid wawl-gap-4"
-  }, selected.length === 1 ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, icons.length === 1 ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onClick: () => {
-      console.log(selected);
+      console.log(icons);
     },
     buttonStyle: "button-primary",
     iconPosition: "after",
     addBgColor: false,
     style: {
-      backgroundColor: color
+      backgroundColor: 'color'
     },
     classNames: "!wawl-border-gray-300 wawl-text-gray-400",
     icon: ""
@@ -2347,10 +2311,10 @@ function IconImage({
     className: "wawl-hidden wawl-w-11",
     type: "file",
     name: "images",
-    onChange: onSelectFile,
+    onChange: onImageChange,
     multiple: true,
     accept: "image/png,image/jpeg,image/webp"
-  }), "Add Image"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), "Add Image"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onClick: handleRemoveClick,
     buttonStyle: "button-primary",
     iconPosition: "after",
@@ -2693,7 +2657,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_reducers_tahira__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/tahira */ "./backend/views/page/redux/reducers/tahira.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
 /* harmony import */ var _common_InputColor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/InputColor */ "./backend/views/page/components/common/InputColor.jsx");
 
 
@@ -2715,9 +2679,10 @@ function InputColorPicker({
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   const handleUpdateSettings = () => {
     // Example: Update the "default_wishlist_name" property
-    dispatch((0,_redux_reducers_tahira__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting1)({
-      name: 'kola_2',
-      ...colors
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      popup_button_color: {
+        ...colors
+      }
     }));
   };
   const handleColorChange = e => {
@@ -2730,14 +2695,7 @@ function InputColorPicker({
       ...colors,
       [name]: value
     });
-
-    // handleUpdateSettings();
-    // onColorChange(name, value);
-    // if (onColorChange) {
-    // 	onColorChange('popup_button_color', colors);
-    // }
   };
-
   const colorValue = [{
     label: 'Background color',
     name: 'background_color' // Use a colon instead of an equal sign
@@ -2790,40 +2748,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _InputCSS__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InputCSS */ "./backend/views/page/components/common/InputCSS.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
+/* harmony import */ var _InputCSS__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./InputCSS */ "./backend/views/page/components/common/InputCSS.jsx");
 
 
 
-function PopupBtnCustomStyle() {
-  const [borderStyles, setBorderStyles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    boderWidth: '',
-    borderHeight: '',
-    borderRadius: '',
-    margin: ''
+
+
+function PopupBtnCustomStyle(onBtnBorderStyleChange) {
+  const [btnBorderStyles, setBtnBorderStyles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    border_width: '',
+    border_height: '',
+    border_radius: '',
+    popup_button_margin: ''
   });
-  const handleColorChange = e => {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    handleUpdateSettings();
+  }, [btnBorderStyles]);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  const handleUpdateSettings = () => {
+    // Example: Update the "default_wishlist_name" property
+
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      popup_button_size: {
+        ...btnBorderStyles
+      }
+    }));
+  };
+  const handleBtnBorderStyleChange = e => {
     const {
       name,
       value
     } = e.target;
-    setBorderStyles({
-      ...borderStyles,
+    console.log(`📌 ~ file: InputColorPicker.jsx:14 ~ handleColorChange ~ name, value:`, name, value);
+    // const updatedValue = value.endsWith( 'px' ) ? value : value + 'px'; // Add 'px' if not present
+    // setBtnBorderStyles( { ...btnBorderStyles, [ name ]: updatedValue } );
+    setBtnBorderStyles({
+      ...btnBorderStyles,
       [name]: value
     });
-    console.log(e.target);
   };
+
+  // const handleColorChange = ( e ) => {
+  // 	const { name, value } = e.target;
+  // 	setBtnBorderStyles( { ...btnBorderStyles, [ name ]: value } );
+  // 	console.log( e.target );
+  // };
+
   const borderStyleValue = [{
     label: 'Boder width',
-    name: 'boderWidth' // Use a colon instead of an equal sign
+    name: 'border_width' // Use a colon instead of an equal sign
   }, {
     label: 'Border radius',
-    name: 'borderRadius' // Use a colon instead of an equal sign
+    name: 'border_height' // Use a colon instead of an equal sign
   }, {
     label: 'Border height',
-    name: 'borderHeight' // Use a colon instead of an equal sign
+    name: 'border_radius' // Use a colon instead of an equal sign
   }, {
     label: 'Margin',
-    name: 'margin' // Use a colon instead of an equal sign
+    name: 'popup_button_margin' // Use a colon instead of an equal sign
   }];
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2836,13 +2820,15 @@ function PopupBtnCustomStyle() {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "wawl-text-base wawl-text-gray-500 wawl-my-2.5 wawl-mr-8",
     htmlFor: style.name
-  }, style.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputCSS__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, style.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputCSS__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: "wawl-h-10 wawl-w-10",
     id: style.name,
     name: style.name,
-    value: borderStyles[style.name] ? borderStyles[style.name] : '',
+    value: btnBorderStyles[style.name] || '',
     placeholder: '10px',
-    onChange: handleColorChange
+    onChange: e => {
+      handleBtnBorderStyleChange(e);
+    }
   })))));
 }
 
@@ -3149,9 +3135,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _headlessui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @headlessui/react */ "./node_modules/@headlessui/react/dist/components/switch/switch.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
+
 
 
 
@@ -3159,16 +3147,23 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 function Toggle({
-  active = true
+  active = false,
+  settingName
 }) {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   const [enabled, setEnabled] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(active);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    // Update the internal state when the 'active' prop changes
     setEnabled(active);
   }, [active]);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_headlessui_react__WEBPACK_IMPORTED_MODULE_2__.Switch, {
-    checked: enabled,
-    onChange: setEnabled,
+  const togglePopupEnable = () => {
+    const newEnabled = !enabled;
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      [settingName]: newEnabled
+    }));
+    setEnabled(newEnabled);
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    onClick: togglePopupEnable,
     className: classNames(enabled ? 'wawl-bg-accent' : 'wawl-bg-gray-200', 'wawl-relative wawl-inline-flex wawl-h-8 wawl-w-[65px] wawl-flex-shrink-0 wawl-cursor-pointer wawl-rounded-full wawl-border-2 wawl-border-transparent wawl-transition-colors wawl-duration-200 wawl-ease-in-out focus:wawl-outline-none focus:wawl-ring-0 focus!:wawl-ring-gray-200 focus:wawl-ring-offset-0')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "wawl-sr-only"
@@ -3241,11 +3236,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _common_Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/Input */ "./backend/views/page/components/common/Input.jsx");
-/* harmony import */ var _common_RadioButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../common/RadioButton */ "./backend/views/page/components/common/RadioButton.jsx");
-/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/Search */ "./backend/views/page/components/common/Search.jsx");
-/* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
-/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
+/* harmony import */ var _common_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/Input */ "./backend/views/page/components/common/Input.jsx");
+/* harmony import */ var _common_RadioButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/RadioButton */ "./backend/views/page/components/common/RadioButton.jsx");
+/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/Search */ "./backend/views/page/components/common/Search.jsx");
+/* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
+/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
+
+
 
 
 
@@ -3254,6 +3253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function GlobalSettings() {
+  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
   const globalSettingsRadio = [{
     id: '1',
     title: 'All Users',
@@ -3268,14 +3268,14 @@ function GlobalSettings() {
   const globalWishlistSettingsItems = {
     enable_wishlist: {
       label: 'Enable wishlist for',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
         items: globalSettingsRadio
       }),
       info: ''
     },
     default_wishlist: {
       label: 'Default wishlist name',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
         classes: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
         placeholder: 'Wishlist',
         name: 'default_wishlist',
@@ -3287,7 +3287,7 @@ function GlobalSettings() {
     },
     exclude_category_product: {
       label: 'Exclude product/category',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Search__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Search__WEBPACK_IMPORTED_MODULE_6__["default"], {
         type: 'search',
         name: 'exclude_category_product',
         classes: "sm:ctx-w-full",
@@ -3296,17 +3296,18 @@ function GlobalSettings() {
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
-    show_status: {
+    item_count: {
       label: 'Show status for each product',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        active: false
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        active: wishlistSettings.item_count,
+        settingName: "item_count"
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: 'How many times product was added to a wishlist'
     },
     guest_user: {
       label: 'Guest user Wishlist will be deleted after',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
         classes: '',
         size: 'wawl-w-40 wawl-h-12',
         placeholder: 'Enter Days',
@@ -3316,27 +3317,39 @@ function GlobalSettings() {
         required: true
       })
     },
-    enable_wishlist_variations_product: {
+    enable_for_variation: {
       label: 'Enable Wishlist for variations product',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        active: wishlistSettings.enable_for_variation,
+        settingName: "enable_for_variation"
+      }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
-    enable_wishlist_my_account: {
+    enable_for_myaccount: {
       label: 'Enable wishlist in my account',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        active: wishlistSettings.enable_for_myaccount,
+        settingName: "enable_for_myaccount"
+      }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
     multi_wishlist_settings: {
       label: 'Multi wishlist settings',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        active: wishlistSettings.multi_wishlist_settings,
+        settingName: "multi_wishlist_settings"
+      }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
     cart_page_wishlist: {
       label: 'Cart page wishlist',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        active: wishlistSettings.cart_page_wishlist,
+        settingName: "cart_page_wishlist"
+      }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: 'Enable wishlist icon on cart page beside delete button'
     }
@@ -3381,27 +3394,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _DataContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../DataContext */ "./backend/views/page/components/DataContext.jsx");
-/* harmony import */ var _common_DisclosureWList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../common/DisclosureWList */ "./backend/views/page/components/common/DisclosureWList.jsx");
-/* harmony import */ var _common_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/Input */ "./backend/views/page/components/common/Input.jsx");
-/* harmony import */ var _common_RadioButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/RadioButton */ "./backend/views/page/components/common/RadioButton.jsx");
-/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/Search */ "./backend/views/page/components/common/Search.jsx");
-/* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
-/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
-/* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../pages/Page */ "./backend/views/page/components/pages/Page.jsx");
-/* harmony import */ var _pages_PageLeft__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../pages/PageLeft */ "./backend/views/page/components/pages/PageLeft.jsx");
-/* harmony import */ var _pages_PageRight__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../pages/PageRight */ "./backend/views/page/components/pages/PageRight.jsx");
-/* harmony import */ var _PopupSettingsLeft__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./PopupSettingsLeft */ "./backend/views/page/components/dashboard/global-settings/PopupSettingsLeft.jsx");
-/* harmony import */ var _Preview__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Preview */ "./backend/views/page/components/dashboard/global-settings/Preview.jsx");
-
-
-
-
-
-
-
+/* harmony import */ var _common_DisclosureWList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/DisclosureWList */ "./backend/views/page/components/common/DisclosureWList.jsx");
+/* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../pages/Page */ "./backend/views/page/components/pages/Page.jsx");
+/* harmony import */ var _pages_PageLeft__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../pages/PageLeft */ "./backend/views/page/components/pages/PageLeft.jsx");
+/* harmony import */ var _pages_PageRight__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pages/PageRight */ "./backend/views/page/components/pages/PageRight.jsx");
+/* harmony import */ var _PopupSettingsLeft__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PopupSettingsLeft */ "./backend/views/page/components/dashboard/global-settings/PopupSettingsLeft.jsx");
+/* harmony import */ var _Preview__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Preview */ "./backend/views/page/components/dashboard/global-settings/Preview.jsx");
 
 
 
@@ -3410,118 +3408,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function PopupSettings() {
-  const globalSettingsRadio = [{
-    id: '1',
-    title: 'All Users',
-    value: 'allUsers',
-    caurrent: true
-  }, {
-    id: '2',
-    title: 'Login user',
-    value: 'loginUser',
-    current: false
-  }];
-  const globalWishlistSettingsItems = {
-    enable_wishlist: {
-      label: 'Enable wishlist for',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        items: globalSettingsRadio
-      }),
-      info: ''
-    },
-    default_wishlist: {
-      label: 'Default wishlist name',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        classNamees: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
-        placeholder: 'Wishlist',
-        name: 'default_wishlist',
-        type: 'text',
-        id: 'wishlist',
-        required: true
-      }),
-      info: ''
-    },
-    exclude_category_product: {
-      label: 'Exclude product/category',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Search__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        type: 'search',
-        name: 'exclude_category_product',
-        classNamees: "sm:ctx-w-full",
-        placeholder: 'Search'
-      })),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: ''
-    },
-    show_status: {
-      label: 'Show status for each product',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: false
-      }),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: 'How many times product was added to a wishlist'
-    },
-    guest_user: {
-      label: 'Guest user Wishlist will be deleted after',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        classNamees: '',
-        size: 'wawl-w-40 wawl-h-12',
-        placeholder: 'Enter Days',
-        name: 'enable_wishlist_variations_product',
-        type: 'text',
-        id: 'wishlist',
-        required: true
-      })
-    },
-    enable_wishlist_variations_product: {
-      label: 'Enable Wishlist for variations product',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], null),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: ''
-    },
-    enable_wishlist_my_account: {
-      label: 'Enable wishlist in my account',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], null),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: ''
-    },
-    multi_wishlist_settings: {
-      label: 'Multi wishlist settings',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], null),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: ''
-    },
-    cart_page_wishlist: {
-      label: 'Cart page wishlist',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], null),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: 'Enable wishlist icon on cart page beside delete button'
-    }
-  };
-  const [list, setList] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
-  const radioChangeHandler = e => {
-    setList(e.target.value);
-  };
-  console.log(list);
-  const [buttonBackgroundColor, setButtonBackgroundColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
-  const handleColorChange = (name, value) => {
-    // Update the background color state based on the input name
-    if (name === 'bgColor') {
-      setButtonBackgroundColor(value);
-    }
-    console.log(value);
-  };
-  console.log('first color', buttonBackgroundColor);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_2__["default"], {
     classes: "wawl-mt-8 wawl-py-8 wawl-px-16 wawl-border wawl-border-gray-200 wawl-shadow-lg wawl-rounded-lg"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " wawl-col-span-12"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_DisclosureWList__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_DisclosureWList__WEBPACK_IMPORTED_MODULE_1__["default"], {
     title: 'Popup Settings',
-    children: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_9__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DataContext__WEBPACK_IMPORTED_MODULE_2__.DataProvider, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_PageLeft__WEBPACK_IMPORTED_MODULE_10__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupSettingsLeft__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      onColorChange: handleColorChange
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_PageRight__WEBPACK_IMPORTED_MODULE_11__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Preview__WEBPACK_IMPORTED_MODULE_13__["default"], {
-      buttonBackgroundColor: buttonBackgroundColor
-    })))))
+    children: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_PageLeft__WEBPACK_IMPORTED_MODULE_3__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PopupSettingsLeft__WEBPACK_IMPORTED_MODULE_5__["default"], null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_PageRight__WEBPACK_IMPORTED_MODULE_4__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Preview__WEBPACK_IMPORTED_MODULE_6__["default"], null))))
   }))));
 }
 
@@ -3541,8 +3434,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _DataContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../DataContext */ "./backend/views/page/components/DataContext.jsx");
-/* harmony import */ var _common_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../common/Button */ "./backend/views/page/components/common/Button.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
 /* harmony import */ var _common_IconImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/IconImage */ "./backend/views/page/components/common/IconImage.jsx");
 /* harmony import */ var _common_Input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/Input */ "./backend/views/page/components/common/Input.jsx");
 /* harmony import */ var _common_InputColorPicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/InputColorPicker */ "./backend/views/page/components/common/InputColorPicker.jsx");
@@ -3559,57 +3452,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function PopupSettingsLeft({}) {
-  // const { butonStyles, updateButtonStyles } = useData();
-  const {
-    updateButtonStyles
-  } = (0,_DataContext__WEBPACK_IMPORTED_MODULE_2__.useData)();
-  const [inputStyles, setInputStyles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
+function PopupSettingsLeft() {
   const [selectedImages, setSelectedImages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
-  const handleColorChange = (name, value) => {
-    const newInputStyles = setInputStyles({
-      ...inputStyles,
-      [name]: value
-    });
-    updateButtonStyles(newInputStyles);
-    if (name === 'background_color') {
-      updateButtonStyles(value);
-    } else if (name === 'background_hover_color') {
-      updateButtonStyles(value);
-    } else if (name === 'border_color') {
-      updateButtonStyles(value);
-    } else if (name === 'border_hover_color') {
-      updateButtonStyles(value);
-    }
-  };
+  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
   const handleImageChange = selected => {
-    setSelectedImages(selected);
+    // Handle image change logic here
   };
-  console.log('selectedImages', selectedImages);
-  const handleSaveClick = () => {
-    const popup_button_color = JSON.stringify(inputStyles, null, 2);
-    const popup_icon_image = JSON.stringify(selectedImages);
-    console.log(popup_button_color, popup_icon_image);
-    // You can also send the JSON data to your server or perform other actions here.
-  };
-
-  console.log('first color', inputStyles);
-  const globalSettingsRadio = [{
-    id: '1',
-    title: 'All Users',
-    value: 'allUsers',
-    caurrent: true
-  }, {
-    id: '2',
-    title: 'Login user',
-    value: 'loginUser',
-    current: false
-  }];
+  const isIconImageEnabled = wishlistSettings.popup_feature_image_enable;
+  const themeDefaultButtonStyle = wishlistSettings.theme_default_button_style;
   const globalWishlistSettingsItems = {
-    enable_disable_popup: {
+    popup_enable: {
       label: 'Enable/Disable',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: true
+        active: wishlistSettings.popup_enable,
+        settingName: "popup_enable"
       }),
       info: ''
     },
@@ -3621,7 +3477,9 @@ function PopupSettingsLeft({}) {
         name: 'popup_title',
         type: 'text',
         id: 'wishlist',
-        required: true
+        required: true,
+        value: '',
+        onChange: e => updatePopupTitle(e.target.value)
       }),
       info: ''
     },
@@ -3635,47 +3493,48 @@ function PopupSettingsLeft({}) {
         id: 'wishlist',
         required: true
       })),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
-    popup_featured_image: {
+    popup_feature_image_enable: {
       label: 'Use Product Featured Image For Pop Up',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: true
+        active: wishlistSettings.popup_feature_image_enable,
+        settingName: "popup_feature_image_enable"
       }),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
-    icon_image: {
-      label: 'Icon Image',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        onChange: handleImageChange
-      })
-    },
-    default_button_style: {
+    ...(isIconImageEnabled && {
+      popup_icon_image: {
+        label: 'Icon Image',
+        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          iconName: "popup_icon_image"
+        })
+      }
+    }),
+    theme_default_button_style: {
       label: 'Theme Default Button Style',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], null),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        active: wishlistSettings.theme_default_button_style,
+        settingName: "theme_default_button_style"
+      })),
       info: ''
     },
-    popup_button_color: {
-      label: 'Popup button color',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        onColorChange: handleColorChange
-      }),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: ''
-    },
-    popup_button_size: {
-      label: 'Popup button Size',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_7__["default"], null),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: ''
-    },
+    ...(themeDefaultButtonStyle && {
+      popup_button_color: {
+        label: 'Popup button color',
+        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+        info: ''
+      },
+      popup_button_size: {
+        label: 'Popup button Size',
+        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_7__["default"], null),
+        info: ''
+      }
+    }),
     succesfully_added_wishlist: {
       title: 'After successfully added to wishlist popup'
     },
-    title_text: {
+    popup_notification_text: {
       label: 'Title Text',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
         classNames: '',
@@ -3686,17 +3545,16 @@ function PopupSettingsLeft({}) {
         id: 'wishlist',
         required: true
       }),
-      // options: [ 'Option 1', 'Option 2', 'Option 3' ],
-      info: 'Enable wishlist icon on cart page beside delete button'
+      info: 'Enable wishlist icon on the cart page beside the delete button'
     },
-    icon_image_after: {
+    popup_notification_icon: {
       label: 'Icon Image',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        onChange: handleImageChange
+        iconName: "popup_notification_icon"
       })
     },
-    button_text: {
-      label: 'Icon Image',
+    popup_notification_button_text: {
+      label: 'Button text',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
         classNames: '',
         size: 'wawl-w-40 wawl-h-12',
@@ -3735,14 +3593,7 @@ function PopupSettingsLeft({}) {
     className: "wawl-mt-3 wawl-text-gray-400 wawl-text-xs"
   }, globalWishlistSettingsItems[itemKey].info)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-basis wawl-basis-3/5 wawl-flex wawl-gap-8 wawl-justify-start"
-  }, globalWishlistSettingsItems[itemKey].component)))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    onClick: handleSaveClick,
-    buttonStyle: 'button-primary',
-    iconPosition: 'after',
-    addBgColor: true,
-    classNames: '',
-    icon: ''
-  }, 'Save')));
+  }, globalWishlistSettingsItems[itemKey].component))))))));
 }
 
 /***/ }),
@@ -3762,7 +3613,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_reducers_tahira__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../redux/reducers/tahira */ "./backend/views/page/redux/reducers/tahira.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
 /* harmony import */ var _common_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/Button */ "./backend/views/page/components/common/Button.jsx");
 /* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
 /* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../pages/Page */ "./backend/views/page/components/pages/Page.jsx");
@@ -3776,12 +3627,19 @@ __webpack_require__.r(__webpack_exports__);
 function Preview({
   onColorChange
 }) {
-  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_tahira__WEBPACK_IMPORTED_MODULE_3__.selectTahira);
+  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
   const [buttonStyle, setButtonStyle] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(wishlistSettings);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     console.log(`📌 ~ file: Preview.jsx:15 ~ Preview ~ wishlistSettings:`, wishlistSettings);
     setButtonStyle(wishlistSettings);
   }, [wishlistSettings, buttonStyle]);
+  const [isHovered, setIsHovered] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_6__["default"], {
     classes: ""
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3796,9 +3654,12 @@ function Preview({
     className: " wawl-mx-auto wawl-bg-white wawl-border-4 wawl-text-center wawl-py-6"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-border wawl-border-gray-300 wawl-w-max wawl-py-2 wawl-mb-3 wawl-px-4 wawl-block wawl-mx-auto"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }, buttonStyle.popup_icon_image === '' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     className: "wawl-mx-auto",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAABWCAYAAACU0StbAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAACjHSURBVHgB7Xx5lF1lle/+znjnW7fmqswDmQgJGTCEQVAmRRB5KGqr/RR8vKe+1nbst1jr+WJ3q+v14NCNrmZpK9raToDt0iUICCgyhQQSIHMlVUkqqbnufM8949e//Z1b0RiGABHyR39ZN3eoe8853/72/u29f3t/h+i/xrEh6DUYcssWkyxrEQ2PvKH51O710e69HbJcLWium9YiMoLAD2UQNYUuq7qZHKWAfitNujd1zw8P059wvCrC2HL1Tal1//zZ1dHBoQ3Rzr0b/cFDV0Z7DmTkZJFMyySh60SaIA3PUkrScFlRGBIFIYV4Dv2QZBSS0MQWL/DvsOrebZmdD47SKR5/MmE88/mv9GQO7ntTau7sazLpzNXGyJQRPrWLNBmSZluYGKYscHpMnqKIJF6LCC/xj/jzSEIAkbpAGeLvEIyU+FsQUdhoRr7n3klm8tOFbXcP0Skap1QYY9/4Ro+W6762+Mgj78yG/qp8e0e72DdM0dQUmQmTNNOKJ0+sCK3VZ0FEfCVSTZQgJMn/WENmhMLPfqBe8xUHvk/kBiyUSlBp3CbL7mfbi1vL9ArHKRHG9g++Z3Z7pv9zgWlcC70vpJ/dR3q1SVYkyC5koP6CpDpZrAkSQhBY7QiCIJgA7AIrH2sBy4VNRr0ROl5KCiEEpUn4rfqOEiKOwwJxXPKn64OBE3y0a+zRX9ArGK9IGHsuvrrTbMveYq5f+bYgNG3xq19TRiRJuD6lunJkZlPEy67MQWMzwMSg7kGxqiYRNQOSnqTAw0oHUq141BICf99IGNAmjbSkQaadgHlBILoWYwqOpUM4oetRxEIpNqJm2fmia4vPzxl+1KGXMV62MLYtO/e/Jc9a9hXPSs5JppLwEDsprelkYYWz8zrJSNvK1lkQrBUyCCioOeSOVckbqZHreVSXPtUAjA1ohgfAgHgIcHnssnT81saEM6RTWjcpk0hSMpslO2uRkbRI11hjBIVNHwuA45c9atZq91ZLEzcudva/ZM/zsoTxzNmXfCE9e/b/kcvmicb2XZQ+OEkJXLAOlc+tmgNcM2NsULaBVYSmuEfLVMH3Kk6dplM6ORmbGhmLfGFQI/Swwj75dV9pCQNnFDBuQGPgV00WCswliXcFMqlD2NSZy1OuMwfB2EShpMiXSiP9BjSl6gyV65MXLyztOvhS5vWShLFpxQrrrU7uxwlhXsPAZyiFJTIDnYxQUMfa2WRhkqwFMlL6QIEDDRiYoMmpEnkXn0m1/jYsdRLm7mmNSpUQU1ClVKOg7kFz6uSWoT2lBkWOryYZRgEwNVTYAeMhG+dM4aRtUqMeCGVWoYOyPW2kmwZFHkAW55MQSuA447rjXNY+/uTTJzs/42S/+NO2+W2LG/lf6Z7xOl4tXdkuBBFpZDgB5db2kZWDILxQrS7/Lai7VNw7SuPN5mb3zWv+dXpJ1++6yR5at2mTI1TstcU8cued7SSLSzRt8lzT0C8DZlwQSZl0WcwQEK+XLwGkEGwoAvJhRg7k3MT7KtVoqujS3HKdumd1UbItrbwQ45Qukt3wR/c7+VXnJMtPD57MHE9KM36Rn1uYnel9wPLt1ewCdXgHHT/FgpGOFcwvxeqc0YfVhIqGWB1ghV9p0tGBUVmi4OO/XJr+2qYHHwxO5lw/3rgxOS4ybzcjeaMzUbpQFpua57OPYSxhpxty4AEPxZiCxcCneQDuXJmgRe1dlO5uI43dsBsq7+NVa5PVcWfdoubWQy927hcVxk0430f7Nzygecb5fDEcJRq6gnzSG/AahQR1nrdY+f3AdZXLdMZKdGS0NOB2WX+2ZttvnqCXOX52ww3rJ/Ye/Dvv8PTFzVpTRDxJAK2K0yg2HaEEIiiN5ekTJi1KtVOhqw2fQXD4voDmhvX6kwcPHX3jejrwgrGI/mIX9N3553+dGvJa9WWdXRtcng29aEZkQX07z5lDuqEDwHzl+xtjZTo8UdzRXNx54brH7hmgVzB++NRTR9+7Yf33ovHas0lJ54ogyrNu6EJTQpCt6IWffbyvQlCO16AUzDZVyCtXzoGLYZh9liHkl+pHf/1C53tBzXho7tqrCl7q5ypQwnsTIGUkcBGYt1FsUtuSXsot6Y7NA/7ena7T0aOTvzvQl3/LlY/fVaFTOL77qfelo4cOf7N5uPIup4owAvghWUuU+cQz4Wu08NyNNT7LLlDXrB6SMGOd45kgiqZL4xuXVnZuppcqjM1d83uTyb4npGvM1jhgsiQEAfdpAXPHm/D/RH1vXK7WhV2nX6rS+O6RA3KpvW7Bgw+W6E8zxLdmrf5Hv978eKhi1ThkjyAUDcjrKROS8DiCuoEjK9Pd1NFToBDeibUkqDtP944/erZQsf+JQ3u+s9q5nk/CIGYjjSZpA50hCLI4JAZwuhFlZrUpk2E7DpsO1Q4Xj1ZM/bI/oSB4yBuObP9EztC+3Al86CCLcnCx2UiHAAhxiKYEwQPATXvrk1QtV3HdRpzfpFOrhjrW/tXzHfw5hfHwovO69cD6AGcCAgGSjnBYQ6JlJmEjcJ0CAkjN74QbDVSa7RUdOVgs3rzq0O8O0Ksw3j256xOaafwAaR+l1ENHlGpQCoLh4A8pIYxHUpE8OjA5CXcM7eVQHg8rmfpf+9oX557ruM8pjIzUPow4tyPC2TTbgFZYZKYSBGCGIEIyO1IqHI4QT0QQxtTo+H0bprZ9h17FEV209P3Cth8k5eQpji3wZGHi8UNXhjQpXBopTmMxbQW6RjI1zwqTNz/XMU8Qxpa+dSkrZX1IR0idyCTJQMisp3AgqBprhu+EZOXTFEL9OO9oTFUaQXHqQ/Qqj+t/8hNvOm/cKMzEAQV9jBvQBxiuwjGhgi/gBN6PNRGe1WrwABAcvmdmcv/jAQSRf3zME4SRnNdxkUzZ3SIHAoaToSQCYGaj4D4DfDtAgsXRjoOgysVJGyOj3z6jPLCfXoNxw94nDkS29b9N4IepNESRBCqsFi0WQAL8EdzTwYmxGDcgEC1pt8+VqRMW8ARhmGbirXoKVoccw8iwRphKKxoIqJzpKlXCGlWHJqhecqhydPLIrumR/0ev4bh2+LG7zFziWzoEYnBCx5gBT2IB6FXuxPkNFq0CHZkulo4trJVt//CmTZuOm/8JwnCkfxnZpsIJsnQKAZKyWiMdSZSBdPuMd11O1JuhZrkix8Ymbrq0emSKXuNh9PR9Rrfski7jxFGHICwWCB4tRCHOckYqFfJ8NhyJRbdnX/+VH73nD49zgjCqpXrOm0K8VIaNNUOy5/SRmctSMpPC627KdXXQvHdcTJkLznpszcEtv6TTYFy6+T+mzKz1SV3ltJrCDA14YUAorCUmIlaOR2oQyWS5hHgJjtiUlM4Urv/D4xwnjL2Xv+2q3mymq2fZEjKWLCLz3HNIZ66gHVgD1Ur0dCG4iVTYbfe0vypu9GRHdyr7IzOVPKyxY+VwPUYM9T+/Aw+kYtWpekWBqg4+FjnWRb9cvNieOcbxNuN4HzORdzgL+5FvaKTv308aIsvG4cM03QTX4CPshgsLkZlGxeL9dBqN1U/fU6ek/llMkfTIVJrArlbxpi0SmlGVwbRcrihm0TDtbHfRfPPMMY4J44GLL04kLPNCTsb8zduouG0XVYdHADpTlDHALOXbqGfBPGqA1qtOlCr7R8bvotNspAxxh21pR1gTjIg5EEOBqt7SE8YSJpfHKyVE1chrQTL3JvKvn/n9MWF0W/nVVd+3pwCWFgKpPHAihfpGFvymZsJ7Ixy300nKd3dQYdmCsfW/uvOUF3Fe6bhgz8NV37K+T793sAg1VPak/i5beW4t8qnuOCQNzsKNlTO/PyYMGM6l6VSKCtAAZuqhIIpAMROQrAEgspP8Q/Vd8JPjFCeJp90IzejfdU0PVEWKgUJIFYaJlldhcTDLVCyXFZkM2nHFDG78HjM0MScGHC7zAYkNjjmEAiM+jglvoqTE3IUu9tFpOi4f3Py0IaNnGCxDMGKBjDmPqKUfLAjOVSbqVYpqPkq+dseiptbJvz0mDFjZAlYpLvhosCV+MODEnBb+2YljujC67ekCnaaDaY0ahd8RLXaeA66mAG+KB7gycKchuRASm8pEtULNhpfQKwYT73+gGSJYqOJ6EJtxrSPWEn7NUtVzqbj0x39zwisPda+8nE7TUTKqPwa9UVLMKYQQUFynDVggMJ0JPPbA9A+kEYzlEbUu6P8Y/06BwOOvu6TD0LR+EcW1TT6AELGdsYYwHmumqTJDH2G5Oa/XNIb6vjQ4Xlu/gIaadJqN900eHPmn2Wdurnry8oPAvQbWvAgBFPHa4byKYhi4sM2kc808+Fv/mgfmz/+0EkY2lejTpEgpo2JdEWxvUtHzqpQHwaQLBYWqE6VpSqRTlJ7fvayye2snjjxMp+H4dtKruKDj2tra1YImEgnwtk2a39VFk+A4yrUqDfouaZBAZGo9i2qFdmUmqazWzQLgH0VRSyNmTESSaiEgBlIIyNJMKrSDSksni4mO1GuelzzfACu+p63QRk0IgIvWuVyOXGh1o9GgCnIUZugcCGIKBa9K3QuNoGkqzXAiE9QPzzpQtYgojmSPxfmOjPEDoSfVIdHOthy/H5gzPPyyCryvxmhLZbZPIEtlJzDtTtH01JSKRIdRxePBC22bNhWQhiUPVZJuPplXmpFwvQVq8iKuciuekyM31hQcwHTCVlFBUMKyVVnAcZq76TQeUeg8hCnV2AEaqtZjqBKkZYOasCwVYzisNQgZQszbcptxFGVZZooZ8JgxYiGImdoVRYjSyjsOIupchKy1h9Jd7VAllwLf20an8Thr3rzir3fuKfeSnmlHaSMPrc5B5dNY6FSk/CNth6NtzDZRkeOOCCuvhAGAFCp259gCXwxQZ2D6Hy4UvIVD4VSNGs+CzOrIKLOBIZLryC10Go+rK2bHBVHBzqHGEsKTeFwW5YISlxIkV+BsepNI0/6xSVrLs7KTXTFmFBsDBtgPH4UgPZAqio1kK5LnZ92k+oFhkstmU/sZ88mbLFVHjOozdBqPuw/u+5uUZnS67SaCLSRoMAIGTA/6XkAl8P1GLy1ZOYcGn9lLqrhdr2WUMCpHJ+5JpdISVSfBfkQFVnFHAV4DSwyTqtMl0iFlLVLYMnDuXae2YnYqx9WrNpz7gFe5wQubim6Im+UwZSy4iYQrgYRzbpegNaFLxnQFwRZyr0S6WwHouFEehL/YwcbCOBFwZ10Ua4ZgTQHwcAWrNjauPIov5SSdxmOyXllS6OxQNWAfhXCUhensdeeg5AMIgCtlSNjVKFMErsb28BlCc79ZTynNuHJgwN2xtOdxuJKVQsQOlY6ZCl6CEK40BHUAR+Kytz0+c2JuYFmUnNNhd1LadPWMFCDcAmv8uofuHKHXaCQM0RwePQqMAHvfcChhp2ho4ABxVl4HlxuVyqinIKLO95CvCUVk2ZrZfqxZpWHIu3Kk3ShDjiuw+pAgt0WMRC5NQ9XmzOuiuYcnVYeddP0VXzhz4+cMzz0/29TOiOqlbprANQCADcS5lq65Dy2/aE9oag+bbYnb79Wc355sf8apGCB9j6qmFXYI3FuLYpeJdMIKLJp0p1EvtsDcIUjXbWpw2ZWDSt/Rjwljjp65e1ILI1e4+D+iJApGOdhXd5BUnXjhGGKLRo3cw6M4frBm9/CRNRUIZh6+sxB8oqnBd0sLGG1AyrptCG2VZuirZMn/0NUZ69lr1r3+H0pZ7ftveBWE4kVejZ8F5mEjLkoifRgdHVUtU6zpEVj+OpxFE6Zf9fB/LskCe/KYMHrBIW5ffP54shn1xv2WXswPcXcuKHg4FAqx6sVHtlLnhjNpQXeBfnRkiEZRc2yESVolfMpCTDaqnQlUmyytlf5zf0nDXxnY8rbUlPeR3yx7/Y0X7f7tKfNE911ySYfliHO9aaczqlUmKr67+18SdlgBJugA/q6ebkVY7di5kxrQBp3LH6AE68hLanHvBqwiRKW08dBxPV3gUQeFI3uFqje0GnKx8kYrodeTKXIOTVK0sEg3dM+hnw0fVtXuHUBlC1xBt2GhMs7deShN4iRGCkLU40ZXVttM0zinGfhbtnat/8S6iS1fo5cxtq9alY6qmb8EMbMBhzzH317pCWUkuCwgRYLaQ5M+OQGJ6El6Gona9moJ5UV4FWhDgEcC7DmDaIRFLOHKErjWI0HzoQ3VwT3HCQMTOCCF3MgEKrPgIqYOVaITZ68RRdkUTT01QAXQgJfpafqmN6ZC2/2+RisgxFk6NxWFpLGdprk02SKJmAqAxVlVFMJJ3HJw9kZj3vCjXz1ZIdy6bp153oR5szkiPum6YVa0dJddP8eTUoRxYQD+My0jew0me3ZDogRq0M9lne7XuZMgoZppA2CigPZOSJ/mhzptifx7+BzHF5EMPVBMYSuDVa3JEH/Erc1wqbqHPCWbRoDSJH+0SjdHvbRCzwJkHdoN1uDZqEZNrtZbCdWyKKsBaSGqW8iTwSSCqQZWJZHfJCBcR/vKtq6VN5yMIA6fdelZF44ltxlVfZPnSW7HgMmizKyJ+Po4JIBUcEbCJbLrR40IiRi+yC2Sf45486tRntYKW4UMTE9w1+BopUb5hkdDDefeE4TBsQR39aoIRcbdt4aIU1iWKPd3R8UGGXN6qQnpRqFPf2/009utAnUgtb/Hr9BjtTGwR0jmbAOgBNUsxf3dHJ8woLG3ArgiOzaoK2i7ZV/PhnNfSBBDq950Sb3o3IdgYYWXhtYV0iotkHkwb1lwFJmk4mUllzjUHHTFc3rsBCJbURJpmE4vHl+MOuhGLRtv28AjcvGs+Vv/cmrPEycIA4WENqnFBLBhxJlrzC2TYjgirjt4WI0q6u9z2yhC3L4iMOldZge928rROiNFd3glenZ6jIKutCJeA3gcjnp01S2PE6IKruNhGPhMaknLkz/9dXplz3MJ4qmz33C+U3L+IwyN7gislNkJj9WJAhFSKg0Jt5aHEDiI5tZsgDtfKQvCgTZ4OJkLs+5E/iGkSWk/QUnfoA/IDvqY0ak0vcPjAhM9OnO+4ytqUbSIAY+Tk2YuTTthmQNXraXHjBrt9MapgZiDSeOgCHeElYhmtZMHMFrjJmltlKTrzAy9Xk/Qd5rjNAreQ+vLKO4x4hIlWzRWkKNCA8IwuT/MhusLzd6Flv3lPxbEzvMuX5msRj+F+mdkAShWgAYkTUSUMIV6QNAWahRdvEa2wZEl0/4696Az+y04GsAzNByuVYNJWZhqAppiuwb9WdhBq7U0zasg8rT8vTPnPA5AgUELWDrhu95MJnBhoV+l/BN7SJ89SwHVBFii0SOT1BWlSI7BLpf0kVaukyh7dKaeod3CoTcifmlCX39RPELvzyymNCYd4soMjvQQ1qu+CW6wR1xiYzW9qEkpYb97ILf2u4srT97N13HgjVfOCw43fxq4soty0ISsBRxADnW4SLVGXRV/HMYwEW9RYY8QKiGQaldhXkZCG7hXlIFVcTPccIOD6B53HxF93O6hVBUv2sxDVPojzdh8zuVzjEikD/DFXX81aTt2UTsEofHWqCqOgBpDdzJDS9Yso0qXTSX4bGfXKInls6iJ3NiE/S0IbeoQFl1p5hRSPzkxQbLdIo9tE/ghuZ3XxsUmoRlJLW6cS2PNcJGRLv+Br2PLTTeZ7nDzu4EjF0sIQs8nVC/I8OAwHQrK9FBYotsqh+lbzlH6XmOU7g2m6WjUQMwAjiVkTwHsEJLiFnwQ2Mg9csCvyApA6rD5I0oGvq0Ls6ploSE8eYJm6J63WsK2t/UAdR98mJyJMkwgiuuTePZ5A4yDA1Y8mtfXSaPteZreOUpyYBxsOaKLIdRkmzr1aDbiDA8akqb73RKd5baDcMbK1AJKdMNEkqwdvKciaDXZco+mTbmmfuZgbvUV4e/2r5OOfH0EXGA8qIBLOTI9Svvhju6pTCshNxiLEGa3IQZq4LkeVmiDkaGMorDjOmuojETD93DNqbRqytdRFJOYsQGXq/a5wONZDav3BGEY0l8+3XTpiN1GjW/eoRri1R6xSCjXyljBaMMqL0YldbVnaN9CnGTQoXYAWDNnUarkA5SwMojyVmgJGgSn+svKCF2b6iMdf/MdjxK5hKIEJLBDADsCAeotCR4F/l6z07c2Hb9X8LYJaEx1ukaHa1P0IKLrrX6TSjKgGta7AFd9hYFCOASuYhpcp4PJJrhLR4vLhwbHREAKDpW4A4nJKp1BFsSVCAGvIa4zYN/zHLVW3df793kOnXFwBCoNQPJDFUqHYWvfCGewEAh390UQlF6q07K++XQ0DcZ5EpeYSJFnCtXy1OnAneEqztdTNOjVqeR5ADdB7rSvPJJABVxDPCKSyGTALejphDKfpDTmaVz25f0oSK8na2XaAnN8GvlDGYLgzorlZpLek+xFoTyhBMHpAvs8Gz90WRBR2ArC4tpqXAjTFKbwTiaNzRQYJCyhuF4IZM0JwnCFaBsKXNqY7Yh3CqoYOiZ51AHDuK+WH6pPHAKJho7Syrnz6GkgkAdkdoH2sjtB1rx2ykBV+xGNLgeaPwZ365oaNWsQCsyD+6q4/KAlLG42gxpbynx4z5oVxhtvuG3gifo0bW/WqIxJV/FYAU91idkJm1d7GlR3Dns/I473wfL7qpzI0XMk4/BZ1YqhEdy6qaXteIcUhKIjVVCdxZa5fqhzed9xwkByJppQn042B/n7mrVyiz5rBBaB+6HUewiv6am+bHu6QWf0dNKQ7uBidKpMVCm5tJ/aF/chZZa0JpmnvQC+Emzdxe9dgCFmAxdgqc5dwf3o0A7i3Y04axLCGwUveUR6tMP3qIjgro4pdsE0LrE6W118IXAppvv1uK6stMGT8dauqFUUVrwugEAiZjKgfQYycYFnJqtUfyv+1W0rATw86zhhECiyduQbXDRRlA67J4BmxEADTRmhOMsLPLBHXmvbJQiPsOZSFzzIqKwgDsGFwxYbhycovXoh6LU09eFvrNKHgjqIFLBOJRdm6MUTwcS5tZLbES3u/wBWRNUGhO7Q006FpqNQFY252nuF3cH9dvG+tKg10TAGeA7o2BT0VngotUhNjN/bEHINx0t05dUC6NAQPQMNhkACfO8goCHlyDceLwzddnI6bEm0YgKobKg2FUoaXJihs/bdTT2PfZ+8d1wQF3FZW6Al3FpoupJWJtpokOvf8PkTh8YoAoJ3rF9Oot6gc7q7aIuoYmJYvRoySESwSusYkGW805m1RbLCmAlqwAwnGAvYpiH35fAUnWwa+AJzsLxrkUFTVf143SI2kUgBvtocpAoBcR+X3ZZUJJWVBTYlrVgreWe12iAJTcYfdc2ef5wwQHiUU0acb880h7G5DF6xmvKzu8jEpNvBDSz8wmfI+OBbcWJcqM97U/ETlBQKEIKvNVXO4uKz2u5DlD57CWWhbbPgWcpQ+WlolwtX16w5Ch/iXhDifg8khjAZTr6A+lloEuhDRe+z1a43MzEVqYXEbJoqdvHvlVCkahth1x8d24MSqolxsGXms9y7pZpjBdgu1W7BuQzsnvs3ShpHx+HK4wGU3EMpEe8X5ZOE6mIjWnjdVdS9dAVVn9zOuQsOBG/xF/+dxDlLAbRCeR3GEnBdNEcm6aCGiDQCrbZrkAQy3PzaJSjaCOpG+jwMN9qER2giauVNdZwfsAtXyi3U4dUuxP5UFpFpQFXNp6XwSFnNUjkSb6OIa8CtRqVWS6MLYQacSPKEtRhPoOOUYgoS3sPKIItm0NdjOkHVy0LObmG2FuOhnz5OGDUZPZykOM1m9ylUSAtGvICUvL+HnL//Ng1d8Q6avOMXZGcy1PaZG1UeEIERUuYCoXQbCRpDSKSECyLWgUBSy+YgpbDojEyWDgCXHAjDq/DWbU8FXsozhSphUpPl60w5cWKnQTprzHSML9Ac1UCDa9KEaJHWcWtjkavpqsQhlSAMqan26WwmTeXJErX1t6sCGacBIXIpvtFA0AxpHHFQjvu6TM09ThiP9ud35CLZDMVMjhr7Z5PheF4vRXv3U6qvn9x/+hYVt++g9MolZK5bQnEKpimNMsGBLgKDs19rAGt0fA/lWAAW1yr68flE5FEZwYuHlN4FSx1CYBxKSt9TpK3SFBYKwvc0b+6Ba87rhvIe6m+ME+zpgnj3EcuGCZi6smimHBhHYixJQxzZjlzcZcF3WIAQiAWPxCmAVgrEUkPIpXpynNVqB44TBrPXhmZvVVGn3sIMxrVyg/IrlpKfSFLulr+mzN9+iiq3fltdiXnhujgJ4iYyGe9Q5mpVibkO8BWV4TGSU0UkZILaXB2xglTxggNv4lfgBBu8BRx8FS6QNSQKYhBklAepTHMBprFOkwJFixkzGXsKdfsAnHNchopmpFbfJ4uOHxl4Kheeoq0HVAO00EcBzIV5hggHvDLKo6ACB5BTzUlnWdn2H+9NeKS0R7mOIFtRJ19HBjlKutBOEyYm6DiUXLeaLBzU81zS33x+q3FspvFUqt1Ayq3hfd1FYXfgKOQGD4ULsoHeRTYTPHwIgsuZHryNXwc14MdkCy+lFnFPGQTLPiGKG2aUWURx6VOZkGAOM2RL45I7ZMFCiVRrdBvEkc0kFAvO28d93nfPe+aRiTcRCkiXvU9Iw1mTZvHtKxK04wRheM3qj7zAa72Lm1Yqv3lEucAktCDctkuV8+vwBnKqRIWF81QYHcq46MQ+34ZmdAO+DvEGDKxW9dC4coM2wAuJP00imPL4ApEUes0wdt8ggHzehxq2yoCwbSS0lNTMY/XeqOU6WehsElVEfjW/5ZE0oQTBW7LSOH8bwyfMKmOm1HGRuEATPXLroJuwKAFePyFqtHbefJLFCgeQ204QxgWHn90CW9kXo3Lc2KY9/qzqxJ/9vnfSFPBi/40fJ30UDDnTbXydwARS215i3GClTs/0XgJcuYrv19nbBGrF6rzxVmNhuGp7F5tJAC1hf8yaIWWomPQEB1Mydpsq7GZhsxvHB1VIsBLOdIZzsuUrE+IryeMcnQj2TJi6QJzOuyKUFrI5ggjyS1gM5Du/RaV9FSpsbq2xb2jD7C0nmglx64V7O/OJKgjFCVI4wPD37qDU0oVk3/B2soaOUPKaSxHrp2JtUK54phNXqgNy0FZSF4lYBPgQToI3RWie1zS11UFtcgh4s1+kHsLle2HgM4/hLlLbv9jNqoQ8ivu/Ob7gsLoJl1sLYxInVI27/rEbB6AiSJ3waBJAbXCEyVgEE+HYRd2iAosSQDuGDXAfAM4ldQbyys9mClsn7IWvavo3clr06RTFXDCH5Pad91Pz+rdS15WXUXDFG9Q9cvhzD9SeAC5wgUmBn1ScIVYRaikitdvYAbWUhrfgleXVc2Grno7V51wH/IjapQAhaPxeFcxDJdQ2fNdBPpOUcfcQM9/MetcioZKxgJMseCbeYMPHzWEx2iWqgNBBi1kchT2kcIYLyyyICOrkiQZ9D6nD27qXkX5gnKpS3DIz9xM044qDmwddPfxVvPUzDnetg6PUuOU2FTuo6C+MK/Tu/Y+rSbIN6+p+IaF6rSlNiVPraKbHQ2lKTOPz31xIQzbxmnf5w0qwmLhumIwRKbpulVmgdpFQcYWHy3QjfsSL4OssEHwKgShB4O9dMJJugUiVbyKAmETdqQELxHjETF3UwHFgXs8gSnZAIayaxHPV+cmKP7itxHPuXhyrO1/0LU0yaHEqzN4l+OHdNPHlW+GikEhxwjV4hNxb/j3OD1sV+4h1W6rkGsJRpSilylGLYZeKvY4U4Ko7zDCAepHiTHzGDw70IN0Qk21AQ1IqEDMVq6VAlwWjsY64KpjkbZt5CKQHrrUHfkxdq4izayYwZBPnrvPdGvgOLMAO3aUf+GV6a3sXpeAEylrzb/9w3s95y4grj257ePPCc7+PuO29uowLShJhsnn7b2jsvsdJzulGEHaIUJdVyM8ECx+KPXLIyZfmx/0dKkIl5VWYcqkw+yTjHhAGyiBsdfyrn/NEoBn4PYJ1mopYe0i1N3syVHlK3OvrK+1kaieLn3XBNDrwjhciKYxWV6Iq0yiGTqjbWwErcOzbkR31ZXK0vg7IbVa+uqy057h7azzvjucJN/obN6FumNNKftRuSfAXSHm3DwNYI8VzKAkcI4FaN3VgzIAZ+DNJhNq4j4o3c46qLhMpbWF+kpmpUDBf6SscYCSb4jQAwmDP01S3oWFhgDYUvjo+e5o8grJe0AP5KKkEYah9rLFJKqqSNY4ZNlTeEWbRDrNOm1HqfC/IIbNcGxsMpr7wx3N+XmG85cjmvQ0j+FRkxTkKBzAsbsYDlrgKRwLZ2ukzA3w8GVZjJEi8SpFs9WxDseFhmKjJUkzIRABR30Ldw/TV60DnyDMW2rDClAhZDgsCnylzDVSEm8Vx26EZPVECHsRUnoe5l6B1gwDWSC4sh2HcfcTXc0Bv0JfcaXoPil19lUbgkHfD+aoN6SSFwePRgemvNyzxpLptlGzdPAz2KEO+9UtchlREsdRUbOBzdMl8o9RVSBzqMbAKZSIBQucAQa6mbvmgUYwhUet2D37rBkQlTHiCSSTWsNZdEATMjtsxU8Chbo3LEQnVFN/K2en3iXt8Wxq1bQzPTeRfA9CITSiAXTN3EZ3HXaGB+/lFlV3PudHwBYXxURpwa9O165yMVmMhkB/vaeHlEEB2zkdC5jUovjsBZ6QBPq8xfQcBBRAAR6WsGQPSBdchEYUip0EBJYzv1RY3j+AflwLBf9GhML7zAQvfVFloCCzQ1X53vvEQH89VYb9FM+TkTLsV0w687QqRBdURVD0uKvR/myP0po5+uu4o0Ec2v9Vf3/G555vvCwqDx8bStqFx6b25jjg+1OJ0nQkVOmYeMQHL9uwiw/QQrg8KF1mqpVaKGxSmoRE/B+03G7xEm+DeHoO3DBGDLgvEV/S+oBFojGoh5DxD514KSVkItU3jxlUT+USgtClBsSaGSqtmbigyI9QAx2nQd4JxuhWm8ZaOuXR9wwAQ138wuK77fwoh5MsWBo83HNr6uymvcaNXMFzfovheWgiIBN9VRPhKA6awEnUIYQqnZVZM58CKYh7yCaz5fX4JlXpkr5xhcmSqAroYJxow7ilD/vOk8G/SLTEpWwyXoZpmNAXOXuueOxyJmlIcuyWMJmP6EIE27ZN1esKs0r9GRToIIV7bOYfeIzN8om/+eM2sP3+xFqoXvc3MzLitPvbUu9t69smsdYnr+EnH4nQCoTHC4WngRwUAexgXNIFocx24i0DxClLd4AMkH20DsbMVD67y90Aj8jxNLVS8KJjTLz7+F+/8q0/cdfvWt1jtP0GivdyKtMVCtG56yPqgtodJBcxW67YQuoiZ/BEswr+YZeq44Vrqu+pSOrxnH70dAdiF0ioHofuRsya3//WDQ0PRi81R0Escd/etW1twwh8YprVkH+qbTWiFG/rKjXaD7luEifoIjGrw6wchrAAm0gfT4O/eDf9wCCC8GjW+Dxn9mGAQNEh8rdYffOb6nTtn0mV6BxZpTcfSj5hB9CHkBMv49peRFnsy3sHM9VwV+qM6N+JWaAGEcwFc7N9dvZ4eufc++pjIyzMM4wHPCT+9cWTrkyc7t5csDB5f61qRWe2bH0cl4hPwiG1mK/DmyNTFKhVhCY9AS7Y4VfqgkUVQZKpb3fHm7H9zp6ARJl1k5fa5UePmt00P3P5852GhrOtfcZXmyiuiwNlAnJRaxsABS1vxrHTmXF9YQD8IUX8dHaVPpWbTbhTNO3T6+WWZwtc37n7kVy+ED6dMGDPj1r6+1IJK+jo9oZ+JAKoXFh0Op/ROFID6g2awKBuIwhlgq2YDJ1yYx1N+ncqh7y7XE1+stDX//weGXv6Wrg+fc97Z80crly63QXTCkR0pjh2Y9icfuLlafdkbgl6RMF5sbLr44sTrdg7Pijx/7jMcTwapca9TO7Bp6PTb1/Zf44/GfwJZfRmy7GL2rQAAAABJRU5ErkJggg=="
+  }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    className: "wawl-mx-auto",
+    src: buttonStyle.popup_icon_image
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: " wawl-text-base"
   }, "Chose a wishlist"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3811,15 +3672,22 @@ function Preview({
       window.open();
     },
     style: {
-      backgroundColor: `${buttonStyle.background_color ? buttonStyle.background_color : '#f00'}`
+      backgroundColor: isHovered ? buttonStyle.popup_button_color.background_hover_color || '#f00' : buttonStyle.popup_button_color.background_color || '#f00',
+      borderColor: isHovered ? buttonStyle.popup_button_color.border_hover_color || '#f00' : buttonStyle.popup_button_color.border_color || '#000000',
+      borderWidth: `${buttonStyle.popup_button_size.border_width}px`,
+      borderRadius: `${buttonStyle.popup_button_size.border_radius}px`,
+      borderHeight: `${buttonStyle.popup_button_size.border_height}px`,
+      margin: `${buttonStyle.popup_button_size.popup_button_margin}px`
     },
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
     buttonStyle: 'button-default',
     iconPosition: 'after',
     addBgColor: true,
     classNames: 'wawl-w-full wawl-bg-default',
     icon: ''
     // onColorChange={ handleColorChange }
-  }, 'Add to wishlist 1')))))));
+  }, 'Add to wishlist')))))));
 }
 
 /***/ }),
@@ -3896,48 +3764,6 @@ function PageRight({
 
 /***/ }),
 
-/***/ "./backend/views/page/redux/reducers/tahira.js":
-/*!*****************************************************!*\
-  !*** ./backend/views/page/redux/reducers/tahira.js ***!
-  \*****************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   selectTahira: function() { return /* binding */ selectTahira; },
-/* harmony export */   updateWishlistSetting1: function() { return /* binding */ updateWishlistSetting1; }
-/* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
-// wishlistSlice.js
-
-
-// Define the initial state based on the provided JSON data
-const initialState = {
-  name: 'kola'
-};
-const wishlistSlice1 = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
-  name: 'tahira',
-  initialState,
-  reducers: {
-    updateWishlistSetting1(state, action) {
-      // Merge the action payload with the current state to update specific properties
-      return {
-        ...state,
-        ...action.payload
-      };
-    }
-  }
-});
-const selectTahira = state => state.tahira;
-
-// Export the reducer and actions
-const {
-  updateWishlistSetting1
-} = wishlistSlice1.actions;
-/* harmony default export */ __webpack_exports__["default"] = (wishlistSlice1.reducer);
-
-/***/ }),
-
 /***/ "./backend/views/page/redux/reducers/wishlistSlice.js":
 /*!************************************************************!*\
   !*** ./backend/views/page/redux/reducers/wishlistSlice.js ***!
@@ -3948,6 +3774,78 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   selectWishlist: function() { return /* binding */ selectWishlist; },
 /* harmony export */   updateWishlistSetting: function() { return /* binding */ updateWishlistSetting; }
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+// wishlistSlice.js
+
+
+// Define the initial state based on the provided JSON data
+const initialState = {
+  enable_wishlist_for: 'all_users',
+  default_wishlist_name: 'New list',
+  exclude_type: 'product',
+  exclude_items: [1, 2, 3],
+  item_count: false,
+  guest_user_wishlist_days: 90,
+  enable_for_variation: false,
+  enable_for_myaccount: false,
+  multi_wishlist_settings: false,
+  cart_page_wishlist: false,
+  popup_enable: true,
+  popup_title: 'Popup title',
+  popup_button_text: 'Button Text',
+  popup_feature_image_enable: true,
+  popup_icon_image: '',
+  theme_default_button_style: true,
+  popup_button_color: {
+    background_color: '#458947',
+    background_hover_color: '#00484',
+    border_color: '#69594',
+    border_hover_color: '1fdasf0px'
+  },
+  popup_button_size: {
+    border_width: '1px',
+    border_height: '1px',
+    border_radios: '10px',
+    popup_button_margin: '10px'
+  },
+  popup_notification_text: 'hello',
+  popup_notification_icon: '',
+  popup_notification_button_text: 'hello'
+};
+const wishlistSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'wishlist',
+  initialState,
+  reducers: {
+    updateWishlistSetting(state, action) {
+      // Merge the action payload with the current state to update specific properties
+      return {
+        ...state,
+        ...action.payload
+      };
+    }
+  }
+});
+const selectWishlist = state => state.wishlist;
+
+// Export the reducer and actions
+const {
+  updateWishlistSetting
+} = wishlistSlice.actions;
+/* harmony default export */ __webpack_exports__["default"] = (wishlistSlice.reducer);
+
+/***/ }),
+
+/***/ "./backend/views/page/redux/reducers/wishlistSlice1.js":
+/*!*************************************************************!*\
+  !*** ./backend/views/page/redux/reducers/wishlistSlice1.js ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   selectWishlist1: function() { return /* binding */ selectWishlist1; },
+/* harmony export */   updateWishlistSetting1: function() { return /* binding */ updateWishlistSetting1; }
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 // wishlistSlice.js
@@ -3987,11 +3885,11 @@ const initialState = {
   popup_notification_icon: 'http://test/gmail.com',
   popup_notification_button_text: 'hello'
 };
-const wishlistSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
-  name: 'wishlist',
+const wishlistSlice1 = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'wishlist1',
   initialState,
   reducers: {
-    updateWishlistSetting(state, action) {
+    updateWishlistSetting1(state, action) {
       // Merge the action payload with the current state to update specific properties
       return {
         ...state,
@@ -4000,13 +3898,13 @@ const wishlistSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSli
     }
   }
 });
-const selectWishlist = state => state.wishlist;
+const selectWishlist1 = state => state.wishlist1;
 
 // Export the reducer and actions
 const {
-  updateWishlistSetting
-} = wishlistSlice.actions;
-/* harmony default export */ __webpack_exports__["default"] = (wishlistSlice.reducer);
+  updateWishlistSetting1
+} = wishlistSlice1.actions;
+/* harmony default export */ __webpack_exports__["default"] = (wishlistSlice1.reducer);
 
 /***/ }),
 
@@ -4021,15 +3919,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   store: function() { return /* binding */ store; }
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
-/* harmony import */ var _reducers_tahira__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducers/tahira */ "./backend/views/page/redux/reducers/tahira.js");
-/* harmony import */ var _reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
+/* harmony import */ var _reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
+/* harmony import */ var _reducers_wishlistSlice1__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducers/wishlistSlice1 */ "./backend/views/page/redux/reducers/wishlistSlice1.js");
 
 
 
 const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.configureStore)({
   reducer: {
-    wishlist: _reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_1__["default"],
-    tahira: _reducers_tahira__WEBPACK_IMPORTED_MODULE_0__["default"]
+    wishlist: _reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_0__["default"],
+    tahira: _reducers_wishlistSlice1__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -9387,10 +9285,22 @@ function createSelectorHook(context = _components_Context__WEBPACK_IMPORTED_MODU
             const toCompare = selector(state);
 
             if (!equalityFn(selected, toCompare)) {
+              let stack = undefined;
+
+              try {
+                throw new Error();
+              } catch (e) {
+                ;
+                ({
+                  stack
+                } = e);
+              }
+
               console.warn('Selector ' + (selector.name || 'unknown') + ' returned a different result when called with the same parameters. This can lead to unnecessary rerenders.' + '\nSelectors that return a new reference (such as an object or an array) should be memoized: https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization', {
                 state,
                 selected,
-                selected2: toCompare
+                selected2: toCompare,
+                stack
               });
             }
           }
@@ -9400,7 +9310,20 @@ function createSelectorHook(context = _components_Context__WEBPACK_IMPORTED_MODU
           if (finalNoopCheck === 'always' || finalNoopCheck === 'once' && firstRun.current) {
             // @ts-ignore
             if (selected === state) {
-              console.warn('Selector ' + (selector.name || 'unknown') + ' returned the root state when called. This can lead to unnecessary rerenders.' + '\nSelectors that return the entire state are almost certainly a mistake, as they will cause a rerender whenever *anything* in state changes.');
+              let stack = undefined;
+
+              try {
+                throw new Error();
+              } catch (e) {
+                ;
+                ({
+                  stack
+                } = e);
+              }
+
+              console.warn('Selector ' + (selector.name || 'unknown') + ' returned the root state when called. This can lead to unnecessary rerenders.' + '\nSelectors that return the entire state are almost certainly a mistake, as they will cause a rerender whenever *anything* in state changes.', {
+                stack
+              });
             }
           }
 
@@ -9645,11 +9568,24 @@ const nullListeners = {
 };
 function createSubscription(store, parentSub) {
   let unsubscribe;
-  let listeners = nullListeners;
+  let listeners = nullListeners; // Reasons to keep the subscription active
+
+  let subscriptionsAmount = 0; // Is this specific subscription subscribed (or only nested ones?)
+
+  let selfSubscribed = false;
 
   function addNestedSub(listener) {
     trySubscribe();
-    return listeners.subscribe(listener);
+    const cleanupListener = listeners.subscribe(listener); // cleanup nested sub
+
+    let removed = false;
+    return () => {
+      if (!removed) {
+        removed = true;
+        cleanupListener();
+        tryUnsubscribe();
+      }
+    };
   }
 
   function notifyNestedSubs() {
@@ -9663,10 +9599,12 @@ function createSubscription(store, parentSub) {
   }
 
   function isSubscribed() {
-    return Boolean(unsubscribe);
+    return selfSubscribed;
   }
 
   function trySubscribe() {
+    subscriptionsAmount++;
+
     if (!unsubscribe) {
       unsubscribe = parentSub ? parentSub.addNestedSub(handleChangeWrapper) : store.subscribe(handleChangeWrapper);
       listeners = createListenerCollection();
@@ -9674,11 +9612,27 @@ function createSubscription(store, parentSub) {
   }
 
   function tryUnsubscribe() {
-    if (unsubscribe) {
+    subscriptionsAmount--;
+
+    if (unsubscribe && subscriptionsAmount === 0) {
       unsubscribe();
       unsubscribe = undefined;
       listeners.clear();
       listeners = nullListeners;
+    }
+  }
+
+  function trySubscribeSelf() {
+    if (!selfSubscribed) {
+      selfSubscribed = true;
+      trySubscribe();
+    }
+  }
+
+  function tryUnsubscribeSelf() {
+    if (selfSubscribed) {
+      selfSubscribed = false;
+      tryUnsubscribe();
     }
   }
 
@@ -9687,8 +9641,8 @@ function createSubscription(store, parentSub) {
     notifyNestedSubs,
     handleChangeWrapper,
     isSubscribed,
-    trySubscribe,
-    tryUnsubscribe,
+    trySubscribe: trySubscribeSelf,
+    tryUnsubscribe: tryUnsubscribeSelf,
     getListeners: () => listeners
   };
   return subscription;
@@ -11937,28 +11891,6 @@ function _typeof(o) {
 
 /***/ }),
 
-/***/ "./node_modules/@headlessui/react/dist/components/description/description.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/@headlessui/react/dist/components/description/description.js ***!
-  \***********************************************************************************/
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Description: function() { return /* binding */ b; },
-/* harmony export */   useDescriptions: function() { return /* binding */ M; }
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var _hooks_use_id_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../hooks/use-id.js */ "./node_modules/@headlessui/react/dist/hooks/use-id.js");
-/* harmony import */ var _utils_render_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/render.js */ "./node_modules/@headlessui/react/dist/utils/render.js");
-/* harmony import */ var _hooks_use_iso_morphic_effect_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../hooks/use-iso-morphic-effect.js */ "./node_modules/@headlessui/react/dist/hooks/use-iso-morphic-effect.js");
-/* harmony import */ var _hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../hooks/use-sync-refs.js */ "./node_modules/@headlessui/react/dist/hooks/use-sync-refs.js");
-/* harmony import */ var _hooks_use_event_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../hooks/use-event.js */ "./node_modules/@headlessui/react/dist/hooks/use-event.js");
-let d=(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);function f(){let r=(0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(d);if(r===null){let t=new Error("You used a <Description /> component, but it is not inside a relevant parent.");throw Error.captureStackTrace&&Error.captureStackTrace(t,f),t}return r}function M(){let[r,t]=(0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);return[r.length>0?r.join(" "):void 0,(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>function(e){let i=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_1__.useEvent)(s=>(t(o=>[...o,s]),()=>t(o=>{let p=o.slice(),c=p.indexOf(s);return c!==-1&&p.splice(c,1),p}))),n=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({register:i,slot:e.slot,name:e.name,props:e.props}),[i,e.slot,e.name,e.props]);return react__WEBPACK_IMPORTED_MODULE_0__.createElement(d.Provider,{value:n},e.children)},[t])]}let S="p";function h(r,t){let a=(0,_hooks_use_id_js__WEBPACK_IMPORTED_MODULE_2__.useId)(),{id:e=`headlessui-description-${a}`,...i}=r,n=f(),s=(0,_hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_3__.useSyncRefs)(t);(0,_hooks_use_iso_morphic_effect_js__WEBPACK_IMPORTED_MODULE_4__.useIsoMorphicEffect)(()=>n.register(e),[e,n.register]);let o={ref:s,...n.props,id:e};return (0,_utils_render_js__WEBPACK_IMPORTED_MODULE_5__.render)({ourProps:o,theirProps:i,slot:n.slot||{},defaultTag:S,name:n.name||"Description"})}let y=(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_5__.forwardRefWithAs)(h),b=Object.assign(y,{});
-
-
-/***/ }),
-
 /***/ "./node_modules/@headlessui/react/dist/components/disclosure/disclosure.js":
 /*!*********************************************************************************!*\
   !*** ./node_modules/@headlessui/react/dist/components/disclosure/disclosure.js ***!
@@ -12001,28 +11933,6 @@ var o=(r=>(r.Space=" ",r.Enter="Enter",r.Escape="Escape",r.Backspace="Backspace"
 
 /***/ }),
 
-/***/ "./node_modules/@headlessui/react/dist/components/label/label.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@headlessui/react/dist/components/label/label.js ***!
-  \***********************************************************************/
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Label: function() { return /* binding */ M; },
-/* harmony export */   useLabels: function() { return /* binding */ H; }
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var _hooks_use_id_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../hooks/use-id.js */ "./node_modules/@headlessui/react/dist/hooks/use-id.js");
-/* harmony import */ var _utils_render_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/render.js */ "./node_modules/@headlessui/react/dist/utils/render.js");
-/* harmony import */ var _hooks_use_iso_morphic_effect_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../hooks/use-iso-morphic-effect.js */ "./node_modules/@headlessui/react/dist/hooks/use-iso-morphic-effect.js");
-/* harmony import */ var _hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../hooks/use-sync-refs.js */ "./node_modules/@headlessui/react/dist/hooks/use-sync-refs.js");
-/* harmony import */ var _hooks_use_event_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../hooks/use-event.js */ "./node_modules/@headlessui/react/dist/hooks/use-event.js");
-let d=(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);function u(){let o=(0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(d);if(o===null){let t=new Error("You used a <Label /> component, but it is not inside a relevant parent.");throw Error.captureStackTrace&&Error.captureStackTrace(t,u),t}return o}function H(){let[o,t]=(0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);return[o.length>0?o.join(" "):void 0,(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>function(e){let s=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_1__.useEvent)(r=>(t(l=>[...l,r]),()=>t(l=>{let n=l.slice(),p=n.indexOf(r);return p!==-1&&n.splice(p,1),n}))),a=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({register:s,slot:e.slot,name:e.name,props:e.props}),[s,e.slot,e.name,e.props]);return react__WEBPACK_IMPORTED_MODULE_0__.createElement(d.Provider,{value:a},e.children)},[t])]}let A="label";function h(o,t){let i=(0,_hooks_use_id_js__WEBPACK_IMPORTED_MODULE_2__.useId)(),{id:e=`headlessui-label-${i}`,passive:s=!1,...a}=o,r=u(),l=(0,_hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_3__.useSyncRefs)(t);(0,_hooks_use_iso_morphic_effect_js__WEBPACK_IMPORTED_MODULE_4__.useIsoMorphicEffect)(()=>r.register(e),[e,r.register]);let n={ref:l,...r.props,id:e};return s&&("onClick"in n&&(delete n.htmlFor,delete n.onClick),"onClick"in a&&delete a.onClick),(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_5__.render)({ourProps:n,theirProps:a,slot:r.slot||{},defaultTag:A,name:r.name||"Label"})}let v=(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_5__.forwardRefWithAs)(h),M=Object.assign(v,{});
-
-
-/***/ }),
-
 /***/ "./node_modules/@headlessui/react/dist/components/listbox/listbox.js":
 /*!***************************************************************************!*\
   !*** ./node_modules/@headlessui/react/dist/components/listbox/listbox.js ***!
@@ -12058,35 +11968,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hooks_use_tracked_pointer_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../hooks/use-tracked-pointer.js */ "./node_modules/@headlessui/react/dist/hooks/use-tracked-pointer.js");
 /* harmony import */ var _hooks_use_text_value_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../hooks/use-text-value.js */ "./node_modules/@headlessui/react/dist/hooks/use-text-value.js");
 var Be=(n=>(n[n.Open=0]="Open",n[n.Closed=1]="Closed",n))(Be||{}),He=(n=>(n[n.Single=0]="Single",n[n.Multi=1]="Multi",n))(He||{}),Ge=(n=>(n[n.Pointer=0]="Pointer",n[n.Other=1]="Other",n))(Ge||{}),Ne=(i=>(i[i.OpenListbox=0]="OpenListbox",i[i.CloseListbox=1]="CloseListbox",i[i.GoToOption=2]="GoToOption",i[i.Search=3]="Search",i[i.ClearSearch=4]="ClearSearch",i[i.RegisterOption=5]="RegisterOption",i[i.UnregisterOption=6]="UnregisterOption",i[i.RegisterLabel=7]="RegisterLabel",i))(Ne||{});function z(e,a=n=>n){let n=e.activeOptionIndex!==null?e.options[e.activeOptionIndex]:null,r=(0,_utils_focus_management_js__WEBPACK_IMPORTED_MODULE_1__.sortByDomNode)(a(e.options.slice()),t=>t.dataRef.current.domRef.current),l=n?r.indexOf(n):null;return l===-1&&(l=null),{options:r,activeOptionIndex:l}}let je={[1](e){return e.dataRef.current.disabled||e.listboxState===1?e:{...e,activeOptionIndex:null,listboxState:1}},[0](e){if(e.dataRef.current.disabled||e.listboxState===0)return e;let a=e.activeOptionIndex,{isSelected:n}=e.dataRef.current,r=e.options.findIndex(l=>n(l.dataRef.current.value));return r!==-1&&(a=r),{...e,listboxState:0,activeOptionIndex:a}},[2](e,a){var l;if(e.dataRef.current.disabled||e.listboxState===1)return e;let n=z(e),r=(0,_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.calculateActiveIndex)(a,{resolveItems:()=>n.options,resolveActiveIndex:()=>n.activeOptionIndex,resolveId:t=>t.id,resolveDisabled:t=>t.dataRef.current.disabled});return{...e,...n,searchQuery:"",activeOptionIndex:r,activationTrigger:(l=a.trigger)!=null?l:1}},[3]:(e,a)=>{if(e.dataRef.current.disabled||e.listboxState===1)return e;let r=e.searchQuery!==""?0:1,l=e.searchQuery+a.value.toLowerCase(),p=(e.activeOptionIndex!==null?e.options.slice(e.activeOptionIndex+r).concat(e.options.slice(0,e.activeOptionIndex+r)):e.options).find(i=>{var b;return!i.dataRef.current.disabled&&((b=i.dataRef.current.textValue)==null?void 0:b.startsWith(l))}),u=p?e.options.indexOf(p):-1;return u===-1||u===e.activeOptionIndex?{...e,searchQuery:l}:{...e,searchQuery:l,activeOptionIndex:u,activationTrigger:1}},[4](e){return e.dataRef.current.disabled||e.listboxState===1||e.searchQuery===""?e:{...e,searchQuery:""}},[5]:(e,a)=>{let n={id:a.id,dataRef:a.dataRef},r=z(e,l=>[...l,n]);return e.activeOptionIndex===null&&e.dataRef.current.isSelected(a.dataRef.current.value)&&(r.activeOptionIndex=r.options.indexOf(n)),{...e,...r}},[6]:(e,a)=>{let n=z(e,r=>{let l=r.findIndex(t=>t.id===a.id);return l!==-1&&r.splice(l,1),r});return{...e,...n,activationTrigger:1}},[7]:(e,a)=>({...e,labelId:a.id})},J=(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);J.displayName="ListboxActionsContext";function _(e){let a=(0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(J);if(a===null){let n=new Error(`<${e} /> is missing a parent <Listbox /> component.`);throw Error.captureStackTrace&&Error.captureStackTrace(n,_),n}return a}let q=(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);q.displayName="ListboxDataContext";function U(e){let a=(0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(q);if(a===null){let n=new Error(`<${e} /> is missing a parent <Listbox /> component.`);throw Error.captureStackTrace&&Error.captureStackTrace(n,U),n}return a}function Ve(e,a){return (0,_utils_match_js__WEBPACK_IMPORTED_MODULE_3__.match)(a.type,je,e,a)}let Ke=react__WEBPACK_IMPORTED_MODULE_0__.Fragment;function Qe(e,a){let{value:n,defaultValue:r,form:l,name:t,onChange:p,by:u=(s,c)=>s===c,disabled:i=!1,horizontal:b=!1,multiple:R=!1,...m}=e;const P=b?"horizontal":"vertical";let S=(0,_hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_4__.useSyncRefs)(a),[L=R?[]:void 0,y]=(0,_hooks_use_controllable_js__WEBPACK_IMPORTED_MODULE_5__.useControllable)(n,p,r),[T,o]=(0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(Ve,{dataRef:(0,react__WEBPACK_IMPORTED_MODULE_0__.createRef)(),listboxState:1,options:[],searchQuery:"",labelId:null,activeOptionIndex:null,activationTrigger:1}),x=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({static:!1,hold:!1}),E=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),B=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),W=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),C=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(typeof u=="string"?(s,c)=>{let O=u;return(s==null?void 0:s[O])===(c==null?void 0:c[O])}:u),A=(0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(s=>(0,_utils_match_js__WEBPACK_IMPORTED_MODULE_3__.match)(d.mode,{[1]:()=>L.some(c=>C(c,s)),[0]:()=>C(L,s)}),[L]),d=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({...T,value:L,disabled:i,mode:R?1:0,orientation:P,compare:C,isSelected:A,optionsPropsRef:x,labelRef:E,buttonRef:B,optionsRef:W}),[L,i,R,T]);(0,_hooks_use_iso_morphic_effect_js__WEBPACK_IMPORTED_MODULE_7__.useIsoMorphicEffect)(()=>{T.dataRef.current=d},[d]),(0,_hooks_use_outside_click_js__WEBPACK_IMPORTED_MODULE_8__.useOutsideClick)([d.buttonRef,d.optionsRef],(s,c)=>{var O;o({type:1}),(0,_utils_focus_management_js__WEBPACK_IMPORTED_MODULE_1__.isFocusableElement)(c,_utils_focus_management_js__WEBPACK_IMPORTED_MODULE_1__.FocusableMode.Loose)||(s.preventDefault(),(O=d.buttonRef.current)==null||O.focus())},d.listboxState===0);let H=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({open:d.listboxState===0,disabled:i,value:L}),[d,i,L]),ie=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(s=>{let c=d.options.find(O=>O.id===s);c&&X(c.dataRef.current.value)}),re=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(()=>{if(d.activeOptionIndex!==null){let{dataRef:s,id:c}=d.options[d.activeOptionIndex];X(s.current.value),o({type:2,focus:_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Specific,id:c})}}),ae=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(()=>o({type:0})),le=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(()=>o({type:1})),se=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)((s,c,O)=>s===_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Specific?o({type:2,focus:_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Specific,id:c,trigger:O}):o({type:2,focus:s,trigger:O})),pe=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)((s,c)=>(o({type:5,id:s,dataRef:c}),()=>o({type:6,id:s}))),ue=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(s=>(o({type:7,id:s}),()=>o({type:7,id:null}))),X=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(s=>(0,_utils_match_js__WEBPACK_IMPORTED_MODULE_3__.match)(d.mode,{[0](){return y==null?void 0:y(s)},[1](){let c=d.value.slice(),O=c.findIndex(F=>C(F,s));return O===-1?c.push(s):c.splice(O,1),y==null?void 0:y(c)}})),de=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(s=>o({type:3,value:s})),ce=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(()=>o({type:4})),fe=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({onChange:X,registerOption:pe,registerLabel:ue,goToOption:se,closeListbox:le,openListbox:ae,selectActiveOption:re,selectOption:ie,search:de,clearSearch:ce}),[]),Te={ref:S},G=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),be=(0,_hooks_use_disposables_js__WEBPACK_IMPORTED_MODULE_9__.useDisposables)();return (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{G.current&&r!==void 0&&be.addEventListener(G.current,"reset",()=>{y==null||y(r)})},[G,y]),react__WEBPACK_IMPORTED_MODULE_0__.createElement(J.Provider,{value:fe},react__WEBPACK_IMPORTED_MODULE_0__.createElement(q.Provider,{value:d},react__WEBPACK_IMPORTED_MODULE_0__.createElement(_internal_open_closed_js__WEBPACK_IMPORTED_MODULE_10__.OpenClosedProvider,{value:(0,_utils_match_js__WEBPACK_IMPORTED_MODULE_3__.match)(d.listboxState,{[0]:_internal_open_closed_js__WEBPACK_IMPORTED_MODULE_10__.State.Open,[1]:_internal_open_closed_js__WEBPACK_IMPORTED_MODULE_10__.State.Closed})},t!=null&&L!=null&&(0,_utils_form_js__WEBPACK_IMPORTED_MODULE_11__.objectToFormEntries)({[t]:L}).map(([s,c],O)=>react__WEBPACK_IMPORTED_MODULE_0__.createElement(_internal_hidden_js__WEBPACK_IMPORTED_MODULE_12__.Hidden,{features:_internal_hidden_js__WEBPACK_IMPORTED_MODULE_12__.Features.Hidden,ref:O===0?F=>{var Y;G.current=(Y=F==null?void 0:F.closest("form"))!=null?Y:null}:void 0,...(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.compact)({key:s,as:"input",type:"hidden",hidden:!0,readOnly:!0,form:l,name:s,value:c})})),(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.render)({ourProps:Te,theirProps:m,slot:H,defaultTag:Ke,name:"Listbox"}))))}let We="button";function Xe(e,a){var y;let n=(0,_hooks_use_id_js__WEBPACK_IMPORTED_MODULE_14__.useId)(),{id:r=`headlessui-listbox-button-${n}`,...l}=e,t=U("Listbox.Button"),p=_("Listbox.Button"),u=(0,_hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_4__.useSyncRefs)(t.buttonRef,a),i=(0,_hooks_use_disposables_js__WEBPACK_IMPORTED_MODULE_9__.useDisposables)(),b=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(T=>{switch(T.key){case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.Space:case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.Enter:case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.ArrowDown:T.preventDefault(),p.openListbox(),i.nextFrame(()=>{t.value||p.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.First)});break;case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.ArrowUp:T.preventDefault(),p.openListbox(),i.nextFrame(()=>{t.value||p.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Last)});break}}),R=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(T=>{switch(T.key){case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.Space:T.preventDefault();break}}),m=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(T=>{if((0,_utils_bugs_js__WEBPACK_IMPORTED_MODULE_16__.isDisabledReactIssue7711)(T.currentTarget))return T.preventDefault();t.listboxState===0?(p.closeListbox(),i.nextFrame(()=>{var o;return(o=t.buttonRef.current)==null?void 0:o.focus({preventScroll:!0})})):(T.preventDefault(),p.openListbox())}),P=(0,_hooks_use_computed_js__WEBPACK_IMPORTED_MODULE_17__.useComputed)(()=>{if(t.labelId)return[t.labelId,r].join(" ")},[t.labelId,r]),S=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({open:t.listboxState===0,disabled:t.disabled,value:t.value}),[t]),L={ref:u,id:r,type:(0,_hooks_use_resolve_button_type_js__WEBPACK_IMPORTED_MODULE_18__.useResolveButtonType)(e,t.buttonRef),"aria-haspopup":"listbox","aria-controls":(y=t.optionsRef.current)==null?void 0:y.id,"aria-expanded":t.listboxState===0,"aria-labelledby":P,disabled:t.disabled,onKeyDown:b,onKeyUp:R,onClick:m};return (0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.render)({ourProps:L,theirProps:l,slot:S,defaultTag:We,name:"Listbox.Button"})}let $e="label";function ze(e,a){let n=(0,_hooks_use_id_js__WEBPACK_IMPORTED_MODULE_14__.useId)(),{id:r=`headlessui-listbox-label-${n}`,...l}=e,t=U("Listbox.Label"),p=_("Listbox.Label"),u=(0,_hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_4__.useSyncRefs)(t.labelRef,a);(0,_hooks_use_iso_morphic_effect_js__WEBPACK_IMPORTED_MODULE_7__.useIsoMorphicEffect)(()=>p.registerLabel(r),[r]);let i=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(()=>{var m;return(m=t.buttonRef.current)==null?void 0:m.focus({preventScroll:!0})}),b=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({open:t.listboxState===0,disabled:t.disabled}),[t]);return (0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.render)({ourProps:{ref:u,id:r,onClick:i},theirProps:l,slot:b,defaultTag:$e,name:"Listbox.Label"})}let Je="ul",qe=_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.Features.RenderStrategy|_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.Features.Static;function Ye(e,a){var T;let n=(0,_hooks_use_id_js__WEBPACK_IMPORTED_MODULE_14__.useId)(),{id:r=`headlessui-listbox-options-${n}`,...l}=e,t=U("Listbox.Options"),p=_("Listbox.Options"),u=(0,_hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_4__.useSyncRefs)(t.optionsRef,a),i=(0,_hooks_use_disposables_js__WEBPACK_IMPORTED_MODULE_9__.useDisposables)(),b=(0,_hooks_use_disposables_js__WEBPACK_IMPORTED_MODULE_9__.useDisposables)(),R=(0,_internal_open_closed_js__WEBPACK_IMPORTED_MODULE_10__.useOpenClosed)(),m=(()=>R!==null?(R&_internal_open_closed_js__WEBPACK_IMPORTED_MODULE_10__.State.Open)===_internal_open_closed_js__WEBPACK_IMPORTED_MODULE_10__.State.Open:t.listboxState===0)();(0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{var x;let o=t.optionsRef.current;o&&t.listboxState===0&&o!==((x=(0,_utils_owner_js__WEBPACK_IMPORTED_MODULE_19__.getOwnerDocument)(o))==null?void 0:x.activeElement)&&o.focus({preventScroll:!0})},[t.listboxState,t.optionsRef]);let P=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(o=>{switch(b.dispose(),o.key){case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.Space:if(t.searchQuery!=="")return o.preventDefault(),o.stopPropagation(),p.search(o.key);case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.Enter:if(o.preventDefault(),o.stopPropagation(),t.activeOptionIndex!==null){let{dataRef:x}=t.options[t.activeOptionIndex];p.onChange(x.current.value)}t.mode===0&&(p.closeListbox(),(0,_utils_disposables_js__WEBPACK_IMPORTED_MODULE_20__.disposables)().nextFrame(()=>{var x;return(x=t.buttonRef.current)==null?void 0:x.focus({preventScroll:!0})}));break;case (0,_utils_match_js__WEBPACK_IMPORTED_MODULE_3__.match)(t.orientation,{vertical:_keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.ArrowDown,horizontal:_keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.ArrowRight}):return o.preventDefault(),o.stopPropagation(),p.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Next);case (0,_utils_match_js__WEBPACK_IMPORTED_MODULE_3__.match)(t.orientation,{vertical:_keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.ArrowUp,horizontal:_keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.ArrowLeft}):return o.preventDefault(),o.stopPropagation(),p.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Previous);case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.Home:case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.PageUp:return o.preventDefault(),o.stopPropagation(),p.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.First);case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.End:case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.PageDown:return o.preventDefault(),o.stopPropagation(),p.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Last);case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.Escape:return o.preventDefault(),o.stopPropagation(),p.closeListbox(),i.nextFrame(()=>{var x;return(x=t.buttonRef.current)==null?void 0:x.focus({preventScroll:!0})});case _keyboard_js__WEBPACK_IMPORTED_MODULE_15__.Keys.Tab:o.preventDefault(),o.stopPropagation();break;default:o.key.length===1&&(p.search(o.key),b.setTimeout(()=>p.clearSearch(),350));break}}),S=(0,_hooks_use_computed_js__WEBPACK_IMPORTED_MODULE_17__.useComputed)(()=>{var o,x,E;return(E=(o=t.labelRef.current)==null?void 0:o.id)!=null?E:(x=t.buttonRef.current)==null?void 0:x.id},[t.labelRef.current,t.buttonRef.current]),L=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({open:t.listboxState===0}),[t]),y={"aria-activedescendant":t.activeOptionIndex===null||(T=t.options[t.activeOptionIndex])==null?void 0:T.id,"aria-multiselectable":t.mode===1?!0:void 0,"aria-labelledby":S,"aria-orientation":t.orientation,id:r,onKeyDown:P,role:"listbox",tabIndex:0,ref:u};return (0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.render)({ourProps:y,theirProps:l,slot:L,defaultTag:Je,features:qe,visible:m,name:"Listbox.Options"})}let Ze="li";function et(e,a){let n=(0,_hooks_use_id_js__WEBPACK_IMPORTED_MODULE_14__.useId)(),{id:r=`headlessui-listbox-option-${n}`,disabled:l=!1,value:t,...p}=e,u=U("Listbox.Option"),i=_("Listbox.Option"),b=u.activeOptionIndex!==null?u.options[u.activeOptionIndex].id===r:!1,R=u.isSelected(t),m=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),P=(0,_hooks_use_text_value_js__WEBPACK_IMPORTED_MODULE_21__.useTextValue)(m),S=(0,_hooks_use_latest_value_js__WEBPACK_IMPORTED_MODULE_22__.useLatestValue)({disabled:l,value:t,domRef:m,get textValue(){return P()}}),L=(0,_hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_4__.useSyncRefs)(a,m);(0,_hooks_use_iso_morphic_effect_js__WEBPACK_IMPORTED_MODULE_7__.useIsoMorphicEffect)(()=>{if(u.listboxState!==0||!b||u.activationTrigger===0)return;let A=(0,_utils_disposables_js__WEBPACK_IMPORTED_MODULE_20__.disposables)();return A.requestAnimationFrame(()=>{var d,H;(H=(d=m.current)==null?void 0:d.scrollIntoView)==null||H.call(d,{block:"nearest"})}),A.dispose},[m,b,u.listboxState,u.activationTrigger,u.activeOptionIndex]),(0,_hooks_use_iso_morphic_effect_js__WEBPACK_IMPORTED_MODULE_7__.useIsoMorphicEffect)(()=>i.registerOption(r,S),[S,r]);let y=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(A=>{if(l)return A.preventDefault();i.onChange(t),u.mode===0&&(i.closeListbox(),(0,_utils_disposables_js__WEBPACK_IMPORTED_MODULE_20__.disposables)().nextFrame(()=>{var d;return(d=u.buttonRef.current)==null?void 0:d.focus({preventScroll:!0})}))}),T=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(()=>{if(l)return i.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Nothing);i.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Specific,r)}),o=(0,_hooks_use_tracked_pointer_js__WEBPACK_IMPORTED_MODULE_23__.useTrackedPointer)(),x=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(A=>o.update(A)),E=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(A=>{o.wasMoved(A)&&(l||b||i.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Specific,r,0))}),B=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_6__.useEvent)(A=>{o.wasMoved(A)&&(l||b&&i.goToOption(_utils_calculate_active_index_js__WEBPACK_IMPORTED_MODULE_2__.Focus.Nothing))}),W=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({active:b,selected:R,disabled:l}),[b,R,l]);return (0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.render)({ourProps:{id:r,ref:L,role:"option",tabIndex:l===!0?void 0:-1,"aria-disabled":l===!0?!0:void 0,"aria-selected":R,disabled:void 0,onClick:y,onFocus:T,onPointerEnter:x,onMouseEnter:x,onPointerMove:E,onMouseMove:E,onPointerLeave:B,onMouseLeave:B},theirProps:p,slot:W,defaultTag:Ze,name:"Listbox.Option"})}let tt=(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.forwardRefWithAs)(Qe),ot=(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.forwardRefWithAs)(Xe),nt=(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.forwardRefWithAs)(ze),it=(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.forwardRefWithAs)(Ye),rt=(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_13__.forwardRefWithAs)(et),Nt=Object.assign(tt,{Button:ot,Label:nt,Options:it,Option:rt});
-
-
-/***/ }),
-
-/***/ "./node_modules/@headlessui/react/dist/components/switch/switch.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@headlessui/react/dist/components/switch/switch.js ***!
-  \*************************************************************************/
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Switch: function() { return /* binding */ Ge; }
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var _utils_render_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/render.js */ "./node_modules/@headlessui/react/dist/utils/render.js");
-/* harmony import */ var _hooks_use_id_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../hooks/use-id.js */ "./node_modules/@headlessui/react/dist/hooks/use-id.js");
-/* harmony import */ var _keyboard_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../keyboard.js */ "./node_modules/@headlessui/react/dist/components/keyboard.js");
-/* harmony import */ var _utils_bugs_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/bugs.js */ "./node_modules/@headlessui/react/dist/utils/bugs.js");
-/* harmony import */ var _label_label_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../label/label.js */ "./node_modules/@headlessui/react/dist/components/label/label.js");
-/* harmony import */ var _description_description_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../description/description.js */ "./node_modules/@headlessui/react/dist/components/description/description.js");
-/* harmony import */ var _hooks_use_resolve_button_type_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../hooks/use-resolve-button-type.js */ "./node_modules/@headlessui/react/dist/hooks/use-resolve-button-type.js");
-/* harmony import */ var _hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../hooks/use-sync-refs.js */ "./node_modules/@headlessui/react/dist/hooks/use-sync-refs.js");
-/* harmony import */ var _internal_hidden_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../internal/hidden.js */ "./node_modules/@headlessui/react/dist/internal/hidden.js");
-/* harmony import */ var _utils_form_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/form.js */ "./node_modules/@headlessui/react/dist/utils/form.js");
-/* harmony import */ var _hooks_use_event_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../hooks/use-event.js */ "./node_modules/@headlessui/react/dist/hooks/use-event.js");
-/* harmony import */ var _hooks_use_controllable_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../hooks/use-controllable.js */ "./node_modules/@headlessui/react/dist/hooks/use-controllable.js");
-/* harmony import */ var _hooks_use_disposables_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../hooks/use-disposables.js */ "./node_modules/@headlessui/react/dist/hooks/use-disposables.js");
-let y=(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);y.displayName="GroupContext";let Y=react__WEBPACK_IMPORTED_MODULE_0__.Fragment;function Z(s){var d;let[n,p]=(0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),[c,f]=(0,_label_label_js__WEBPACK_IMPORTED_MODULE_1__.useLabels)(),[r,h]=(0,_description_description_js__WEBPACK_IMPORTED_MODULE_2__.useDescriptions)(),l=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({switch:n,setSwitch:p,labelledby:c,describedby:r}),[n,p,c,r]),T={},b=s;return react__WEBPACK_IMPORTED_MODULE_0__.createElement(h,{name:"Switch.Description"},react__WEBPACK_IMPORTED_MODULE_0__.createElement(f,{name:"Switch.Label",props:{htmlFor:(d=l.switch)==null?void 0:d.id,onClick(t){n&&(t.currentTarget.tagName==="LABEL"&&t.preventDefault(),n.click(),n.focus({preventScroll:!0}))}}},react__WEBPACK_IMPORTED_MODULE_0__.createElement(y.Provider,{value:l},(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_3__.render)({ourProps:T,theirProps:b,defaultTag:Y,name:"Switch.Group"}))))}let ee="button";function te(s,n){let p=(0,_hooks_use_id_js__WEBPACK_IMPORTED_MODULE_4__.useId)(),{id:c=`headlessui-switch-${p}`,checked:f,defaultChecked:r=!1,onChange:h,name:l,value:T,form:b,...d}=s,t=(0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(y),u=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),D=(0,_hooks_use_sync_refs_js__WEBPACK_IMPORTED_MODULE_5__.useSyncRefs)(u,n,t===null?null:t.setSwitch),[o,a]=(0,_hooks_use_controllable_js__WEBPACK_IMPORTED_MODULE_6__.useControllable)(f,h,r),S=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_7__.useEvent)(()=>a==null?void 0:a(!o)),C=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_7__.useEvent)(e=>{if((0,_utils_bugs_js__WEBPACK_IMPORTED_MODULE_8__.isDisabledReactIssue7711)(e.currentTarget))return e.preventDefault();e.preventDefault(),S()}),L=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_7__.useEvent)(e=>{e.key===_keyboard_js__WEBPACK_IMPORTED_MODULE_9__.Keys.Space?(e.preventDefault(),S()):e.key===_keyboard_js__WEBPACK_IMPORTED_MODULE_9__.Keys.Enter&&(0,_utils_form_js__WEBPACK_IMPORTED_MODULE_10__.attemptSubmit)(e.currentTarget)}),v=(0,_hooks_use_event_js__WEBPACK_IMPORTED_MODULE_7__.useEvent)(e=>e.preventDefault()),G=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>({checked:o}),[o]),R={id:c,ref:D,role:"switch",type:(0,_hooks_use_resolve_button_type_js__WEBPACK_IMPORTED_MODULE_11__.useResolveButtonType)(s,u),tabIndex:0,"aria-checked":o,"aria-labelledby":t==null?void 0:t.labelledby,"aria-describedby":t==null?void 0:t.describedby,onClick:C,onKeyUp:L,onKeyPress:v},k=(0,_hooks_use_disposables_js__WEBPACK_IMPORTED_MODULE_12__.useDisposables)();return (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{var w;let e=(w=u.current)==null?void 0:w.closest("form");e&&r!==void 0&&k.addEventListener(e,"reset",()=>{a(r)})},[u,a]),react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment,null,l!=null&&o&&react__WEBPACK_IMPORTED_MODULE_0__.createElement(_internal_hidden_js__WEBPACK_IMPORTED_MODULE_13__.Hidden,{features:_internal_hidden_js__WEBPACK_IMPORTED_MODULE_13__.Features.Hidden,...(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_3__.compact)({as:"input",type:"checkbox",hidden:!0,readOnly:!0,form:b,checked:o,name:l,value:T})}),(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_3__.render)({ourProps:R,theirProps:d,slot:G,defaultTag:ee,name:"Switch"}))}let ne=(0,_utils_render_js__WEBPACK_IMPORTED_MODULE_3__.forwardRefWithAs)(te),re=Z,Ge=Object.assign(ne,{Group:re,Label:_label_label_js__WEBPACK_IMPORTED_MODULE_1__.Label,Description:_description_description_js__WEBPACK_IMPORTED_MODULE_2__.Description});
 
 
 /***/ }),

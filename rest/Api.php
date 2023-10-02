@@ -35,6 +35,9 @@ class Api {
 
         $my_wishlist_page = new MyWishlistPage();
         $my_wishlist_page->register_route();
+
+        $search_product = new SearchProduct();
+        $search_product->register_route();
     }
 }
 

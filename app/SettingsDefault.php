@@ -144,9 +144,9 @@ class SettingsDefault {
      */
     public function my_wishlist_page_default() {
         $my_wish_list_page_default = [
-            'wishlist_content'          => 'Temp Content',
+            'wishlist_content'          => 'Your Wishlist',
             'wishlist_page'             => 'true',
-            'wishlist_privacy'          => 'true',
+//            'wishlist_privacy'          => 'true',
             'wishlist_creation_date'    => 'true',
             'wishlist_counted_item'     => 'true',
             'wishlist_action_button'    => [
@@ -156,7 +156,7 @@ class SettingsDefault {
             ],
             'wishlist_add_to_cart'      => 'true',
             'wishlist_add_recent_view'  => 'true',
-            'wishlist_share'            => 'true',
+//            'wishlist_share'            => 'true',
             'wishlist_bulk_action'      => 'true',
             'wishlist_product'          => 'true',
             'wishlist_unit_price'       => 'true',
@@ -164,8 +164,8 @@ class SettingsDefault {
             'wishlist_stock_status'     => 'true'
         ];
 
-        if( ! get_option( 'my_wishlist_settings' ) ) {
-            update_option( 'my_wishlist_settings', maybe_serialize( $my_wish_list_page_default ) );
+        if( ! get_option( 'ww_my_wishlist_settings' ) ) {
+            update_option( 'ww_my_wishlist_settings', maybe_serialize( $my_wish_list_page_default ) );
         }
     }
 }

@@ -11,6 +11,8 @@ class SettingsDefault {
         $this->product_listing_page_default();
         $this->single_product_page_default();
         $this->my_wishlist_page_default();
+
+        $this->create_default_wishlist_page();
     }
 
     /**
@@ -167,5 +169,47 @@ class SettingsDefault {
         if( ! get_option( 'ww_my_wishlist_settings' ) ) {
             update_option( 'ww_my_wishlist_settings', maybe_serialize( $my_wish_list_page_default ) );
         }
+    }
+
+    /**
+     * make a wishlist page when activate the plugin
+     *
+     * @return void
+     */
+    public function create_default_wishlist_page() {
+        function is_page_slug_exists( $slug ) {
+            $args = array(
+                'name'        => $slug,
+                'post_type'   => 'page',
+                'post_status' => 'publish',
+                'numberposts' => 1
+            );
+
+            $pages = get_posts( $args );
+
+            return ! empty( $pages );
+        }
+
+        function create_page_if_not_exists( $slug, $title, $content ) {
+            if ( ! is_page_slug_exists( $slug ) ) {
+                // Page data
+                $page_data = array(
+                    'post_title'    => $title,
+                    'post_name'     => $slug,
+                    'post_content'  => $content,
+                    'post_status'   => 'publish',
+                    'post_type'     => 'page'
+                );
+
+                // Create the page
+                wp_insert_post( $page_data );
+            }
+        }
+
+        $slug = 'wawl-wishlist';
+        $title = 'Wishlist';
+        $content = '[wawl_wishlist_table/]';
+
+        create_page_if_not_exists( $slug, $title, $content );
     }
 }

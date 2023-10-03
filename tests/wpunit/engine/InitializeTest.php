@@ -40,6 +40,7 @@ class InitializeTest extends \Codeception\TestCase\WPTestCase {
 		$classes[] = 'WooCommerce_Wishlist\Integrations\Template';
 		$classes[] = 'WooCommerce_Wishlist\Integrations\Widgets\My_Recent_Posts_Widget';
 		$classes[] = 'WooCommerce_Wishlist\Frontend\Enqueue';
+		$classes[] = 'WooCommerce_Wishlist\Frontend\DefaultAction';
 		$classes[] = 'WooCommerce_Wishlist\Frontend\Extras\Body_Class';
 
 		$all_classes = get_declared_classes();

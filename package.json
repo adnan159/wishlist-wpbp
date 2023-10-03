@@ -5,6 +5,7 @@
     "author": "WebAppick <webappick@gmail.com>",
     "files": [
         "ajax",
+        "app",
         "assets",
         "backend",
         "cli",

@@ -2505,6 +2505,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
+
+
+
 
 function Input({
   label = '',
@@ -2523,6 +2530,29 @@ function Input({
   checked = false,
   accept = ''
 }) {
+  const [popupInputs, setPopupInputs] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    handleUpdateSettings();
+  }, [popupInputs]);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  const handleUpdateSettings = () => {
+    // Example: Update the "default_wishlist_name" property
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      ...popupInputs
+    }));
+  };
+  const handlePopupInputs = e => {
+    // const name = e.target.name;
+    const {
+      name,
+      value
+    } = e.target;
+    console.log(`📌 ~ file: PopupInputs.jsx:14 ~ handlePopupInputs ~ name, value:`, name, value);
+    setPopupInputs({
+      ...popupInputs,
+      [name]: value
+    });
+  };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
@@ -2536,7 +2566,9 @@ function Input({
     autoComplete: "off",
     placeholder: placeholder,
     accept: accept,
-    onChange: onChange && onChange,
+    onChange: e => {
+      handlePopupInputs(e);
+    },
     onFocus: onFocus && onFocus,
     onBlur: onBlur && onBlur
   }));
@@ -3266,30 +3298,31 @@ function GlobalSettings() {
     current: false
   }];
   const globalWishlistSettingsItems = {
-    enable_wishlist: {
+    enable_wishlist_for: {
       label: 'Enable wishlist for',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
         items: globalSettingsRadio
       }),
       info: ''
     },
-    default_wishlist: {
+    default_wishlist_name: {
       label: 'Default wishlist name',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
         classes: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
         placeholder: 'Wishlist',
-        name: 'default_wishlist',
+        name: "default_wishlist_name",
         type: 'text',
         id: 'wishlist',
-        required: true
+        required: true,
+        value: wishlistSettings.name
       }),
       info: ''
     },
-    exclude_category_product: {
+    exclude_type: {
       label: 'Exclude product/category',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Search__WEBPACK_IMPORTED_MODULE_6__["default"], {
         type: 'search',
-        name: 'exclude_category_product',
+        name: "exclude_type",
         classes: "sm:ctx-w-full",
         placeholder: 'Search'
       })),
@@ -3299,28 +3332,29 @@ function GlobalSettings() {
     item_count: {
       label: 'Show status for each product',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.item_count,
+        active: wishlistSettings.settingName,
         settingName: "item_count"
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: 'How many times product was added to a wishlist'
     },
-    guest_user: {
+    guest_user_wishlist_days: {
       label: 'Guest user Wishlist will be deleted after',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
         classes: '',
         size: 'wawl-w-40 wawl-h-12',
         placeholder: 'Enter Days',
-        name: 'enable_wishlist_variations_product',
+        name: "guest_user_wishlist_days",
         type: 'text',
         id: 'wishlist',
-        required: true
+        required: true,
+        value: wishlistSettings.name
       })
     },
     enable_for_variation: {
       label: 'Enable Wishlist for variations product',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.enable_for_variation,
+        active: wishlistSettings.settingName,
         settingName: "enable_for_variation"
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -3329,7 +3363,7 @@ function GlobalSettings() {
     enable_for_myaccount: {
       label: 'Enable wishlist in my account',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.enable_for_myaccount,
+        active: wishlistSettings.settingName,
         settingName: "enable_for_myaccount"
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -3338,7 +3372,7 @@ function GlobalSettings() {
     multi_wishlist_settings: {
       label: 'Multi wishlist settings',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.multi_wishlist_settings,
+        active: wishlistSettings.settingName,
         settingName: "multi_wishlist_settings"
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -3347,7 +3381,7 @@ function GlobalSettings() {
     cart_page_wishlist: {
       label: 'Cart page wishlist',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.cart_page_wishlist,
+        active: wishlistSettings.settingName,
         settingName: "cart_page_wishlist"
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -3464,7 +3498,7 @@ function PopupSettingsLeft() {
     popup_enable: {
       label: 'Enable/Disable',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.popup_enable,
+        active: wishlistSettings.settingName,
         settingName: "popup_enable"
       }),
       info: ''
@@ -3474,12 +3508,11 @@ function PopupSettingsLeft() {
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
         classNamees: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
         placeholder: 'Choose a Wishlist',
-        name: 'popup_title',
+        name: "popup_title",
         type: 'text',
         id: 'wishlist',
         required: true,
-        value: '',
-        onChange: e => updatePopupTitle(e.target.value)
+        value: wishlistSettings.name
       }),
       info: ''
     },
@@ -3488,17 +3521,18 @@ function PopupSettingsLeft() {
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
         classNamees: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
         placeholder: 'Add to Wishlist',
-        name: 'popup_button_text',
+        name: "popup_button_text",
         type: 'text',
         id: 'wishlist',
-        required: true
+        required: true,
+        value: wishlistSettings.name
       })),
       info: ''
     },
     popup_feature_image_enable: {
       label: 'Use Product Featured Image For Pop Up',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.popup_feature_image_enable,
+        active: wishlistSettings.settingName,
         settingName: "popup_feature_image_enable"
       }),
       info: ''
@@ -3514,7 +3548,7 @@ function PopupSettingsLeft() {
     theme_default_button_style: {
       label: 'Theme Default Button Style',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.theme_default_button_style,
+        active: wishlistSettings.settingName,
         settingName: "theme_default_button_style"
       })),
       info: ''
@@ -3540,10 +3574,11 @@ function PopupSettingsLeft() {
         classNames: '',
         size: ' wawl-w-72 wawl-h-12',
         placeholder: 'Successfully added to wishlist',
-        name: 'title_text',
+        name: "popup_notification_text",
         type: 'text',
         id: 'wishlist',
-        required: true
+        required: true,
+        value: wishlistSettings.name
       }),
       info: 'Enable wishlist icon on the cart page beside the delete button'
     },
@@ -3559,10 +3594,11 @@ function PopupSettingsLeft() {
         classNames: '',
         size: 'wawl-w-40 wawl-h-12',
         placeholder: 'View wishlist',
-        name: 'button_text',
+        name: "popup_notification_button_text",
         type: 'text',
         id: 'wishlist',
-        required: true
+        required: true,
+        value: wishlistSettings.name
       })
     }
   };
@@ -3836,78 +3872,6 @@ const {
 
 /***/ }),
 
-/***/ "./backend/views/page/redux/reducers/wishlistSlice1.js":
-/*!*************************************************************!*\
-  !*** ./backend/views/page/redux/reducers/wishlistSlice1.js ***!
-  \*************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   selectWishlist1: function() { return /* binding */ selectWishlist1; },
-/* harmony export */   updateWishlistSetting1: function() { return /* binding */ updateWishlistSetting1; }
-/* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
-// wishlistSlice.js
-
-
-// Define the initial state based on the provided JSON data
-const initialState = {
-  enable_wishlist_for: 'all_users',
-  default_wishlist_name: 'New list',
-  exclude_type: 'product',
-  exclude_items: [1, 2, 3],
-  item_count: true,
-  guest_user_wishlist_days: 90,
-  enable_for_variation: true,
-  enable_for_myaccount: false,
-  multi_wishlist_settings: true,
-  cart_page_wishlist: true,
-  popup_enable: true,
-  popup_title: 'Popup title',
-  popup_button_text: 'Button Text',
-  popup_feature_image_enable: true,
-  popup_icon_image: 'http://www.gmail.com',
-  theme_default_button_style: true,
-  popup_button_color: {
-    background_color: '#458947',
-    background_hover_color: '#00484',
-    border_color: '#69594',
-    border_hover_color: '1fdasf0px'
-  },
-  popup_button_size: {
-    border_width: '1px',
-    border_height: '1px',
-    border_radios: '10px',
-    popup_button_margin: '10px'
-  },
-  popup_notification_text: 'hello',
-  popup_notification_icon: 'http://test/gmail.com',
-  popup_notification_button_text: 'hello'
-};
-const wishlistSlice1 = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
-  name: 'wishlist1',
-  initialState,
-  reducers: {
-    updateWishlistSetting1(state, action) {
-      // Merge the action payload with the current state to update specific properties
-      return {
-        ...state,
-        ...action.payload
-      };
-    }
-  }
-});
-const selectWishlist1 = state => state.wishlist1;
-
-// Export the reducer and actions
-const {
-  updateWishlistSetting1
-} = wishlistSlice1.actions;
-/* harmony default export */ __webpack_exports__["default"] = (wishlistSlice1.reducer);
-
-/***/ }),
-
 /***/ "./backend/views/page/redux/store.js":
 /*!*******************************************!*\
   !*** ./backend/views/page/redux/store.js ***!
@@ -3918,16 +3882,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   store: function() { return /* binding */ store; }
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var _reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-/* harmony import */ var _reducers_wishlistSlice1__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducers/wishlistSlice1 */ "./backend/views/page/redux/reducers/wishlistSlice1.js");
 
 
-
-const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.configureStore)({
+const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.configureStore)({
   reducer: {
-    wishlist: _reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_0__["default"],
-    tahira: _reducers_wishlistSlice1__WEBPACK_IMPORTED_MODULE_1__["default"]
+    wishlist: _reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_0__["default"]
+    // tahira: wishlistReducer1,
   }
 });
 

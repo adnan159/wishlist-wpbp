@@ -1,3 +1,7 @@
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWishlistSetting } from '../../redux/reducers/wishlistSlice';
+
 export default function Input( {
 	label = '',
 	type = 'text',
@@ -15,6 +19,33 @@ export default function Input( {
 	checked = false,
 	accept = '',
 } ) {
+	const [ popupInputs, setPopupInputs ] = useState( {} );
+
+	useEffect( () => {
+		handleUpdateSettings();
+	}, [ popupInputs ] );
+
+	const dispatch = useDispatch();
+
+	const handleUpdateSettings = () => {
+		// Example: Update the "default_wishlist_name" property
+		dispatch(
+			updateWishlistSetting( {
+				...popupInputs,
+			} )
+		);
+	};
+	const handlePopupInputs = ( e ) => {
+		// const name = e.target.name;
+		const { name, value } = e.target;
+		console.log(
+			`📌 ~ file: PopupInputs.jsx:14 ~ handlePopupInputs ~ name, value:`,
+			name,
+			value
+		);
+
+		setPopupInputs( { ...popupInputs, [ name ]: value } );
+	};
 	return (
 		<div className="">
 			{ /* { label && (
@@ -41,7 +72,9 @@ export default function Input( {
 				autoComplete="off"
 				placeholder={ placeholder }
 				accept={ accept }
-				onChange={ onChange && onChange }
+				onChange={ ( e ) => {
+					handlePopupInputs( e );
+				} }
 				onFocus={ onFocus && onFocus }
 				onBlur={ onBlur && onBlur }
 			/>

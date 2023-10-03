@@ -24,7 +24,7 @@ export default function PopupSettingsLeft() {
 			label: 'Enable/Disable',
 			component: (
 				<Toggle
-					active={ wishlistSettings.popup_enable }
+					active={ wishlistSettings.settingName }
 					settingName="popup_enable"
 				/>
 			),
@@ -38,12 +38,11 @@ export default function PopupSettingsLeft() {
 						'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
 					}
 					placeholder={ 'Choose a Wishlist' }
-					name={ 'popup_title' }
+					name="popup_title"
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
-					value={ '' }
-					onChange={ ( e ) => updatePopupTitle( e.target.value ) }
+					value={ wishlistSettings.name }
 				/>
 			),
 			info: '',
@@ -57,10 +56,11 @@ export default function PopupSettingsLeft() {
 							'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
 						}
 						placeholder={ 'Add to Wishlist' }
-						name={ 'popup_button_text' }
+						name="popup_button_text"
 						type={ 'text' }
 						id={ 'wishlist' }
 						required={ true }
+						value={ wishlistSettings.name }
 					/>
 				</>
 			),
@@ -70,7 +70,7 @@ export default function PopupSettingsLeft() {
 			label: 'Use Product Featured Image For Pop Up',
 			component: (
 				<Toggle
-					active={ wishlistSettings.popup_feature_image_enable }
+					active={ wishlistSettings.settingName }
 					settingName="popup_feature_image_enable"
 				/>
 			),
@@ -87,7 +87,7 @@ export default function PopupSettingsLeft() {
 			component: (
 				<>
 					<Toggle
-						active={ wishlistSettings.theme_default_button_style }
+						active={ wishlistSettings.settingName }
 						settingName="theme_default_button_style"
 					/>
 				</>
@@ -117,10 +117,11 @@ export default function PopupSettingsLeft() {
 					classNames={ '' }
 					size={ ' wawl-w-72 wawl-h-12' }
 					placeholder={ 'Successfully added to wishlist' }
-					name={ 'title_text' }
+					name="popup_notification_text"
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
+					value={ wishlistSettings.name }
 				/>
 			),
 			info: 'Enable wishlist icon on the cart page beside the delete button',
@@ -136,10 +137,11 @@ export default function PopupSettingsLeft() {
 					classNames={ '' }
 					size={ 'wawl-w-40 wawl-h-12' }
 					placeholder={ 'View wishlist' }
-					name={ 'button_text' }
+					name="popup_notification_button_text"
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
+					value={ wishlistSettings.name }
 				/>
 			),
 		},

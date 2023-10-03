@@ -47,12 +47,12 @@ export default function GlobalSettings() {
 		},
 	];
 	const globalWishlistSettingsItems = {
-		enable_wishlist: {
+		enable_wishlist_for: {
 			label: 'Enable wishlist for',
 			component: <RadioButton items={ globalSettingsRadio } />,
 			info: '',
 		},
-		default_wishlist: {
+		default_wishlist_name: {
 			label: 'Default wishlist name',
 			component: (
 				<Input
@@ -60,22 +60,23 @@ export default function GlobalSettings() {
 						'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
 					}
 					placeholder={ 'Wishlist' }
-					name={ 'default_wishlist' }
+					name="default_wishlist_name"
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
+					value={ wishlistSettings.name }
 				/>
 			),
 			info: '',
 		},
-		exclude_category_product: {
+		exclude_type: {
 			label: 'Exclude product/category',
 			component: (
 				<>
 					<Select />
 					<Search
 						type={ 'search' }
-						name={ 'exclude_category_product' }
+						name="exclude_type"
 						classes="sm:ctx-w-full"
 						placeholder={ 'Search' }
 					/>
@@ -88,24 +89,25 @@ export default function GlobalSettings() {
 			label: 'Show status for each product',
 			component: (
 				<Toggle
-					active={ wishlistSettings.item_count }
+					active={ wishlistSettings.settingName }
 					settingName="item_count"
 				/>
 			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: 'How many times product was added to a wishlist',
 		},
-		guest_user: {
+		guest_user_wishlist_days: {
 			label: 'Guest user Wishlist will be deleted after',
 			component: (
 				<Input
 					classes={ '' }
 					size={ 'wawl-w-40 wawl-h-12' }
 					placeholder={ 'Enter Days' }
-					name={ 'enable_wishlist_variations_product' }
+					name="guest_user_wishlist_days"
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
+					value={ wishlistSettings.name }
 				/>
 			),
 		},
@@ -113,7 +115,7 @@ export default function GlobalSettings() {
 			label: 'Enable Wishlist for variations product',
 			component: (
 				<Toggle
-					active={ wishlistSettings.enable_for_variation }
+					active={ wishlistSettings.settingName }
 					settingName="enable_for_variation"
 				/>
 			),
@@ -124,7 +126,7 @@ export default function GlobalSettings() {
 			label: 'Enable wishlist in my account',
 			component: (
 				<Toggle
-					active={ wishlistSettings.enable_for_myaccount }
+					active={ wishlistSettings.settingName }
 					settingName="enable_for_myaccount"
 				/>
 			),
@@ -135,7 +137,7 @@ export default function GlobalSettings() {
 			label: 'Multi wishlist settings',
 			component: (
 				<Toggle
-					active={ wishlistSettings.multi_wishlist_settings }
+					active={ wishlistSettings.settingName }
 					settingName="multi_wishlist_settings"
 				/>
 			),
@@ -146,7 +148,7 @@ export default function GlobalSettings() {
 			label: 'Cart page wishlist',
 			component: (
 				<Toggle
-					active={ wishlistSettings.cart_page_wishlist }
+					active={ wishlistSettings.settingName }
 					settingName="cart_page_wishlist"
 				/>
 			),

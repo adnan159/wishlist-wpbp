@@ -27,13 +27,11 @@ export default function PopupBtnCustomStyle( onBtnBorderStyleChange ) {
 	};
 	const handleBtnBorderStyleChange = ( e ) => {
 		const { name, value } = e.target;
-		console.log(
-			`📌 ~ file: InputColorPicker.jsx:14 ~ handleColorChange ~ name, value:`,
-			name,
-			value
-		);
-		// const updatedValue = value.endsWith( 'px' ) ? value : value + 'px'; // Add 'px' if not present
-		// setBtnBorderStyles( { ...btnBorderStyles, [ name ]: updatedValue } );
+		// console.log(
+		// 	`📌 ~ file: InputColorPicker.jsx:14 ~ handleColorChange ~ name, value:`,
+		// 	name,
+		// 	value
+		// );
 		setBtnBorderStyles( { ...btnBorderStyles, [ name ]: value } );
 	};
 

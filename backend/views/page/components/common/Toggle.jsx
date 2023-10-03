@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { updateProductListing } from '../../redux/reducers/productListingSlice';
 import { updateWishlistSetting } from '../../redux/reducers/wishlistSlice';
 
 function classNames( ...classes ) {
@@ -19,6 +20,11 @@ export default function Toggle( { active = false, settingName } ) {
 
 		dispatch(
 			updateWishlistSetting( {
+				[ settingName ]: newEnabled,
+			} )
+		);
+		dispatch(
+			updateProductListing( {
 				[ settingName ]: newEnabled,
 			} )
 		);

@@ -1,21 +1,43 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	selectWishlist,
+	updateWishlistSetting,
+} from '../../redux/reducers/wishlistSlice';
+// Import the action and selector
 
 export default function RadioButton( { items, classes = '' } ) {
-	const [ checked, setChecked ] = useState( '1' );
-	const [ value, setValue ] = useState( '' );
+	const dispatch = useDispatch();
+	const radioButtonValue = useSelector( selectWishlist );
 
-	const handleChange = ( event ) => {
-		setChecked( event.target.id );
-		setValue( event.target.value );
-	};
-	const toggleRadio = () => {
-		// Toggle the checked state between '1' and '2' (or any other value)
-		const newValue = checked === '1' ? '2' : '1';
-		setChecked( newValue );
-	};
+	const [ checked, setChecked ] = useState( radioButtonValue );
+	const [ value, setValue ] = useState( '' );
+	// useEffect( () => {
+	// 	setValue( items.find( ( item ) => item.id === checked )?.value || ' ' );
+	// }, [ checked, items ] );
 	useEffect( () => {
+		handleUpdateSettings();
+	}, [ checked, value ] );
+
+	const handleUpdateSettings = () => {
+		// Example: Update the "default_wishlist_name" property
+		dispatch(
+			updateWishlistSetting( {
+				enable_wishlist_for: value,
+			} )
+		);
+	};
+	const handleChange = ( e ) => {
+		// const name = e.target.name;
+		const newValue = e.target.id;
+		console.log(
+			`📌 ~ file: PopupInputs.jsx:14 ~ handlePopupInputs ~ name, value:`,
+			newValue
+		);
+		setChecked( newValue );
 		setValue( items.find( ( item ) => item.id === checked )?.value || ' ' );
-	}, [ checked, items ] );
+	};
+
 	return (
 		<>
 			{ items.map( ( item ) => (
@@ -27,23 +49,25 @@ export default function RadioButton( { items, classes = '' } ) {
 					].join( ' ' ) }
 				>
 					<input
-						className=" focus:wawl-outline-1 focus:wawl-shadow-none"
+						className="focus:wawl-outline-1 focus:wawl-shadow-none"
 						type="radio"
 						name="radioValue"
 						id={ item.id }
 						value={ item.value }
 						checked={ checked === item.id }
-						onChange={ handleChange }
+						onChange={ ( e ) => {
+							handleChange( e );
+						} }
 					/>
 					<label
-						className=" -wawl-mt-1.5 wawl-ml-2 wawl-text-base"
+						className="-wawl-mt-1.5 wawl-ml-2 wawl-text-base"
 						htmlFor={ item.value }
 					>
 						{ item.title }
 					</label>
 				</div>
 			) ) }
-			{ /* <h2>{ checked ? value : 'hello' }</h2> */ }
+			<h2>{ checked ? value : 'hello' }</h2>
 		</>
 	);
 }

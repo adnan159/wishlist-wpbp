@@ -24,8 +24,23 @@ class Api {
     }
 
     public function ww_custom_api() {
-        $general_settings = new GlobalSettings();
-        $general_settings->register_route();
+        $global_settings = new GlobalSettings();
+        $global_settings->register_route();
+
+        $product_listing_settings = new ProductListingSettings();
+        $product_listing_settings->register_route();
+
+        $single_product_page_settings = new SingleProductPageSettings();
+        $single_product_page_settings->register_route();
+
+        $my_wishlist_page = new MyWishlistPage();
+        $my_wishlist_page->register_route();
+
+        $search_product = new SearchProduct();
+        $search_product->register_route();
+
+        $search_categories = new SearchCategories();
+        $search_categories->register_route();
     }
 }
 

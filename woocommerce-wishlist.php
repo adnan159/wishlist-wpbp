@@ -33,6 +33,7 @@ define( 'WW_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'WW_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'WW_MIN_PHP_VERSION', '7.4' );
 define( 'WW_WP_VERSION', '5.3' );
+define( 'WW_API_NAME_SPACE', 'wp/wishlist/v1');
 
 add_action(
 	'init',
@@ -135,7 +136,7 @@ function ww_fs() {
 Puc_v4_Factory::buildUpdateChecker( 'https://github.com/user-name/repo-name/', __FILE__, 'unique-plugin-or-theme-slug' );
 
 if ( ! wp_installing() ) {
-	register_activation_hook( WW_TEXTDOMAIN . '/' . WW_TEXTDOMAIN . '.php', array( new \WooCommerce_Wishlist\Backend\ActDeact, 'activate' ) );
+	register_activation_hook( __FILE__, array( new \WooCommerce_Wishlist\Backend\ActDeact, 'activate' ) );
 	register_deactivation_hook( WW_TEXTDOMAIN . '/' . WW_TEXTDOMAIN . '.php', array( new \WooCommerce_Wishlist\Backend\ActDeact, 'deactivate' ) );
 	add_action(
 		'plugins_loaded',

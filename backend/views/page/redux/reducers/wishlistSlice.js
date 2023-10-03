@@ -7,7 +7,7 @@ const initialState = {
 	default_wishlist_name: 'New list',
 	exclude_type: 'product',
 	exclude_items: [ 1, 2, 3 ],
-	item_count: false,
+	item_count: true,
 	guest_user_wishlist_days: 90,
 	enable_for_variation: false,
 	enable_for_myaccount: false,
@@ -47,10 +47,15 @@ const wishlistSlice = createSlice( {
 				...action.payload,
 			};
 		},
+
+		getWishlistSettings( state, action ) {
+			// Merge the action payload with the current state to update specific properties
+			return action.payload;
+		},
 	},
 } );
 export const selectWishlist = ( state ) => state.wishlist;
 
 // Export the reducer and actions
-export const { updateWishlistSetting } = wishlistSlice.actions;
+export const { updateWishlistSetting, getWishlistSettings  } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

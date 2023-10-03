@@ -113,6 +113,18 @@ class Enqueue extends Base {
 		$scripts[1]->forLocation( Asset::BACKEND )->withVersion( WW_VERSION );
 		$scripts[1]->dependencies();
 
+        $js_options = array(
+            'ww_ajax_url' => admin_url('admin-ajax.php'),
+            'admin_url' => admin_url('admin.php'),
+            'json_url' => esc_url_raw(rest_url()),
+            'rest_nonce' => wp_create_nonce('wp_rest'),
+            'base_rest_url'  => rest_url(WW_API_NAME_SPACE)
+        );
+
+        wp_enqueue_script( 'ww-admin-view', 'ww-admin-view.js', [], null, true );
+
+        wp_localize_script( 'ww-admin-view', 'ww_admin_view_object', $js_options );
+
 		return $scripts;
 	}
 

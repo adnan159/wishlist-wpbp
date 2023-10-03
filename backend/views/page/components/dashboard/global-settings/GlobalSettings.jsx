@@ -1,13 +1,36 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectWishlist } from '../../../redux/reducers/wishlistSlice';
+import { useState, useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import { selectWishlist, getWishlistSettings } from '../../../redux/reducers/wishlistSlice';
 import Input from '../../common/Input';
 import RadioButton from '../../common/RadioButton';
 import Search from '../../common/Search';
 import Select from '../../common/Select';
 import Toggle from '../../common/Toggle';
+
+import axios from 'axios';
+
 export default function GlobalSettings() {
 	const wishlistSettings = useSelector( selectWishlist );
+
+	const url = ww_admin_view_object.base_rest_url + "/global-settings";
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+
+		const headers = {
+			'Content-Type': 'application/json',
+			'X-WP-Nonce': ww_admin_view_object.rest_nonce
+		};
+
+		axios.get(url, { headers } )
+			.then(response => {
+				dispatch(getWishlistSettings(response.data.data));
+			})
+	}, []);
+
+
+
 
 	const globalSettingsRadio = [
 		{

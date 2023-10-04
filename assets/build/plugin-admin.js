@@ -2666,41 +2666,29 @@ __webpack_require__.r(__webpack_exports__);
 function InputColor({
   name,
   value,
-  onClick,
   onChange
 }) {
-  const [showIcon, setShowIcon] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true);
-  const inputRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null); // Create a ref for the input element
-
+  const inputRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
   const handleToggleIcon = () => {
-    setShowIcon(!showIcon);
     if (inputRef.current) {
-      inputRef.current.click(); // Trigger a click event on the input element
+      inputRef.current.click();
     }
   };
-
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "color-input-container"
-  }, showIcon ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, !value ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "pen-icon",
     onClick: handleToggleIcon
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_hi2__WEBPACK_IMPORTED_MODULE_2__.HiMiniEyeDropper, {
     className: "wawl-text-gray-400"
   })) : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    ref: inputRef // Assign the ref to the input element
-    ,
+    ref: inputRef,
     className: "wawl-h-10 wawl-w-10 wawl-bg-gray-400",
     type: "color",
     name: name,
-    value: value
-    // onChange={onChange}
-    ,
-    onChange: e => {
-      onChange(e);
-    },
-    onClick: () => setShowIcon(false),
-    onFocus: () => setShowIcon(false)
-  })));
+    value: value || `#ffffff`,
+    onChange: onChange
+  }));
 }
 
 /***/ }),
@@ -2717,81 +2705,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-/* harmony import */ var _common_InputColor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/InputColor */ "./backend/views/page/components/common/InputColor.jsx");
-
-
-
+/* harmony import */ var _InputColor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputColor */ "./backend/views/page/components/common/InputColor.jsx");
 
 
 function InputColorPicker({
-  onColorChange
+  onChange,
+  items,
+  values
 }) {
-  const [colors, setColors] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    background_color: '',
-    background_hover_color: '',
-    border_color: '',
-    border_hover_color: ''
-  });
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    handleUpdateSettings();
-  }, [colors]);
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  const handleUpdateSettings = () => {
-    // Example: Update the "default_wishlist_name" property
-    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
-      popup_button_color: {
-        ...colors
-      }
-    }));
-  };
-  const handleColorChange = e => {
-    const {
-      name,
-      value
-    } = e.target;
-    console.log(`📌 ~ file: InputColorPicker.jsx:14 ~ handleColorChange ~ name, value:`, name, value);
-    setColors({
-      ...colors,
-      [name]: value
-    });
-  };
-  const colorValue = [{
-    label: 'Background color',
-    name: 'background_color' // Use a colon instead of an equal sign
-  }, {
-    label: 'Border color',
-    name: 'border_color' // Use a colon instead of an equal sign
-  }, {
-    label: 'Background hover color',
-    name: 'background_hover_color' // Use a colon instead of an equal sign
-  }, {
-    label: 'Border hover color',
-    name: 'border_hover_color' // Use a colon instead of an equal sign
-  }];
-
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-grid wawl-grid-cols-1 wawl-max-w-max wawl-p-4 wawl-border wawl-border-gray-200 wawl-rounded-lg"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: " wawl-col-span-1 wawl-grid wawl-grid-cols-2  wawl-gap-8  wawl-justify-between"
-  }, colorValue.map((color, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index,
+    className: " wawl-col-span-1 wawl-grid wawl-grid-cols-2 wawl-gap-8 wawl-justify-between"
+  }, items.map(color => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: color.name,
     className: "wawl-flex wawl-justify-between wawl-items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "wawl-text-base wawl-text-gray-500 wawl-my-2.5 wawl-mr-8",
     htmlFor: color.name
-  }, color.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColor__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, color.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputColor__WEBPACK_IMPORTED_MODULE_1__["default"], {
     className: "wawl-h-10 wawl-w-10",
     name: color.name,
-    value: colors[color.name] ? colors[color.name] : '#ffffff'
-    // onChange={handleColorChange}
-    ,
-    onChange: e => {
-      handleColorChange(e);
-    }
+    value: values[color.name] || '',
+    onChange: onChange
   })))));
 }
 
@@ -3525,12 +3461,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-/* harmony import */ var _common_IconImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/IconImage */ "./backend/views/page/components/common/IconImage.jsx");
-/* harmony import */ var _common_Input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/Input */ "./backend/views/page/components/common/Input.jsx");
-/* harmony import */ var _common_InputColorPicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/InputColorPicker */ "./backend/views/page/components/common/InputColorPicker.jsx");
-/* harmony import */ var _common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/PopupBtnCustomStyle */ "./backend/views/page/components/common/PopupBtnCustomStyle.jsx");
-/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
-/* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../pages/Page */ "./backend/views/page/components/pages/Page.jsx");
+/* harmony import */ var _utility_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../utility/data */ "./backend/views/page/utility/data.js");
+/* harmony import */ var _common_IconImage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/IconImage */ "./backend/views/page/components/common/IconImage.jsx");
+/* harmony import */ var _common_Input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/Input */ "./backend/views/page/components/common/Input.jsx");
+/* harmony import */ var _common_InputColorPicker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/InputColorPicker */ "./backend/views/page/components/common/InputColorPicker.jsx");
+/* harmony import */ var _common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/PopupBtnCustomStyle */ "./backend/views/page/components/common/PopupBtnCustomStyle.jsx");
+/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
+/* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../pages/Page */ "./backend/views/page/components/pages/Page.jsx");
+
 
 
 
@@ -3543,51 +3481,60 @@ __webpack_require__.r(__webpack_exports__);
 
 function PopupSettingsLeft() {
   const [selectedImages, setSelectedImages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
-  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
+  const globalSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  const handleColorChange = e => {
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      popup_button_color: {
+        ...globalSettings.popup_button_color,
+        [e.target.name]: e.target.value
+      }
+    }));
+  };
   const handleImageChange = selected => {
     // Handle image change logic here
   };
-  const isIconImageEnabled = wishlistSettings.popup_feature_image_enable;
-  const themeDefaultButtonStyle = wishlistSettings.theme_default_button_style;
+  const isIconImageEnabled = globalSettings.popup_feature_image_enable;
+  const themeDefaultButtonStyle = globalSettings.theme_default_button_style;
   const globalWishlistSettingsItems = {
     popup_enable: {
       label: 'Enable/Disable',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.settingName,
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        active: globalSettings.settingName,
         settingName: "popup_enable"
       }),
       info: ''
     },
     popup_title: {
       label: 'Popup Title',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_6__["default"], {
         classNamees: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
         placeholder: 'Choose a Wishlist',
         name: "popup_title",
         type: 'text',
         id: 'wishlist',
         required: true,
-        value: wishlistSettings.name
+        value: globalSettings.name
       }),
       info: ''
     },
     popup_button_text: {
       label: 'Popup button text',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_6__["default"], {
         classNamees: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
         placeholder: 'Add to Wishlist',
         name: "popup_button_text",
         type: 'text',
         id: 'wishlist',
         required: true,
-        value: wishlistSettings.name
+        value: globalSettings.name
       })),
       info: ''
     },
     popup_feature_image_enable: {
       label: 'Use Product Featured Image For Pop Up',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.settingName,
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        active: globalSettings.settingName,
         settingName: "popup_feature_image_enable"
       }),
       info: ''
@@ -3595,15 +3542,15 @@ function PopupSettingsLeft() {
     ...(isIconImageEnabled && {
       popup_icon_image: {
         label: 'Icon Image',
-        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_5__["default"], {
           iconName: "popup_icon_image"
         })
       }
     }),
     theme_default_button_style: {
       label: 'Theme Default Button Style',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.settingName,
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        active: globalSettings.settingName,
         settingName: "theme_default_button_style"
       })),
       info: ''
@@ -3611,12 +3558,16 @@ function PopupSettingsLeft() {
     ...(themeDefaultButtonStyle && {
       popup_button_color: {
         label: 'Popup button color',
-        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColorPicker__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          onChange: handleColorChange,
+          items: _utility_data__WEBPACK_IMPORTED_MODULE_4__.colorValue,
+          values: globalSettings.popup_button_color
+        }),
         info: ''
       },
       popup_button_size: {
         label: 'Popup button Size',
-        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_7__["default"], null),
+        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_8__["default"], null),
         info: ''
       }
     }),
@@ -3625,7 +3576,7 @@ function PopupSettingsLeft() {
     },
     popup_notification_text: {
       label: 'Title Text',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_6__["default"], {
         classNames: '',
         size: ' wawl-w-72 wawl-h-12',
         placeholder: 'Successfully added to wishlist',
@@ -3633,19 +3584,19 @@ function PopupSettingsLeft() {
         type: 'text',
         id: 'wishlist',
         required: true,
-        value: wishlistSettings.name
+        value: globalSettings.name
       }),
       info: 'Enable wishlist icon on the cart page beside the delete button'
     },
     popup_notification_icon: {
       label: 'Icon Image',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconImage__WEBPACK_IMPORTED_MODULE_5__["default"], {
         iconName: "popup_notification_icon"
       })
     },
     popup_notification_button_text: {
       label: 'Button text',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_6__["default"], {
         classNames: '',
         size: 'wawl-w-40 wawl-h-12',
         placeholder: 'View wishlist',
@@ -3653,7 +3604,7 @@ function PopupSettingsLeft() {
         type: 'text',
         id: 'wishlist',
         required: true,
-        value: wishlistSettings.name
+        value: globalSettings.name
       })
     }
   };
@@ -3662,7 +3613,7 @@ function PopupSettingsLeft() {
     setList(e.target.value);
   };
   console.log(list);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_10__["default"], {
     classes: "wawl-mt-14"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " wawl-col-span-12"
@@ -3829,13 +3780,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _redux_reducers_productListingSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../redux/reducers/productListingSlice */ "./backend/views/page/redux/reducers/productListingSlice.js");
-/* harmony import */ var _common_IconStyle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/IconStyle */ "./backend/views/page/components/common/IconStyle.jsx");
-/* harmony import */ var _common_InputColorPicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/InputColorPicker */ "./backend/views/page/components/common/InputColorPicker.jsx");
-/* harmony import */ var _common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/PopupBtnCustomStyle */ "./backend/views/page/components/common/PopupBtnCustomStyle.jsx");
-/* harmony import */ var _common_RadioButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/RadioButton */ "./backend/views/page/components/common/RadioButton.jsx");
-/* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
-/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
-/* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../pages/Page */ "./backend/views/page/components/pages/Page.jsx");
+/* harmony import */ var _utility_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../utility/data */ "./backend/views/page/utility/data.js");
+/* harmony import */ var _common_IconStyle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/IconStyle */ "./backend/views/page/components/common/IconStyle.jsx");
+/* harmony import */ var _common_InputColorPicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/InputColorPicker */ "./backend/views/page/components/common/InputColorPicker.jsx");
+/* harmony import */ var _common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/PopupBtnCustomStyle */ "./backend/views/page/components/common/PopupBtnCustomStyle.jsx");
+/* harmony import */ var _common_RadioButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/RadioButton */ "./backend/views/page/components/common/RadioButton.jsx");
+/* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
+/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
+/* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../pages/Page */ "./backend/views/page/components/pages/Page.jsx");
+
 
 
 
@@ -3876,6 +3829,15 @@ const iconStylesValue = [{
 function ProductListingLeft() {
   const [selectedImages, setSelectedImages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
   const productListing = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_productListingSlice__WEBPACK_IMPORTED_MODULE_3__.selectProductListing);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  const handleColorChange = e => {
+    dispatch((0,_redux_reducers_productListingSlice__WEBPACK_IMPORTED_MODULE_3__.updateProductListing)({
+      listing_button_color: {
+        ...productListing.listing_button_color,
+        [e.target.name]: e.target.value
+      }
+    }));
+  };
   const handleRadioButtonChange = value => {
     // Handle radio button change logic here
   };
@@ -3885,7 +3847,7 @@ function ProductListingLeft() {
   const productListingItems = {
     listing_settings_enable: {
       label: 'Enable/Disable',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
         active: productListing.settingName,
         settingName: "listing_settings_enable"
       }),
@@ -3893,12 +3855,12 @@ function ProductListingLeft() {
     },
     listing_button_position: {
       label: 'Button position on listing',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_9__["default"], null),
       info: ''
     },
     listing_button_type: {
       label: 'Button Type',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
         items: globalSettingsRadio
         // onChange={ handleRadioButtonChange }
       }),
@@ -3907,12 +3869,12 @@ function ProductListingLeft() {
     },
     listing_icon: {
       label: 'Choose Icon',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_9__["default"], null),
       info: ''
     },
     listing_theme_default: {
       label: 'Theme Default',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
         active: productListing.settingName,
         settingName: "listing_theme_default"
       }),
@@ -3920,19 +3882,23 @@ function ProductListingLeft() {
     },
     listing_icon_style: {
       label: 'Icon style',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconStyle__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconStyle__WEBPACK_IMPORTED_MODULE_5__["default"], {
         iconStyleProps: iconStylesValue
       }),
       info: ''
     },
     listing_button_color: {
       label: 'Button color',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        onChange: handleColorChange,
+        items: _utility_data__WEBPACK_IMPORTED_MODULE_4__.colorValue,
+        values: productListing.listing_button_color
+      }),
       info: ''
     },
     listing_button_size: {
       label: 'Button size',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_7__["default"], null),
       info: ''
     }
   };
@@ -3940,7 +3906,7 @@ function ProductListingLeft() {
   const radioChangeHandler = e => {
     setList(e.target.value);
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Page__WEBPACK_IMPORTED_MODULE_11__["default"], {
     classes: ""
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-col-span-12"
@@ -4072,10 +4038,10 @@ const initialState = {
     icon_hover_color: '#4359078'
   },
   listing_button_color: {
-    background_color: '#349058',
+    background_color: '#000000',
     background_hover_color: '#458943',
     border_color: '#456544',
-    border_hover_color: '#349054'
+    border_hover_color: ''
   },
   listing_button_size: {
     border_width: '10px',
@@ -4130,7 +4096,7 @@ const initialState = {
   exclude_items: [1, 2, 3],
   item_count: false,
   guest_user_wishlist_days: 90,
-  enable_for_variation: false,
+  enable_for_variation: true,
   enable_for_myaccount: false,
   multi_wishlist_settings: false,
   cart_page_wishlist: false,
@@ -4141,10 +4107,10 @@ const initialState = {
   popup_icon_image: '',
   theme_default_button_style: true,
   popup_button_color: {
-    background_color: '#458947',
-    background_hover_color: '#00484',
-    border_color: '#69594',
-    border_hover_color: '1fdasf0px'
+    background_color: '',
+    background_hover_color: '#458943',
+    border_color: '#456544',
+    border_hover_color: '#349054'
   },
   popup_button_size: {
     border_width: '1px',
@@ -4201,6 +4167,33 @@ const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.configureStore)({
     productListing: _reducers_productListingSlice__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
+
+/***/ }),
+
+/***/ "./backend/views/page/utility/data.js":
+/*!********************************************!*\
+  !*** ./backend/views/page/utility/data.js ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   colorValue: function() { return /* binding */ colorValue; }
+/* harmony export */ });
+const colorValue = [{
+  label: 'Background color',
+  name: 'background_color' // Use a colon instead of an equal sign
+}, {
+  label: 'Border color',
+  name: 'border_color' // Use a colon instead of an equal sign
+}, {
+  label: 'Background hover color',
+  name: 'background_hover_color' // Use a colon instead of an equal sign
+}, {
+  label: 'Border hover color',
+  name: 'border_hover_color' // Use a colon instead of an equal sign
+}];
+// export default data;
 
 /***/ }),
 

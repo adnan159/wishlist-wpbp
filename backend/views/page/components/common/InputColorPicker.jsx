@@ -1,68 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateWishlistSetting } from '../../redux/reducers/wishlistSlice';
-import InputColor from '../common/InputColor';
+import InputColor from './InputColor';
 
-export default function InputColorPicker( { onColorChange } ) {
-	const [ colors, setColors ] = useState( {
-		background_color: '',
-		background_hover_color: '',
-		border_color: '',
-		border_hover_color: '',
-	} );
-	useEffect( () => {
-		handleUpdateSettings();
-	}, [ colors ] );
-
-	const dispatch = useDispatch();
-
-	const handleUpdateSettings = () => {
-		// Example: Update the "default_wishlist_name" property
-		dispatch(
-			updateWishlistSetting( {
-				popup_button_color: {
-					...colors,
-				},
-			} )
-		);
-	};
-	const handleColorChange = ( e ) => {
-		const { name, value } = e.target;
-		console.log(
-			`📌 ~ file: InputColorPicker.jsx:14 ~ handleColorChange ~ name, value:`,
-			name,
-			value
-		);
-
-		setColors( { ...colors, [ name ]: value } );
-	};
-
-	const colorValue = [
-		{
-			label: 'Background color',
-			name: 'background_color', // Use a colon instead of an equal sign
-		},
-
-		{
-			label: 'Border color',
-			name: 'border_color', // Use a colon instead of an equal sign
-		},
-		{
-			label: 'Background hover color',
-			name: 'background_hover_color', // Use a colon instead of an equal sign
-		},
-		{
-			label: 'Border hover color',
-			name: 'border_hover_color', // Use a colon instead of an equal sign
-		},
-	];
-
+export default function InputColorPicker( { onChange, items, values } ) {
 	return (
 		<div className="wawl-grid wawl-grid-cols-1 wawl-max-w-max wawl-p-4 wawl-border wawl-border-gray-200 wawl-rounded-lg">
-			<div className=" wawl-col-span-1 wawl-grid wawl-grid-cols-2  wawl-gap-8  wawl-justify-between">
-				{ colorValue.map( ( color, index ) => (
+			<div className=" wawl-col-span-1 wawl-grid wawl-grid-cols-2 wawl-gap-8 wawl-justify-between">
+				{ items.map( ( color ) => (
 					<div
-						key={ index }
+						key={ color.name }
 						className="wawl-flex wawl-justify-between wawl-items-center"
 					>
 						<label
@@ -71,18 +15,12 @@ export default function InputColorPicker( { onColorChange } ) {
 						>
 							{ color.label }
 						</label>
+
 						<InputColor
 							className="wawl-h-10 wawl-w-10"
 							name={ color.name }
-							value={
-								colors[ color.name ]
-									? colors[ color.name ]
-									: '#ffffff'
-							}
-							// onChange={handleColorChange}
-							onChange={ ( e ) => {
-								handleColorChange( e );
-							} }
+							value={ values[ color.name ] || '' }
+							onChange={ onChange }
 						/>
 					</div>
 				) ) }

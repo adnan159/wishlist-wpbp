@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectWishlist } from '../../../redux/reducers/wishlistSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	selectWishlist,
+	updateWishlistSetting,
+} from '../../../redux/reducers/wishlistSlice';
+import { colorValue } from '../../../utility/data';
 import IconImage from '../../common/IconImage';
 import Input from '../../common/Input';
 import InputColorPicker from '../../common/InputColorPicker';
@@ -10,21 +14,32 @@ import Page from '../../pages/Page';
 
 export default function PopupSettingsLeft() {
 	const [ selectedImages, setSelectedImages ] = useState( {} );
-	const wishlistSettings = useSelector( selectWishlist );
+	const globalSettings = useSelector( selectWishlist );
+	const dispatch = useDispatch();
 
+	const handleColorChange = ( e ) => {
+		dispatch(
+			updateWishlistSetting( {
+				popup_button_color: {
+					...globalSettings.popup_button_color,
+					[ e.target.name ]: e.target.value,
+				},
+			} )
+		);
+	};
 	const handleImageChange = ( selected ) => {
 		// Handle image change logic here
 	};
 
-	const isIconImageEnabled = wishlistSettings.popup_feature_image_enable;
-	const themeDefaultButtonStyle = wishlistSettings.theme_default_button_style;
+	const isIconImageEnabled = globalSettings.popup_feature_image_enable;
+	const themeDefaultButtonStyle = globalSettings.theme_default_button_style;
 
 	const globalWishlistSettingsItems = {
 		popup_enable: {
 			label: 'Enable/Disable',
 			component: (
 				<Toggle
-					active={ wishlistSettings.settingName }
+					active={ globalSettings.settingName }
 					settingName="popup_enable"
 				/>
 			),
@@ -42,7 +57,7 @@ export default function PopupSettingsLeft() {
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
-					value={ wishlistSettings.name }
+					value={ globalSettings.name }
 				/>
 			),
 			info: '',
@@ -60,7 +75,7 @@ export default function PopupSettingsLeft() {
 						type={ 'text' }
 						id={ 'wishlist' }
 						required={ true }
-						value={ wishlistSettings.name }
+						value={ globalSettings.name }
 					/>
 				</>
 			),
@@ -70,7 +85,7 @@ export default function PopupSettingsLeft() {
 			label: 'Use Product Featured Image For Pop Up',
 			component: (
 				<Toggle
-					active={ wishlistSettings.settingName }
+					active={ globalSettings.settingName }
 					settingName="popup_feature_image_enable"
 				/>
 			),
@@ -87,7 +102,7 @@ export default function PopupSettingsLeft() {
 			component: (
 				<>
 					<Toggle
-						active={ wishlistSettings.settingName }
+						active={ globalSettings.settingName }
 						settingName="theme_default_button_style"
 					/>
 				</>
@@ -97,7 +112,13 @@ export default function PopupSettingsLeft() {
 		...( themeDefaultButtonStyle && {
 			popup_button_color: {
 				label: 'Popup button color',
-				component: <InputColorPicker />,
+				component: (
+					<InputColorPicker
+						onChange={ handleColorChange }
+						items={ colorValue }
+						values={ globalSettings.popup_button_color }
+					/>
+				),
 				info: '',
 			},
 			popup_button_size: {
@@ -121,7 +142,7 @@ export default function PopupSettingsLeft() {
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
-					value={ wishlistSettings.name }
+					value={ globalSettings.name }
 				/>
 			),
 			info: 'Enable wishlist icon on the cart page beside the delete button',
@@ -141,7 +162,7 @@ export default function PopupSettingsLeft() {
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
-					value={ wishlistSettings.name }
+					value={ globalSettings.name }
 				/>
 			),
 		},

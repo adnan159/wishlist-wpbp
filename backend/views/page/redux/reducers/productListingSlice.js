@@ -14,10 +14,10 @@ const initialState = {
 		icon_hover_color: '#4359078',
 	},
 	listing_button_color: {
-		background_color: '#349058',
+		background_color: '#000000',
 		background_hover_color: '#458943',
 		border_color: '#456544',
-		border_hover_color: '#349054',
+		border_hover_color: '',
 	},
 	listing_button_size: {
 		border_width: '10px',

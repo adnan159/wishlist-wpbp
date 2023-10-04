@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectProductListing } from '../../../redux/reducers/productListingSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	selectProductListing,
+	updateProductListing,
+} from '../../../redux/reducers/productListingSlice';
+import { colorValue } from '../../../utility/data';
 import IconStyle from '../../common/IconStyle';
 import InputColorPicker from '../../common/InputColorPicker';
 import PopupBtnCustomStyle from '../../common/PopupBtnCustomStyle';
@@ -47,7 +51,20 @@ const iconStylesValue = [
 
 export default function ProductListingLeft() {
 	const [ selectedImages, setSelectedImages ] = useState( {} );
+
 	const productListing = useSelector( selectProductListing );
+	const dispatch = useDispatch();
+
+	const handleColorChange = ( e ) => {
+		dispatch(
+			updateProductListing( {
+				listing_button_color: {
+					...productListing.listing_button_color,
+					[ e.target.name ]: e.target.value,
+				},
+			} )
+		);
+	};
 
 	const handleRadioButtonChange = ( value ) => {
 		// Handle radio button change logic here
@@ -105,7 +122,13 @@ export default function ProductListingLeft() {
 		},
 		listing_button_color: {
 			label: 'Button color',
-			component: <InputColorPicker />,
+			component: (
+				<InputColorPicker
+					onChange={ handleColorChange }
+					items={ colorValue }
+					values={ productListing.listing_button_color }
+				/>
+			),
 			info: '',
 		},
 		listing_button_size: {

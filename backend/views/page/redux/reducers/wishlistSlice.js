@@ -9,7 +9,7 @@ const initialState = {
 	exclude_items: [ 1, 2, 3 ],
 	item_count: false,
 	guest_user_wishlist_days: 90,
-	enable_for_variation: false,
+	enable_for_variation: true,
 	enable_for_myaccount: false,
 	multi_wishlist_settings: false,
 	cart_page_wishlist: false,
@@ -20,10 +20,10 @@ const initialState = {
 	popup_icon_image: '',
 	theme_default_button_style: true,
 	popup_button_color: {
-		background_color: '#458947',
-		background_hover_color: '#00484',
-		border_color: '#69594',
-		border_hover_color: '1fdasf0px',
+		background_color: '',
+		background_hover_color: '#458943',
+		border_color: '#456544',
+		border_hover_color: '#349054',
 	},
 	popup_button_size: {
 		border_width: '1px',

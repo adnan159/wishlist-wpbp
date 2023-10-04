@@ -1039,6 +1039,10 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.\!wawl-bg-none {
+  background-image: none !important;
+}
+
 .wawl-object-cover {
   -o-object-fit: cover;
      object-fit: cover;

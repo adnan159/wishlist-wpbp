@@ -35,6 +35,7 @@ intermediate
 .idea
 cache
 vendor
+assets/build
 tests/_output/
 woocommerce-wishlist/vendor/
 tests/_support/_generated/

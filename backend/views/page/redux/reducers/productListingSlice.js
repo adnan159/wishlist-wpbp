@@ -22,7 +22,7 @@ const initialState = {
 	listing_button_size: {
 		border_width: '10px',
 		border_height: '10px',
-		border_radios: '10px',
+		border_radius: '10px',
 		margin: '10px',
 	},
 };

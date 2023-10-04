@@ -1,13 +1,52 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectWishlist } from '../../../redux/reducers/wishlistSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	selectWishlist,
+	updateWishlistSetting,
+} from '../../../redux/reducers/wishlistSlice';
 import Input from '../../common/Input';
 import RadioButton from '../../common/RadioButton';
 import Search from '../../common/Search';
 import Select from '../../common/Select';
-import Toggle from '../../common/Toggle';
+import ToggleButton from '../../common/ToggleButton';
 export default function GlobalSettings() {
-	const wishlistSettings = useSelector( selectWishlist );
+	const [ toggleValue, setToggleValue ] = useState( false );
+
+	const globalSettings = useSelector( selectWishlist );
+	const dispatch = useDispatch();
+
+	const handleInputChange = ( e ) => {
+		const newValue = e.target.value;
+		dispatch(
+			updateWishlistSetting( {
+				[ e.target.name ]: newValue,
+			} )
+		);
+	};
+	const [ checked, setChecked ] = useState( '' ); // Initialize with an empty string or the default value you want
+
+	// ... other code
+
+	const handleInputRadioChange = ( e ) => {
+		const radioValue = e.target.id;
+		setChecked( radioValue ); // Update the selected radio button
+		dispatch(
+			updateWishlistSetting( {
+				[ items.find( ( item ) => item.id === radioValue )?.value ||
+				'' ]: radioValue,
+			} )
+		);
+	};
+
+	// Callback function to handle the value from ToggleButton
+	const handleToggle = ( value, settingName ) => {
+		setToggleValue( value ); // Update the toggleValue with the new value
+		dispatch(
+			updateWishlistSetting( {
+				[ settingName ]: value,
+			} )
+		);
+	};
 
 	const globalSettingsRadio = [
 		{
@@ -33,15 +72,15 @@ export default function GlobalSettings() {
 			label: 'Default wishlist name',
 			component: (
 				<Input
-					classes={
+					className={
 						'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
 					}
-					placeholder={ 'Wishlist' }
+					placeholder={ 'Choose a Wishlist' }
 					name="default_wishlist_name"
 					type={ 'text' }
-					id={ 'wishlist' }
 					required={ true }
-					value={ wishlistSettings.name }
+					value={ globalSettings.default_wishlist_name }
+					onChange={ handleInputChange }
 				/>
 			),
 			info: '',
@@ -65,9 +104,11 @@ export default function GlobalSettings() {
 		item_count: {
 			label: 'Show status for each product',
 			component: (
-				<Toggle
-					active={ wishlistSettings.settingName }
-					settingName="item_count"
+				<ToggleButton
+					onToggle={ ( value ) =>
+						handleToggle( value, 'cart_page_wishlist' )
+					}
+					isOn={ globalSettings.item_count }
 				/>
 			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -77,23 +118,28 @@ export default function GlobalSettings() {
 			label: 'Guest user Wishlist will be deleted after',
 			component: (
 				<Input
-					classes={ '' }
+					className={
+						'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
+					}
 					size={ 'wawl-w-40 wawl-h-12' }
 					placeholder={ 'Enter Days' }
 					name="guest_user_wishlist_days"
 					type={ 'text' }
 					id={ 'wishlist' }
 					required={ true }
-					value={ wishlistSettings.name }
+					value={ globalSettings.guest_user_wishlist_days }
+					onChange={ handleInputChange }
 				/>
 			),
 		},
 		enable_for_variation: {
 			label: 'Enable Wishlist for variations product',
 			component: (
-				<Toggle
-					active={ wishlistSettings.settingName }
-					settingName="enable_for_variation"
+				<ToggleButton
+					onToggle={ ( value ) =>
+						handleToggle( value, 'cart_page_wishlist' )
+					}
+					isOn={ globalSettings.enable_for_variation }
 				/>
 			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -102,9 +148,11 @@ export default function GlobalSettings() {
 		enable_for_myaccount: {
 			label: 'Enable wishlist in my account',
 			component: (
-				<Toggle
-					active={ wishlistSettings.settingName }
-					settingName="enable_for_myaccount"
+				<ToggleButton
+					onToggle={ ( value ) =>
+						handleToggle( value, 'cart_page_wishlist' )
+					}
+					isOn={ globalSettings.enable_for_myaccount }
 				/>
 			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -113,9 +161,11 @@ export default function GlobalSettings() {
 		multi_wishlist_settings: {
 			label: 'Multi wishlist settings',
 			component: (
-				<Toggle
-					active={ wishlistSettings.settingName }
-					settingName="multi_wishlist_settings"
+				<ToggleButton
+					onToggle={ ( value ) =>
+						handleToggle( value, 'cart_page_wishlist' )
+					}
+					isOn={ globalSettings.multi_wishlist_settings }
 				/>
 			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -124,9 +174,11 @@ export default function GlobalSettings() {
 		cart_page_wishlist: {
 			label: 'Cart page wishlist',
 			component: (
-				<Toggle
-					active={ wishlistSettings.settingName }
-					settingName="cart_page_wishlist"
+				<ToggleButton
+					onToggle={ ( value ) =>
+						handleToggle( value, 'cart_page_wishlist' )
+					}
+					isOn={ globalSettings.cart_page_wishlist }
 				/>
 			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],

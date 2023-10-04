@@ -2093,41 +2093,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _components_common_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/common/Button */ "./backend/views/page/components/common/Button.jsx");
-/* harmony import */ var _components_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/dashboard/Dashboard */ "./backend/views/page/components/dashboard/Dashboard.jsx");
-/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-
+/* harmony import */ var _components_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/dashboard/Dashboard */ "./backend/views/page/components/dashboard/Dashboard.jsx");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
 
 
 
 
 const App = () => {
-  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_4__.selectWishlist);
+  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-border wawl-border-[#E2E2E2] wawl-bg-white wawl-p-14"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "wawl-font-bold wawl-text-xl"
-  }, "Wishlist Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "wawl-flex wawl-gap-4 wawl-justify-end wawl-mt-16 wawl-mb-10"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_common_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    onClick: () => {
-      window.open();
-    },
-    buttonStyle: 'buttonPrimary',
-    iconPosition: 'after',
-    addBgColor: false,
-    classNames: '',
-    icon: ''
-  }, 'Reset'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_common_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    onClick: () => {
-      console.log('hello world', wishlistSettings);
-    },
-    buttonStyle: 'button-primary',
-    iconPosition: 'after',
-    addBgColor: true,
-    classNames: '',
-    icon: ''
-  }, 'Save'))));
+  }, "Wishlist Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (App);
 
@@ -2334,91 +2312,42 @@ function IconImage({
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ InputColorPicker; }
+/* harmony export */   "default": function() { return /* binding */ IconStyle; }
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_reducers_productListingSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/productListingSlice */ "./backend/views/page/redux/reducers/productListingSlice.js");
-/* harmony import */ var _common_InputColor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/InputColor */ "./backend/views/page/components/common/InputColor.jsx");
-/* harmony import */ var _InputCSS__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./InputCSS */ "./backend/views/page/components/common/InputCSS.jsx");
+/* harmony import */ var _common_InputColor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/InputColor */ "./backend/views/page/components/common/InputColor.jsx");
+/* harmony import */ var _InputCSS__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InputCSS */ "./backend/views/page/components/common/InputCSS.jsx");
 
 
 
-
-
-
-function InputColorPicker({
-  iconStyleProps
+function IconStyle({
+  onChange,
+  items,
+  values
 }) {
-  const [iconStyles, setIconStyles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    icon_size: '',
-    icon_color: '',
-    icon_hover_color: ''
-  });
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    handleUpdateSettings();
-  }, [iconStyles]);
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  const handleUpdateSettings = () => {
-    dispatch((0,_redux_reducers_productListingSlice__WEBPACK_IMPORTED_MODULE_3__.updateProductListing)({
-      listing_icon_style: {
-        ...iconStyles
-      }
-    }));
-  };
-  const handleIconStyleChange = e => {
-    const {
-      name,
-      value
-    } = e.target;
-    console.log(`📌 ~ file: InputColorPicker.jsx:14 ~ handleColorChange ~ name, value:`, name, value);
-    setIconStyles({
-      ...iconStyles,
-      [name]: value
-    });
-  };
-  const iconStylesValue = [{
-    label: 'Size',
-    name: 'icon_size' // Use a colon instead of an equal sign
-  }, {
-    label: 'Icon color',
-    name: 'icon_color' // Use a colon instead of an equal sign
-  }, {
-    label: 'Icon hover color',
-    name: 'icon_hover_color' // Use a colon instead of an equal sign
-  }];
-
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-grid wawl-grid-cols-1 wawl-w-72 wawl-px-4 wawl-border wawl-border-gray-200 wawl-rounded-lg"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " wawl-col-span-1  wawl-gap-8  wawl-justify-between"
-  }, iconStyleProps.map((style, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index,
+  }, items.map(style => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: style.name,
     className: "wawl-flex wawl-justify-between wawl-items-center wawl-my-4"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "wawl-text-base wawl-text-gray-500 wawl-mr-8",
     htmlFor: style.name
-  }, style.label), style.name === 'icon_size' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputCSS__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, style.label), style.name === 'icon_size' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputCSS__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "wawl-h-10 wawl-w-10",
     id: style.name,
     name: style.name,
-    value: iconStyles[style.name] || '',
-    placeholder: '10px',
-    onChange: e => {
-      handleIconStyleChange(e);
-    }
-  }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColor__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    value: values[style.name] || '',
+    placeholder: `${values[style.name]}` || '10px',
+    onChange: onChange
+  }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_InputColor__WEBPACK_IMPORTED_MODULE_1__["default"], {
     className: "wawl-h-10 wawl-w-10",
     name: style.name,
-    value: iconStyles[style.name] ? iconStyles[style.name] : '#ffffff'
-    // onChange={handleColorChange}
-    ,
-    onChange: e => {
-      handleIconStyleChange(e);
-    }
+    value: values[style.name] ? values[style.name] : '',
+    onChange: onChange
   })))));
 }
 
@@ -2536,16 +2465,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-
-
-
 
 function Input({
-  label = '',
   type = 'text',
   name = '',
   value = '',
@@ -2553,37 +2474,8 @@ function Input({
   classes = '',
   size = 'wawl-h-12 wawl-w-72',
   required = false,
-  onBlur = null,
-  onChange,
-  onFocus = null,
-  dataId = null,
-  dataIndex = null,
-  checked = false,
-  accept = ''
+  onChange
 }) {
-  const [popupInputs, setPopupInputs] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    handleUpdateSettings();
-  }, [popupInputs]);
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  const handleUpdateSettings = () => {
-    // Example: Update the "default_wishlist_name" property
-    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
-      ...popupInputs
-    }));
-  };
-  const handlePopupInputs = e => {
-    // const name = e.target.name;
-    const {
-      name,
-      value
-    } = e.target;
-    console.log(`📌 ~ file: PopupInputs.jsx:14 ~ handlePopupInputs ~ name, value:`, name, value);
-    setPopupInputs({
-      ...popupInputs,
-      [name]: value
-    });
-  };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
@@ -2591,17 +2483,10 @@ function Input({
     type: type,
     name: name,
     id: name,
-    "data-id": dataId,
-    "data-index": dataIndex,
+    value: value || '',
     required: required,
-    autoComplete: "off",
     placeholder: placeholder,
-    accept: accept,
-    onChange: e => {
-      handlePopupInputs(e);
-    },
-    onFocus: onFocus && onFocus,
-    onBlur: onBlur && onBlur
+    onChange: onChange
   }));
 }
 
@@ -2636,7 +2521,7 @@ function InputCSS({
     type: "text",
     id: id,
     name: name,
-    value: value,
+    value: value || '',
     placeholder: placeholder,
     onChange: onChange,
     onBlur: onBlur
@@ -2745,91 +2630,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-/* harmony import */ var _InputCSS__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./InputCSS */ "./backend/views/page/components/common/InputCSS.jsx");
+/* harmony import */ var _InputCSS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputCSS */ "./backend/views/page/components/common/InputCSS.jsx");
 
 
-
-
-
-function PopupBtnCustomStyle(onBtnBorderStyleChange) {
-  const [btnBorderStyles, setBtnBorderStyles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    border_width: '',
-    border_height: '',
-    border_radius: '',
-    popup_button_margin: ''
-  });
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    handleUpdateSettings();
-  }, [btnBorderStyles]);
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  const handleUpdateSettings = () => {
-    // Example: Update the "default_wishlist_name" property
-
-    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
-      popup_button_size: {
-        ...btnBorderStyles
-      }
-    }));
-  };
-  const handleBtnBorderStyleChange = e => {
-    const {
-      name,
-      value
-    } = e.target;
-    // console.log(
-    // 	`📌 ~ file: InputColorPicker.jsx:14 ~ handleColorChange ~ name, value:`,
-    // 	name,
-    // 	value
-    // );
-    setBtnBorderStyles({
-      ...btnBorderStyles,
-      [name]: value
-    });
-  };
-
-  // const handleColorChange = ( e ) => {
-  // 	const { name, value } = e.target;
-  // 	setBtnBorderStyles( { ...btnBorderStyles, [ name ]: value } );
-  // 	console.log( e.target );
-  // };
-
-  const borderStyleValue = [{
-    label: 'Boder width',
-    name: 'border_width' // Use a colon instead of an equal sign
-  }, {
-    label: 'Border radius',
-    name: 'border_height' // Use a colon instead of an equal sign
-  }, {
-    label: 'Border height',
-    name: 'border_radius' // Use a colon instead of an equal sign
-  }, {
-    label: 'Margin',
-    name: 'popup_button_margin' // Use a colon instead of an equal sign
-  }];
-
+function PopupBtnCustomStyle({
+  onChange,
+  items,
+  values
+}) {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-grid wawl-grid-cols-1 wawl-max-w-max wawl-p-4 wawl-border wawl-border-gray-200 wawl-rounded-lg"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " wawl-col-span-1 wawl-grid wawl-grid-cols-2  wawl-gap-8  wawl-justify-between"
-  }, borderStyleValue.map((style, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index,
+  }, items.map(size => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: size.name,
     className: "wawl-flex wawl-justify-between wawl-items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "wawl-text-base wawl-text-gray-500 wawl-my-2.5 wawl-mr-8",
-    htmlFor: style.name
-  }, style.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputCSS__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    htmlFor: size.name
+  }, size.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_InputCSS__WEBPACK_IMPORTED_MODULE_1__["default"], {
     className: "wawl-h-10 wawl-w-10",
-    id: style.name,
-    name: style.name,
-    value: btnBorderStyles[style.name] || '',
-    placeholder: '10px',
-    onChange: e => {
-      handleBtnBorderStyleChange(e);
-    }
+    id: size.name,
+    name: size.name,
+    value: values[size.name],
+    placeholder: `${values[size.name]}px`,
+    onChange: onChange
   })))));
 }
 
@@ -3153,47 +2978,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_reducers_productListingSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/productListingSlice */ "./backend/views/page/redux/reducers/productListingSlice.js");
-/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-
-
-
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 function Toggle({
-  active = false,
-  settingName
+  onChange,
+  active = true
 }) {
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  const [enabled, setEnabled] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(active);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    setEnabled(active);
-  }, [active]);
-  const togglePopupEnable = () => {
-    const newEnabled = !enabled;
-    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_4__.updateWishlistSetting)({
-      [settingName]: newEnabled
-    }));
-    dispatch((0,_redux_reducers_productListingSlice__WEBPACK_IMPORTED_MODULE_3__.updateProductListing)({
-      [settingName]: newEnabled
-    }));
-    setEnabled(newEnabled);
-  };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    onClick: togglePopupEnable,
-    className: classNames(enabled ? 'wawl-bg-accent' : 'wawl-bg-gray-200', 'wawl-relative wawl-inline-flex wawl-h-8 wawl-w-[65px] wawl-flex-shrink-0 wawl-cursor-pointer wawl-rounded-full wawl-border-2 wawl-border-transparent wawl-transition-colors wawl-duration-200 wawl-ease-in-out focus:wawl-outline-none focus:wawl-ring-0 focus!:wawl-ring-gray-200 focus:wawl-ring-offset-0')
+    onClick: onChange,
+    className: classNames(active ? 'wawl-bg-accent' : 'wawl-bg-gray-200', 'wawl-relative wawl-inline-flex wawl-h-8 wawl-w-[65px] wawl-flex-shrink-0 wawl-cursor-pointer wawl-rounded-full wawl-border-2 wawl-border-transparent wawl-transition-colors wawl-duration-200 wawl-ease-in-out focus:wawl-outline-none focus:wawl-ring-0 focus:wawl-ring-gray-200 focus:wawl-ring-offset-0')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "wawl-sr-only"
   }, "Use setting"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     "aria-hidden": "true",
-    className: classNames(enabled ? 'wawl-translate-x-9 wawl-translate-y-0.5' : 'wawl-translate-x-0.5 wawl-translate-y-0.5', 'wawl-pointer-events-none wawl-inline-block wawl-h-6 wawl-w-6 wawl-transform wawl-rounded-full wawl-bg-white wawl-shadow wawl-ring-0 wawl-transition wawl-duration-200 wawl-ease-in-out')
+    className: classNames(active ? 'wawl-translate-x-9 wawl-translate-y-0.5' : 'wawl-translate-x-0.5 wawl-translate-y-0.5', 'wawl-pointer-events-none wawl-inline-block wawl-h-6 wawl-w-6 wawl-transform wawl-rounded-full wawl-bg-white wawl-shadow wawl-ring-0 wawl-transition wawl-duration-200 wawl-ease-in-out')
   }));
+}
+
+/***/ }),
+
+/***/ "./backend/views/page/components/common/ToggleButton.jsx":
+/*!***************************************************************!*\
+  !*** ./backend/views/page/components/common/ToggleButton.jsx ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ ToggleButton; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+function ToggleButton({
+  onToggle,
+  isOn
+}) {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: () => onToggle(!isOn) // Toggle the value and call the callback
+    ,
+    className: `${isOn ? 'wawl-ring-2 wawl-ring-accent focus:wawl-ring-accent' : 'wawl-ring-2 wawl-ring-gray-200 focus:wawl-ring-gray-200 wawl-transition-colors wawl-duration-200 wawl-ease-in-out focus:wawl-outline-none'} ${isOn ? 'wawl-justify-end' : 'wawl-justify-start'} ${isOn ? 'wawl-bg-accent' : 'wawl-bg-gray-200'} wawl-w-14  wawl-h-7 wawl-p-0 wawl-m-auto  wawl-rounded-full wawl-flex wawl-transition wawl-duration-500 wawl-shadow-2xl`
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: `wawl-bg-white wawl-transition wawl-duration-500 wawl-rounded-full wawl-w-1/2 wawl-h-full wawl-m-0 wawl-p-0 wawl-shadow-xl`
+  })));
 }
 
 /***/ }),
@@ -3212,12 +3041,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _common_ImageUpload__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../common/ImageUpload */ "./backend/views/page/components/common/ImageUpload.jsx");
-/* harmony import */ var _common_Tab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/Tab */ "./backend/views/page/components/common/Tab.jsx");
-/* harmony import */ var _common_Tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/Tabs */ "./backend/views/page/components/common/Tabs.jsx");
-/* harmony import */ var _global_settings_GlobalSettings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./global-settings/GlobalSettings */ "./backend/views/page/components/dashboard/global-settings/GlobalSettings.jsx");
-/* harmony import */ var _global_settings_PopupSettings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./global-settings/PopupSettings */ "./backend/views/page/components/dashboard/global-settings/PopupSettings.jsx");
-/* harmony import */ var _product_listing_ProductListing__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./product-listing/ProductListing */ "./backend/views/page/components/dashboard/product-listing/ProductListing.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
+/* harmony import */ var _common_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/Button */ "./backend/views/page/components/common/Button.jsx");
+/* harmony import */ var _common_ImageUpload__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/ImageUpload */ "./backend/views/page/components/common/ImageUpload.jsx");
+/* harmony import */ var _common_Tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/Tab */ "./backend/views/page/components/common/Tab.jsx");
+/* harmony import */ var _common_Tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/Tabs */ "./backend/views/page/components/common/Tabs.jsx");
+/* harmony import */ var _global_settings_GlobalSettings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./global-settings/GlobalSettings */ "./backend/views/page/components/dashboard/global-settings/GlobalSettings.jsx");
+/* harmony import */ var _global_settings_PopupSettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./global-settings/PopupSettings */ "./backend/views/page/components/dashboard/global-settings/PopupSettings.jsx");
+/* harmony import */ var _product_listing_ProductListing__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./product-listing/ProductListing */ "./backend/views/page/components/dashboard/product-listing/ProductListing.jsx");
+
+
+
 
 
 
@@ -3228,17 +3063,38 @@ __webpack_require__.r(__webpack_exports__);
 
 function Dashboard() {
   const [active, setActive] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
   const handleChange = newActive => setActive(newActive);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tabs__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     active: active,
     onChange: handleChange
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     title: "Global settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_global_settings_GlobalSettings__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_global_settings_PopupSettings__WEBPACK_IMPORTED_MODULE_6__["default"], null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_global_settings_GlobalSettings__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_global_settings_PopupSettings__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "wawl-flex wawl-gap-4 wawl-justify-end wawl-mt-16 wawl-mb-10"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onClick: () => {
+      window.open();
+    },
+    buttonStyle: 'buttonPrimary',
+    iconPosition: 'after',
+    addBgColor: false,
+    classNames: '',
+    icon: ''
+  }, 'Reset'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onClick: () => {
+      console.log('hello world', wishlistSettings);
+    },
+    buttonStyle: 'button-primary',
+    iconPosition: 'after',
+    addBgColor: true,
+    classNames: '',
+    icon: ''
+  }, 'Save'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     title: "Product listing page"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_product_listing_ProductListing__WEBPACK_IMPORTED_MODULE_7__["default"], null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_product_listing_ProductListing__WEBPACK_IMPORTED_MODULE_10__["default"], null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     title: "Single product page"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Single product page"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ImageUpload__WEBPACK_IMPORTED_MODULE_2__["default"], null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Single product page"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ImageUpload__WEBPACK_IMPORTED_MODULE_5__["default"], null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     title: "My wishlist page"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "My wishlist page"))));
 }
@@ -3265,7 +3121,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_RadioButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/RadioButton */ "./backend/views/page/components/common/RadioButton.jsx");
 /* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/Search */ "./backend/views/page/components/common/Search.jsx");
 /* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
-/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
+/* harmony import */ var _common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/ToggleButton */ "./backend/views/page/components/common/ToggleButton.jsx");
 
 
 
@@ -3276,7 +3132,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function GlobalSettings() {
-  const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
+  const [toggleValue, setToggleValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const globalSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  const handleInputChange = e => {
+    const newValue = e.target.value;
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      [e.target.name]: newValue
+    }));
+  };
+  const [checked, setChecked] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''); // Initialize with an empty string or the default value you want
+
+  // ... other code
+
+  const handleInputRadioChange = e => {
+    const radioValue = e.target.id;
+    setChecked(radioValue); // Update the selected radio button
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      [items.find(item => item.id === radioValue)?.value || '']: radioValue
+    }));
+  };
+
+  // Callback function to handle the value from ToggleButton
+  const handleToggle = (value, settingName) => {
+    setToggleValue(value); // Update the toggleValue with the new value
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      [settingName]: value
+    }));
+  };
   const globalSettingsRadio = [{
     id: '1',
     title: 'All Users',
@@ -3299,13 +3182,13 @@ function GlobalSettings() {
     default_wishlist_name: {
       label: 'Default wishlist name',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        classes: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
-        placeholder: 'Wishlist',
+        className: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
+        placeholder: 'Choose a Wishlist',
         name: "default_wishlist_name",
         type: 'text',
-        id: 'wishlist',
         required: true,
-        value: wishlistSettings.name
+        value: globalSettings.default_wishlist_name,
+        onChange: handleInputChange
       }),
       info: ''
     },
@@ -3322,9 +3205,9 @@ function GlobalSettings() {
     },
     item_count: {
       label: 'Show status for each product',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.settingName,
-        settingName: "item_count"
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        isOn: globalSettings.item_count
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: 'How many times product was added to a wishlist'
@@ -3332,48 +3215,49 @@ function GlobalSettings() {
     guest_user_wishlist_days: {
       label: 'Guest user Wishlist will be deleted after',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        classes: '',
+        className: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
         size: 'wawl-w-40 wawl-h-12',
         placeholder: 'Enter Days',
         name: "guest_user_wishlist_days",
         type: 'text',
         id: 'wishlist',
         required: true,
-        value: wishlistSettings.name
+        value: globalSettings.guest_user_wishlist_days,
+        onChange: handleInputChange
       })
     },
     enable_for_variation: {
       label: 'Enable Wishlist for variations product',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.settingName,
-        settingName: "enable_for_variation"
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        isOn: globalSettings.enable_for_variation
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
     enable_for_myaccount: {
       label: 'Enable wishlist in my account',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.settingName,
-        settingName: "enable_for_myaccount"
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        isOn: globalSettings.enable_for_myaccount
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
     multi_wishlist_settings: {
       label: 'Multi wishlist settings',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.settingName,
-        settingName: "multi_wishlist_settings"
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        isOn: globalSettings.multi_wishlist_settings
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
     cart_page_wishlist: {
       label: 'Cart page wishlist',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        active: wishlistSettings.settingName,
-        settingName: "cart_page_wishlist"
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        isOn: globalSettings.cart_page_wishlist
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: 'Enable wishlist icon on cart page beside delete button'
@@ -3466,7 +3350,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_Input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/Input */ "./backend/views/page/components/common/Input.jsx");
 /* harmony import */ var _common_InputColorPicker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/InputColorPicker */ "./backend/views/page/components/common/InputColorPicker.jsx");
 /* harmony import */ var _common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/PopupBtnCustomStyle */ "./backend/views/page/components/common/PopupBtnCustomStyle.jsx");
-/* harmony import */ var _common_Toggle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../common/Toggle */ "./backend/views/page/components/common/Toggle.jsx");
+/* harmony import */ var _common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../common/ToggleButton */ "./backend/views/page/components/common/ToggleButton.jsx");
 /* harmony import */ var _pages_Page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../pages/Page */ "./backend/views/page/components/pages/Page.jsx");
 
 
@@ -3481,6 +3365,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function PopupSettingsLeft() {
   const [selectedImages, setSelectedImages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
+  const [toggleValue, setToggleValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const globalSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   const handleColorChange = e => {
@@ -3488,54 +3373,67 @@ function PopupSettingsLeft() {
       popup_button_color: {
         ...globalSettings.popup_button_color,
         [e.target.name]: e.target.value
+      },
+      popup_button_size: {
+        ...globalSettings.popup_button_size,
+        [e.target.name]: e.target.value
       }
     }));
   };
-  const handleImageChange = selected => {
-    // Handle image change logic here
+  const handleInputChange = e => {
+    const newValue = e.target.value;
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      [e.target.name]: newValue
+    }));
+  };
+  const handleToggle = (value, settingName) => {
+    setToggleValue(value); // Update the toggleValue with the new value
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+      [settingName]: value
+    }));
   };
   const isIconImageEnabled = globalSettings.popup_feature_image_enable;
   const themeDefaultButtonStyle = globalSettings.theme_default_button_style;
   const globalWishlistSettingsItems = {
     popup_enable: {
       label: 'Enable/Disable',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        active: globalSettings.settingName,
-        settingName: "popup_enable"
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        isOn: globalSettings.popup_enable
       }),
       info: ''
     },
     popup_title: {
       label: 'Popup Title',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        classNamees: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
+        className: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
         placeholder: 'Choose a Wishlist',
         name: "popup_title",
         type: 'text',
-        id: 'wishlist',
         required: true,
-        value: globalSettings.name
+        value: globalSettings.popup_title,
+        onChange: handleInputChange
       }),
       info: ''
     },
     popup_button_text: {
       label: 'Popup button text',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        classNamees: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
-        placeholder: 'Add to Wishlist',
+        className: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
+        placeholder: 'Choose a Wishlist',
         name: "popup_button_text",
         type: 'text',
-        id: 'wishlist',
         required: true,
-        value: globalSettings.name
+        value: globalSettings.popup_button_text,
+        onChange: handleInputChange
       })),
       info: ''
     },
     popup_feature_image_enable: {
       label: 'Use Product Featured Image For Pop Up',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        active: globalSettings.settingName,
-        settingName: "popup_feature_image_enable"
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        isOn: globalSettings.popup_feature_image_enable
       }),
       info: ''
     },
@@ -3549,9 +3447,9 @@ function PopupSettingsLeft() {
     }),
     theme_default_button_style: {
       label: 'Theme Default Button Style',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        active: globalSettings.settingName,
-        settingName: "theme_default_button_style"
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        isOn: globalSettings.theme_default_button_style
       })),
       info: ''
     },
@@ -3567,7 +3465,11 @@ function PopupSettingsLeft() {
       },
       popup_button_size: {
         label: 'Popup button Size',
-        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+        component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          onChange: handleColorChange,
+          items: _utility_data__WEBPACK_IMPORTED_MODULE_4__.borderStyle,
+          values: globalSettings.popup_button_size
+        }),
         info: ''
       }
     }),
@@ -3577,14 +3479,13 @@ function PopupSettingsLeft() {
     popup_notification_text: {
       label: 'Title Text',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        classNames: '',
-        size: ' wawl-w-72 wawl-h-12',
-        placeholder: 'Successfully added to wishlist',
+        className: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
+        placeholder: 'Choose a Wishlist',
         name: "popup_notification_text",
         type: 'text',
-        id: 'wishlist',
         required: true,
-        value: globalSettings.name
+        value: globalSettings.popup_notification_text,
+        onChange: handleInputChange
       }),
       info: 'Enable wishlist icon on the cart page beside the delete button'
     },
@@ -3597,14 +3498,13 @@ function PopupSettingsLeft() {
     popup_notification_button_text: {
       label: 'Button text',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Input__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        classNames: '',
-        size: 'wawl-w-40 wawl-h-12',
-        placeholder: 'View wishlist',
+        className: 'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72',
+        placeholder: 'Choose a Wishlist',
         name: "popup_notification_button_text",
         type: 'text',
-        id: 'wishlist',
         required: true,
-        value: globalSettings.name
+        value: globalSettings.popup_notification_button_text,
+        onChange: handleInputChange
       })
     }
   };
@@ -3714,8 +3614,8 @@ function Preview({
       window.open();
     },
     style: {
-      backgroundColor: isHovered ? buttonStyle.popup_button_color.background_hover_color || '#f00' : buttonStyle.popup_button_color.background_color || '#f00',
-      borderColor: isHovered ? buttonStyle.popup_button_color.border_hover_color || '#f00' : buttonStyle.popup_button_color.border_color || '#000000',
+      backgroundColor: isHovered ? buttonStyle.popup_button_color.background_hover_color || '' : buttonStyle.popup_button_color.background_color || '',
+      borderColor: isHovered ? buttonStyle.popup_button_color.border_hover_color || '' : buttonStyle.popup_button_color.border_color || '',
       borderWidth: `${buttonStyle.popup_button_size.border_width}px`,
       borderRadius: `${buttonStyle.popup_button_size.border_radius}px`,
       borderHeight: `${buttonStyle.popup_button_size.border_height}px`,
@@ -3835,14 +3735,16 @@ function ProductListingLeft() {
       listing_button_color: {
         ...productListing.listing_button_color,
         [e.target.name]: e.target.value
+      },
+      listing_button_size: {
+        ...productListing.listing_button_size,
+        [e.target.name]: e.target.value
+      },
+      listing_icon_style: {
+        ...productListing.listing_icon_style,
+        [e.target.name]: e.target.value
       }
     }));
-  };
-  const handleRadioButtonChange = value => {
-    // Handle radio button change logic here
-  };
-  const handleIconStyleChange = (name, value) => {
-    // Handle icon style change logic here
   };
   const productListingItems = {
     listing_settings_enable: {
@@ -3883,7 +3785,9 @@ function ProductListingLeft() {
     listing_icon_style: {
       label: 'Icon style',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_IconStyle__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        iconStyleProps: iconStylesValue
+        onChange: handleColorChange,
+        items: _utility_data__WEBPACK_IMPORTED_MODULE_4__.iconStyles,
+        values: productListing.listing_icon_style
       }),
       info: ''
     },
@@ -3898,7 +3802,11 @@ function ProductListingLeft() {
     },
     listing_button_size: {
       label: 'Button size',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_7__["default"], null),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_PopupBtnCustomStyle__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        onChange: handleColorChange,
+        items: _utility_data__WEBPACK_IMPORTED_MODULE_4__.listingButtonSize,
+        values: productListing.listing_button_size
+      }),
       info: ''
     }
   };
@@ -4046,7 +3954,7 @@ const initialState = {
   listing_button_size: {
     border_width: '10px',
     border_height: '10px',
-    border_radios: '10px',
+    border_radius: '10px',
     margin: '10px'
   }
 };
@@ -4099,7 +4007,7 @@ const initialState = {
   enable_for_variation: true,
   enable_for_myaccount: false,
   multi_wishlist_settings: false,
-  cart_page_wishlist: false,
+  cart_page_wishlist: true,
   popup_enable: true,
   popup_title: 'Popup title',
   popup_button_text: 'Button Text',
@@ -4108,14 +4016,14 @@ const initialState = {
   theme_default_button_style: true,
   popup_button_color: {
     background_color: '',
-    background_hover_color: '#458943',
+    background_hover_color: '#f00f00',
     border_color: '#456544',
     border_hover_color: '#349054'
   },
   popup_button_size: {
-    border_width: '1px',
+    border_width: '2px',
     border_height: '1px',
-    border_radios: '10px',
+    border_radius: '10px',
     popup_button_margin: '10px'
   },
   popup_notification_text: 'hello',
@@ -4178,7 +4086,10 @@ const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.configureStore)({
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   colorValue: function() { return /* binding */ colorValue; }
+/* harmony export */   borderStyle: function() { return /* binding */ borderStyle; },
+/* harmony export */   colorValue: function() { return /* binding */ colorValue; },
+/* harmony export */   iconStyles: function() { return /* binding */ iconStyles; },
+/* harmony export */   listingButtonSize: function() { return /* binding */ listingButtonSize; }
 /* harmony export */ });
 const colorValue = [{
   label: 'Background color',
@@ -4193,7 +4104,45 @@ const colorValue = [{
   label: 'Border hover color',
   name: 'border_hover_color' // Use a colon instead of an equal sign
 }];
-// export default data;
+
+const borderStyle = [{
+  label: 'Boder width',
+  name: 'border_width' // Use a colon instead of an equal sign
+}, {
+  label: 'Border radius',
+  name: 'border_height' // Use a colon instead of an equal sign
+}, {
+  label: 'Border height',
+  name: 'border_radius' // Use a colon instead of an equal sign
+}, {
+  label: 'Margin',
+  name: 'popup_button_margin' // Use a colon instead of an equal sign
+}];
+
+const listingButtonSize = [{
+  label: 'Boder width',
+  name: 'border_width' // Use a colon instead of an equal sign
+}, {
+  label: 'Border radius',
+  name: 'border_height' // Use a colon instead of an equal sign
+}, {
+  label: 'Border height',
+  name: 'border_radius' // Use a colon instead of an equal sign
+}, {
+  label: 'Margin',
+  name: 'margin' // Use a colon instead of an equal sign
+}];
+
+const iconStyles = [{
+  label: 'Size',
+  name: 'icon_size' // Use a colon instead of an equal sign
+}, {
+  label: 'Icon color',
+  name: 'icon_color' // Use a colon instead of an equal sign
+}, {
+  label: 'Icon hover color',
+  name: 'icon_hover_color' // Use a colon instead of an equal sign
+}];
 
 /***/ }),
 

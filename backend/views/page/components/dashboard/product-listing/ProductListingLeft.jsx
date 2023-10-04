@@ -4,7 +4,11 @@ import {
 	selectProductListing,
 	updateProductListing,
 } from '../../../redux/reducers/productListingSlice';
-import { colorValue } from '../../../utility/data';
+import {
+	colorValue,
+	iconStyles,
+	listingButtonSize,
+} from '../../../utility/data';
 import IconStyle from '../../common/IconStyle';
 import InputColorPicker from '../../common/InputColorPicker';
 import PopupBtnCustomStyle from '../../common/PopupBtnCustomStyle';
@@ -62,16 +66,16 @@ export default function ProductListingLeft() {
 					...productListing.listing_button_color,
 					[ e.target.name ]: e.target.value,
 				},
+				listing_button_size: {
+					...productListing.listing_button_size,
+					[ e.target.name ]: e.target.value,
+				},
+				listing_icon_style: {
+					...productListing.listing_icon_style,
+					[ e.target.name ]: e.target.value,
+				},
 			} )
 		);
-	};
-
-	const handleRadioButtonChange = ( value ) => {
-		// Handle radio button change logic here
-	};
-
-	const handleIconStyleChange = ( name, value ) => {
-		// Handle icon style change logic here
 	};
 
 	const productListingItems = {
@@ -117,7 +121,13 @@ export default function ProductListingLeft() {
 		},
 		listing_icon_style: {
 			label: 'Icon style',
-			component: <IconStyle iconStyleProps={ iconStylesValue } />,
+			component: (
+				<IconStyle
+					onChange={ handleColorChange }
+					items={ iconStyles }
+					values={ productListing.listing_icon_style }
+				/>
+			),
 			info: '',
 		},
 		listing_button_color: {
@@ -133,7 +143,13 @@ export default function ProductListingLeft() {
 		},
 		listing_button_size: {
 			label: 'Button size',
-			component: <PopupBtnCustomStyle />,
+			component: (
+				<PopupBtnCustomStyle
+					onChange={ handleColorChange }
+					items={ listingButtonSize }
+					values={ productListing.listing_button_size }
+				/>
+			),
 			info: '',
 		},
 	};

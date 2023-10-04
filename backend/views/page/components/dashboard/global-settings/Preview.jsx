@@ -66,15 +66,14 @@ export default function Preview( { onColorChange } ) {
 										backgroundColor: isHovered
 											? buttonStyle.popup_button_color
 													.background_hover_color ||
-											  '#f00'
+											  ''
 											: buttonStyle.popup_button_color
-													.background_color || '#f00',
+													.background_color || '',
 										borderColor: isHovered
 											? buttonStyle.popup_button_color
-													.border_hover_color ||
-											  '#f00'
+													.border_hover_color || ''
 											: buttonStyle.popup_button_color
-													.border_color || '#000000',
+													.border_color || '',
 
 										borderWidth: `${ buttonStyle.popup_button_size.border_width }px`,
 										borderRadius: `${ buttonStyle.popup_button_size.border_radius }px`,

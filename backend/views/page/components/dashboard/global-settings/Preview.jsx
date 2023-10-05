@@ -37,7 +37,7 @@ export default function Preview( { onColorChange } ) {
 
 					<div className="wawl-py-8 wawl-px-8 wawl-border wawl-border-gray-200  wawl-rounded-lg wawl-mx-auto">
 						<div className=" wawl-mx-auto wawl-bg-white wawl-border-4 wawl-text-center wawl-py-6">
-							<div className="wawl-border wawl-border-gray-300 wawl-w-max wawl-py-2 wawl-mb-3 wawl-px-4 wawl-block wawl-mx-auto">
+							<div className="wawl-border wawl-border-gray-300 wawl-w-36 wawl-py-2 wawl-mb-3 wawl-px-4 wawl-block wawl-mx-auto">
 								{ buttonStyle.popup_icon_image === '' ? (
 									<img
 										className="wawl-mx-auto"

@@ -774,8 +774,8 @@ video {
   width: 4rem;
 }
 
-.wawl-w-32 {
-  width: 8rem;
+.wawl-w-36 {
+  width: 9rem;
 }
 
 .wawl-w-4 {
@@ -812,10 +812,6 @@ video {
 
 .wawl-w-full {
   width: 100%;
-}
-
-.wawl-w-max {
-  width: max-content;
 }
 
 .wawl-min-w-0 {

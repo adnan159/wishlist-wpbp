@@ -614,6 +614,11 @@ video {
   margin-bottom: 2rem;
 }
 
+.wawl-mx-36 {
+  margin-left: 9rem;
+  margin-right: 9rem;
+}
+
 .-wawl-mb-8 {
   margin-bottom: -2rem;
 }
@@ -812,6 +817,10 @@ video {
 
 .wawl-w-max {
   width: max-content;
+}
+
+.wawl-w-36 {
+  width: 9rem;
 }
 
 .wawl-min-w-0 {

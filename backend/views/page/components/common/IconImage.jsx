@@ -5,11 +5,9 @@ import { updateWishlistSetting, selectWishlist } from '../../redux/reducers/wish
 import Button from './Button';
 
 export default function IconImage( { iconName } ) {
-	const [ icons, setIcons ] = useState( {} );
+	const popupIcon = useSelector(selectWishlist);
+	const [ icons, setIcons ] = useState( popupIcon[iconName ] || Img );
 	const dispatch = useDispatch();
-	const iconTest = useSelector(selectWishlist);
-
-	console.log(iconTest);
 
 	const onImageChange = ( event ) => {
 		if ( event.target.files && event.target.files[ 0 ] ) {
@@ -69,7 +67,7 @@ export default function IconImage( { iconName } ) {
 					) : (
 						<img
 							className="wawl-mx-auto wawl-object-cover wawl-h-32 wawl-w-auto"
-							src={ iconTest.popup_icon_image }
+							src={ popupIcon[iconName] }
 							alt="Default"
 						/>
 					) }

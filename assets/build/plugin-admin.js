@@ -3019,7 +3019,7 @@ function ToggleButton({
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => onToggle(!isOn) // Toggle the value and call the callback
     ,
-    className: `${isOn ? 'wawl-ring-2 wawl-ring-accent focus:wawl-ring-accent' : 'wawl-ring-2 wawl-ring-gray-200 focus:wawl-ring-gray-200 wawl-transition-colors wawl-duration-200 wawl-ease-in-out focus:wawl-outline-none'} ${isOn ? 'wawl-justify-end' : 'wawl-justify-start'} ${isOn ? 'wawl-bg-accent' : 'wawl-bg-gray-200'} wawl-w-14  wawl-h-7 wawl-p-0 wawl-m-auto  wawl-rounded-full wawl-flex wawl-transition wawl-duration-500 wawl-shadow-2xl`
+    className: `${isOn ? 'wawl-ring-2 wawl-ring-accent focus:wawl-ring-accent' : 'wawl-ring-2 wawl-ring-gray-200 focus:wawl-ring-gray-200 wawl-transition-colors wawl-duration-200 wawl-ease-in-out focus:wawl-outline-none'} ${isOn ? 'wawl-justify-end' : 'wawl-justify-start'} ${isOn ? 'wawl-bg-accent' : 'wawl-bg-gray-200'} wawl-w-[50px]  wawl-h-6 wawl-p-0 wawl-m-auto  wawl-rounded-full wawl-flex wawl-transition wawl-duration-500 wawl-shadow-2xl`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: `wawl-bg-white wawl-transition wawl-duration-500 wawl-rounded-full wawl-w-1/2 wawl-h-full wawl-m-0 wawl-p-0 wawl-shadow-xl`
   })));
@@ -3206,7 +3206,7 @@ function GlobalSettings() {
     item_count: {
       label: 'Show status for each product',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        onToggle: value => handleToggle(value, 'item_count'),
         isOn: globalSettings.item_count
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -3229,7 +3229,7 @@ function GlobalSettings() {
     enable_for_variation: {
       label: 'Enable Wishlist for variations product',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        onToggle: value => handleToggle(value, 'enable_for_variation'),
         isOn: globalSettings.enable_for_variation
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -3238,7 +3238,7 @@ function GlobalSettings() {
     enable_for_myaccount: {
       label: 'Enable wishlist in my account',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        onToggle: value => handleToggle(value, 'enable_for_myaccount'),
         isOn: globalSettings.enable_for_myaccount
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -3247,7 +3247,7 @@ function GlobalSettings() {
     multi_wishlist_settings: {
       label: 'Multi wishlist settings',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        onToggle: value => handleToggle(value, 'multi_wishlist_settings'),
         isOn: globalSettings.multi_wishlist_settings
       }),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
@@ -3398,7 +3398,7 @@ function PopupSettingsLeft() {
     popup_enable: {
       label: 'Enable/Disable',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        onToggle: value => handleToggle(value, 'popup_enable'),
         isOn: globalSettings.popup_enable
       }),
       info: ''
@@ -3432,7 +3432,7 @@ function PopupSettingsLeft() {
     popup_feature_image_enable: {
       label: 'Use Product Featured Image For Pop Up',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        onToggle: value => handleToggle(value, 'popup_feature_image_enable'),
         isOn: globalSettings.popup_feature_image_enable
       }),
       info: ''
@@ -3448,7 +3448,7 @@ function PopupSettingsLeft() {
     theme_default_button_style: {
       label: 'Theme Default Button Style',
       component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        onToggle: value => handleToggle(value, 'cart_page_wishlist'),
+        onToggle: value => handleToggle(value, 'theme_default_button_style'),
         isOn: globalSettings.theme_default_button_style
       })),
       info: ''
@@ -4011,7 +4011,7 @@ const initialState = {
   popup_enable: true,
   popup_title: 'Popup title',
   popup_button_text: 'Button Text',
-  popup_feature_image_enable: true,
+  popup_feature_image_enable: false,
   popup_icon_image: '',
   theme_default_button_style: true,
   popup_button_color: {

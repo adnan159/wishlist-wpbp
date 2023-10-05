@@ -59,7 +59,7 @@ export default function PopupSettingsLeft() {
 			component: (
 				<ToggleButton
 					onToggle={ ( value ) =>
-						handleToggle( value, 'cart_page_wishlist' )
+						handleToggle( value, 'popup_enable' )
 					}
 					isOn={ globalSettings.popup_enable }
 				/>
@@ -107,7 +107,7 @@ export default function PopupSettingsLeft() {
 			component: (
 				<ToggleButton
 					onToggle={ ( value ) =>
-						handleToggle( value, 'cart_page_wishlist' )
+						handleToggle( value, 'popup_feature_image_enable' )
 					}
 					isOn={ globalSettings.popup_feature_image_enable }
 				/>
@@ -126,7 +126,7 @@ export default function PopupSettingsLeft() {
 				<>
 					<ToggleButton
 						onToggle={ ( value ) =>
-							handleToggle( value, 'cart_page_wishlist' )
+							handleToggle( value, 'theme_default_button_style' )
 						}
 						isOn={ globalSettings.theme_default_button_style }
 					/>

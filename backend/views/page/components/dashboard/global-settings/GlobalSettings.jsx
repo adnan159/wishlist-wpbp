@@ -106,7 +106,7 @@ export default function GlobalSettings() {
 			component: (
 				<ToggleButton
 					onToggle={ ( value ) =>
-						handleToggle( value, 'cart_page_wishlist' )
+						handleToggle( value, 'item_count' )
 					}
 					isOn={ globalSettings.item_count }
 				/>
@@ -137,7 +137,7 @@ export default function GlobalSettings() {
 			component: (
 				<ToggleButton
 					onToggle={ ( value ) =>
-						handleToggle( value, 'cart_page_wishlist' )
+						handleToggle( value, 'enable_for_variation' )
 					}
 					isOn={ globalSettings.enable_for_variation }
 				/>
@@ -150,7 +150,7 @@ export default function GlobalSettings() {
 			component: (
 				<ToggleButton
 					onToggle={ ( value ) =>
-						handleToggle( value, 'cart_page_wishlist' )
+						handleToggle( value, 'enable_for_myaccount' )
 					}
 					isOn={ globalSettings.enable_for_myaccount }
 				/>
@@ -163,7 +163,7 @@ export default function GlobalSettings() {
 			component: (
 				<ToggleButton
 					onToggle={ ( value ) =>
-						handleToggle( value, 'cart_page_wishlist' )
+						handleToggle( value, 'multi_wishlist_settings' )
 					}
 					isOn={ globalSettings.multi_wishlist_settings }
 				/>

@@ -11,6 +11,26 @@ export default function IconImage( { iconName } ) {
 	const onImageChange = ( event ) => {
 		if ( event.target.files && event.target.files[ 0 ] ) {
 			setIcons( URL.createObjectURL( event.target.files[ 0 ] ) );
+
+			var formData = new FormData();
+			let file = ( event.target.files[ 0 ] );
+			formData.append( 'file', file );
+			formData.append( 'title', file.name );
+			fetch('http://localhost:8888/ascode-develop/wp-json/wp/v2/media/',{
+				body:formData,
+				method: 'POST',
+				headers: {
+					'X-WP-Nonce' : ww_admin_view_object.rest_nonce
+				}
+			} ).then( response => {
+				return response.json();
+			}).then( result => {
+				dispatch(
+					updateWishlistSetting( {
+						[ iconName ]: (result.link),
+					} )
+				);
+			})
 		}
 	};
 

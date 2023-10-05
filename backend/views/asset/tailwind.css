@@ -746,10 +746,6 @@ video {
   height: 1.5rem;
 }
 
-.wawl-h-7 {
-  height: 1.75rem;
-}
-
 .wawl-h-8 {
   height: 2rem;
 }
@@ -772,10 +768,6 @@ video {
 
 .wawl-w-11 {
   width: 2.75rem;
-}
-
-.wawl-w-14 {
-  width: 3.5rem;
 }
 
 .wawl-w-16 {
@@ -806,6 +798,10 @@ video {
   width: 18rem;
 }
 
+.wawl-w-\[50px\] {
+  width: 50px;
+}
+
 .wawl-w-\[65px\] {
   width: 65px;
 }
@@ -820,10 +816,6 @@ video {
 
 .wawl-w-max {
   width: max-content;
-}
-
-.wawl-w-\[50px\] {
-  width: 50px;
 }
 
 .wawl-min-w-0 {

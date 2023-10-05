@@ -822,6 +822,10 @@ video {
   width: max-content;
 }
 
+.wawl-w-\[50px\] {
+  width: 50px;
+}
+
 .wawl-min-w-0 {
   min-width: 0px;
 }

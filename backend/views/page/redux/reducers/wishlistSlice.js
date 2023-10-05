@@ -16,7 +16,7 @@ const initialState = {
 	popup_enable: true,
 	popup_title: 'Popup title',
 	popup_button_text: 'Button Text',
-	popup_feature_image_enable: true,
+	popup_feature_image_enable: false,
 	popup_icon_image: '',
 	theme_default_button_style: true,
 	popup_button_color: {

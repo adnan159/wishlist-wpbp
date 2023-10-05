@@ -69,3 +69,17 @@ export const iconStyles = [
 		name: 'icon_hover_color', // Use a colon instead of an equal sign
 	},
 ];
+export const globalSettingsRadio = [
+	{
+		id: '1',
+		title: 'All Users',
+		name: 'All Users',
+		caurrent: true,
+	},
+	{
+		id: '2',
+		title: 'Login user',
+		name: 'Login user',
+		current: false,
+	},
+];

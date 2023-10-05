@@ -2672,60 +2672,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-
-
-
-
-// Import the action and selector
 
 function RadioButton({
   items,
-  classes = ''
+  name,
+  label,
+  value,
+  isChecked,
+  onChange
 }) {
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  const radioButtonValue = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
-  const [checked, setChecked] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(radioButtonValue);
-  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
-  // useEffect( () => {
-  // 	setValue( items.find( ( item ) => item.id === checked )?.value || ' ' );
-  // }, [ checked, items ] );
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    handleUpdateSettings();
-  }, [checked, value]);
-  const handleUpdateSettings = () => {
-    // Example: Update the "default_wishlist_name" property
-    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
-      enable_wishlist_for: value
-    }));
+  const handleRadioChange = e => {
+    const {
+      id
+    } = e.currentTarget;
+    onChange(id);
   };
-  const handleChange = e => {
-    // const name = e.target.name;
-    const newValue = e.target.id;
-    console.log(`📌 ~ file: PopupInputs.jsx:14 ~ handlePopupInputs ~ name, value:`, newValue);
-    setChecked(newValue);
-    setValue(items.find(item => item.id === checked)?.value || ' ');
-  };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, items.map(item => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: item.id,
-    className: ['wawl-text-gray-800 wawl-items-center wawl-mb-4  wawl-inline-flex', classes].join(' ')
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     className: "focus:wawl-outline-1 focus:wawl-shadow-none",
     type: "radio",
-    name: "radioValue",
-    id: item.id,
-    value: item.value,
-    checked: checked === item.id,
-    onChange: e => {
-      handleChange(e);
-    }
+    name: name,
+    id: value,
+    value: value,
+    checked: isChecked,
+    onChange: handleRadioChange
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "-wawl-mt-1.5 wawl-ml-2 wawl-text-base",
-    htmlFor: item.value
-  }, item.title))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, checked ? value : 'hello'));
+    htmlFor: value
+  }, label));
 }
 
 /***/ }),
@@ -3132,24 +3105,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function GlobalSettings() {
-  const [toggleValue, setToggleValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const globalSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  const [toggleValue, setToggleValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [selectedInput, setSelectedInput] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(globalSettings.enable_wishlist_for);
   const handleInputChange = e => {
     const newValue = e.target.value;
     dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
       [e.target.name]: newValue
     }));
   };
-  const [checked, setChecked] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''); // Initialize with an empty string or the default value you want
-
-  // ... other code
-
-  const handleInputRadioChange = e => {
-    const radioValue = e.target.id;
-    setChecked(radioValue); // Update the selected radio button
+  const handleRadioChange = inputValue => {
+    setSelectedInput(inputValue);
     dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
-      [items.find(item => item.id === radioValue)?.value || '']: radioValue
+      enable_wishlist_for: inputValue
     }));
   };
 
@@ -3160,23 +3129,22 @@ function GlobalSettings() {
       [settingName]: value
     }));
   };
-  const globalSettingsRadio = [{
-    id: '1',
-    title: 'All Users',
-    value: 'allUsers',
-    caurrent: true
-  }, {
-    id: '2',
-    title: 'Login user',
-    value: 'loginUser',
-    current: false
-  }];
   const globalWishlistSettingsItems = {
     enable_wishlist_for: {
       label: 'Enable wishlist for',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        items: globalSettingsRadio
-      }),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: "option",
+        value: "all_users",
+        label: "All user",
+        isChecked: selectedInput === 'all_users',
+        onChange: handleRadioChange
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: "option",
+        value: "login_user",
+        label: "Login user",
+        isChecked: selectedInput === 'login_user',
+        onChange: handleRadioChange
+      })),
       info: ''
     },
     default_wishlist_name: {
@@ -4088,6 +4056,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   borderStyle: function() { return /* binding */ borderStyle; },
 /* harmony export */   colorValue: function() { return /* binding */ colorValue; },
+/* harmony export */   globalSettingsRadio: function() { return /* binding */ globalSettingsRadio; },
 /* harmony export */   iconStyles: function() { return /* binding */ iconStyles; },
 /* harmony export */   listingButtonSize: function() { return /* binding */ listingButtonSize; }
 /* harmony export */ });
@@ -4142,6 +4111,18 @@ const iconStyles = [{
 }, {
   label: 'Icon hover color',
   name: 'icon_hover_color' // Use a colon instead of an equal sign
+}];
+
+const globalSettingsRadio = [{
+  id: '1',
+  title: 'All Users',
+  name: 'All Users',
+  caurrent: true
+}, {
+  id: '2',
+  title: 'Login user',
+  name: 'Login user',
+  current: false
 }];
 
 /***/ }),

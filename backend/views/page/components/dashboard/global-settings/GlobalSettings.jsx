@@ -10,10 +10,12 @@ import Search from '../../common/Search';
 import Select from '../../common/Select';
 import ToggleButton from '../../common/ToggleButton';
 export default function GlobalSettings() {
-	const [ toggleValue, setToggleValue ] = useState( false );
-
 	const globalSettings = useSelector( selectWishlist );
 	const dispatch = useDispatch();
+	const [ toggleValue, setToggleValue ] = useState( false );
+	const [ selectedInput, setSelectedInput ] = useState(
+		globalSettings.enable_wishlist_for
+	);
 
 	const handleInputChange = ( e ) => {
 		const newValue = e.target.value;
@@ -23,17 +25,12 @@ export default function GlobalSettings() {
 			} )
 		);
 	};
-	const [ checked, setChecked ] = useState( '' ); // Initialize with an empty string or the default value you want
 
-	// ... other code
-
-	const handleInputRadioChange = ( e ) => {
-		const radioValue = e.target.id;
-		setChecked( radioValue ); // Update the selected radio button
+	const handleRadioChange = ( inputValue ) => {
+		setSelectedInput( inputValue );
 		dispatch(
 			updateWishlistSetting( {
-				[ items.find( ( item ) => item.id === radioValue )?.value ||
-				'' ]: radioValue,
+				enable_wishlist_for: inputValue,
 			} )
 		);
 	};
@@ -48,24 +45,27 @@ export default function GlobalSettings() {
 		);
 	};
 
-	const globalSettingsRadio = [
-		{
-			id: '1',
-			title: 'All Users',
-			value: 'allUsers',
-			caurrent: true,
-		},
-		{
-			id: '2',
-			title: 'Login user',
-			value: 'loginUser',
-			current: false,
-		},
-	];
 	const globalWishlistSettingsItems = {
 		enable_wishlist_for: {
 			label: 'Enable wishlist for',
-			component: <RadioButton items={ globalSettingsRadio } />,
+			component: (
+				<>
+					<RadioButton
+						name="option"
+						value="all_users"
+						label="All user"
+						isChecked={ selectedInput === 'all_users' }
+						onChange={ handleRadioChange }
+					/>
+					<RadioButton
+						name="option"
+						value="login_user"
+						label="Login user"
+						isChecked={ selectedInput === 'login_user' }
+						onChange={ handleRadioChange }
+					/>
+				</>
+			),
 			info: '',
 		},
 		default_wishlist_name: {

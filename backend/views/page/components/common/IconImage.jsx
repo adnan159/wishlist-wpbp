@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Img from '../../../asset/img/image.png';
-import { updateWishlistSetting } from '../../redux/reducers/wishlistSlice';
+import { updateWishlistSetting, selectWishlist } from '../../redux/reducers/wishlistSlice';
 import Button from './Button';
 
 export default function IconImage( { iconName } ) {
 	const [ icons, setIcons ] = useState( {} );
 	const dispatch = useDispatch();
+	const iconTest = useSelector(selectWishlist);
+
+	console.log(iconTest);
 
 	const onImageChange = ( event ) => {
 		if ( event.target.files && event.target.files[ 0 ] ) {
@@ -27,7 +30,7 @@ export default function IconImage( { iconName } ) {
 			}).then( result => {
 				dispatch(
 					updateWishlistSetting( {
-						[ iconName ]: (result.link),
+						[ iconName ]: (result.source_url),
 					} )
 				);
 			})
@@ -66,7 +69,7 @@ export default function IconImage( { iconName } ) {
 					) : (
 						<img
 							className="wawl-mx-auto wawl-object-cover wawl-h-32 wawl-w-auto"
-							src={ Img }
+							src={ iconTest.popup_icon_image }
 							alt="Default"
 						/>
 					) }

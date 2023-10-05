@@ -1,31 +1,67 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectWishlist } from '../../../redux/reducers/wishlistSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	selectWishlist,
+	updateWishlistSetting,
+} from '../../../redux/reducers/wishlistSlice';
+import { borderStyle, colorValue } from '../../../utility/data';
 import IconImage from '../../common/IconImage';
 import Input from '../../common/Input';
 import InputColorPicker from '../../common/InputColorPicker';
 import PopupBtnCustomStyle from '../../common/PopupBtnCustomStyle';
-import Toggle from '../../common/Toggle';
+import ToggleButton from '../../common/ToggleButton';
 import Page from '../../pages/Page';
 
 export default function PopupSettingsLeft() {
 	const [ selectedImages, setSelectedImages ] = useState( {} );
-	const wishlistSettings = useSelector( selectWishlist );
+	const [ toggleValue, setToggleValue ] = useState( false );
 
-	const handleImageChange = ( selected ) => {
-		// Handle image change logic here
+	const globalSettings = useSelector( selectWishlist );
+	const dispatch = useDispatch();
+
+	const handleColorChange = ( e ) => {
+		dispatch(
+			updateWishlistSetting( {
+				popup_button_color: {
+					...globalSettings.popup_button_color,
+					[ e.target.name ]: e.target.value,
+				},
+				popup_button_size: {
+					...globalSettings.popup_button_size,
+					[ e.target.name ]: e.target.value,
+				},
+			} )
+		);
+	};
+	const handleInputChange = ( e ) => {
+		const newValue = e.target.value;
+		dispatch(
+			updateWishlistSetting( {
+				[ e.target.name ]: newValue,
+			} )
+		);
+	};
+	const handleToggle = ( value, settingName ) => {
+		setToggleValue( value ); // Update the toggleValue with the new value
+		dispatch(
+			updateWishlistSetting( {
+				[ settingName ]: value,
+			} )
+		);
 	};
 
-	const isIconImageEnabled = wishlistSettings.popup_feature_image_enable;
-	const themeDefaultButtonStyle = wishlistSettings.theme_default_button_style;
+	const isIconImageEnabled = globalSettings.popup_feature_image_enable;
+	const themeDefaultButtonStyle = globalSettings.theme_default_button_style;
 
 	const globalWishlistSettingsItems = {
 		popup_enable: {
 			label: 'Enable/Disable',
 			component: (
-				<Toggle
-					active={ wishlistSettings.settingName }
-					settingName="popup_enable"
+				<ToggleButton
+					onToggle={ ( value ) =>
+						handleToggle( value, 'popup_enable' )
+					}
+					isOn={ globalSettings.popup_enable }
 				/>
 			),
 			info: '',
@@ -34,15 +70,15 @@ export default function PopupSettingsLeft() {
 			label: 'Popup Title',
 			component: (
 				<Input
-					classNamees={
+					className={
 						'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
 					}
 					placeholder={ 'Choose a Wishlist' }
 					name="popup_title"
 					type={ 'text' }
-					id={ 'wishlist' }
 					required={ true }
-					value={ wishlistSettings.name }
+					value={ globalSettings.popup_title }
+					onChange={ handleInputChange }
 				/>
 			),
 			info: '',
@@ -52,15 +88,15 @@ export default function PopupSettingsLeft() {
 			component: (
 				<>
 					<Input
-						classNamees={
+						className={
 							'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
 						}
-						placeholder={ 'Add to Wishlist' }
+						placeholder={ 'Choose a Wishlist' }
 						name="popup_button_text"
 						type={ 'text' }
-						id={ 'wishlist' }
 						required={ true }
-						value={ wishlistSettings.name }
+						value={ globalSettings.popup_button_text }
+						onChange={ handleInputChange }
 					/>
 				</>
 			),
@@ -69,9 +105,11 @@ export default function PopupSettingsLeft() {
 		popup_feature_image_enable: {
 			label: 'Use Product Featured Image For Pop Up',
 			component: (
-				<Toggle
-					active={ wishlistSettings.settingName }
-					settingName="popup_feature_image_enable"
+				<ToggleButton
+					onToggle={ ( value ) =>
+						handleToggle( value, 'popup_feature_image_enable' )
+					}
+					isOn={ globalSettings.popup_feature_image_enable }
 				/>
 			),
 			info: '',
@@ -86,9 +124,11 @@ export default function PopupSettingsLeft() {
 			label: 'Theme Default Button Style',
 			component: (
 				<>
-					<Toggle
-						active={ wishlistSettings.settingName }
-						settingName="theme_default_button_style"
+					<ToggleButton
+						onToggle={ ( value ) =>
+							handleToggle( value, 'theme_default_button_style' )
+						}
+						isOn={ globalSettings.theme_default_button_style }
 					/>
 				</>
 			),
@@ -97,12 +137,24 @@ export default function PopupSettingsLeft() {
 		...( themeDefaultButtonStyle && {
 			popup_button_color: {
 				label: 'Popup button color',
-				component: <InputColorPicker />,
+				component: (
+					<InputColorPicker
+						onChange={ handleColorChange }
+						items={ colorValue }
+						values={ globalSettings.popup_button_color }
+					/>
+				),
 				info: '',
 			},
 			popup_button_size: {
 				label: 'Popup button Size',
-				component: <PopupBtnCustomStyle />,
+				component: (
+					<PopupBtnCustomStyle
+						onChange={ handleColorChange }
+						items={ borderStyle }
+						values={ globalSettings.popup_button_size }
+					/>
+				),
 				info: '',
 			},
 		} ),
@@ -114,14 +166,15 @@ export default function PopupSettingsLeft() {
 			label: 'Title Text',
 			component: (
 				<Input
-					classNames={ '' }
-					size={ ' wawl-w-72 wawl-h-12' }
-					placeholder={ 'Successfully added to wishlist' }
+					className={
+						'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
+					}
+					placeholder={ 'Choose a Wishlist' }
 					name="popup_notification_text"
 					type={ 'text' }
-					id={ 'wishlist' }
 					required={ true }
-					value={ wishlistSettings.name }
+					value={ globalSettings.popup_notification_text }
+					onChange={ handleInputChange }
 				/>
 			),
 			info: 'Enable wishlist icon on the cart page beside the delete button',
@@ -134,14 +187,15 @@ export default function PopupSettingsLeft() {
 			label: 'Button text',
 			component: (
 				<Input
-					classNames={ '' }
-					size={ 'wawl-w-40 wawl-h-12' }
-					placeholder={ 'View wishlist' }
+					className={
+						'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
+					}
+					placeholder={ 'Choose a Wishlist' }
 					name="popup_notification_button_text"
 					type={ 'text' }
-					id={ 'wishlist' }
 					required={ true }
-					value={ wishlistSettings.name }
+					value={ globalSettings.popup_notification_button_text }
+					onChange={ handleInputChange }
 				/>
 			),
 		},

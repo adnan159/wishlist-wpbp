@@ -15,7 +15,7 @@ export default function InputCSS( {
 					type="text"
 					id={ id }
 					name={ name }
-					value={ value }
+					value={ value || '' }
 					placeholder={ placeholder }
 					onChange={ onChange }
 					onBlur={ onBlur }

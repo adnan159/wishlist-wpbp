@@ -127,8 +127,8 @@ class GlobalSettings extends WP_REST_Controller {
             if( $request['popup_button_size']['border_height'] ) {
                 $prepared['popup_button_size']['border_height'] = $request['popup_button_size']['border_height'];
             }
-            if( $request['popup_button_size']['border_radios'] ) {
-                $prepared['popup_button_size']['border_radios'] = $request['popup_button_size']['border_radios'];
+            if( $request['popup_button_size']['border_radius'] ) {
+                $prepared['popup_button_size']['border_radius'] = $request['popup_button_size']['border_radius'];
             }
             if( $request['popup_button_size']['popup_button_margin'] ) {
                 $prepared['popup_button_size']['popup_button_margin'] = $request['popup_button_size']['popup_button_margin'];
@@ -489,7 +489,7 @@ class GlobalSettings extends WP_REST_Controller {
                                 'sanitize_callback'	=> 'sanitize_text_field',
                             ],
                         ],
-                        'border_radios' => [
+                        'border_radius' => [
                             'description'	=> __('Popup button Border radios' ),
                             'type'			=> 'string',
                             'context'		=> [ 'view', 'edit' ],

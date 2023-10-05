@@ -6,7 +6,7 @@ import {
 } from '../../../redux/reducers/wishlistSlice';
 import Input from '../../common/Input';
 import RadioButton from '../../common/RadioButton';
-import Search from '../../common/Search';
+import SearchSelect from '../../common/SearchSelect';
 import Select from '../../common/Select';
 import ToggleButton from '../../common/ToggleButton';
 export default function GlobalSettings() {
@@ -90,12 +90,8 @@ export default function GlobalSettings() {
 			component: (
 				<>
 					<Select />
-					<Search
-						type={ 'search' }
-						name="exclude_type"
-						classes="sm:ctx-w-full"
-						placeholder={ 'Search' }
-					/>
+
+					<SearchSelect />
 				</>
 			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],

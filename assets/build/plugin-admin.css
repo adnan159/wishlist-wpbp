@@ -118,4 +118,20 @@ input[type=color]::-webkit-color-swatch {
   background-color: none;
 }
 
+.css-1oevgaz-Input input[type=text] {
+  box-shadow: none;
+}
+
+.css-1oevgaz-Input input[type=text]:focus {
+  box-shadow: none;
+  border: none !important;
+  outline: none;
+}
+
+input[type=text]:focus {
+  box-shadow: none;
+  border: none !important;
+  outline: none;
+}
+
 /*# sourceMappingURL=plugin-admin.css.map*/

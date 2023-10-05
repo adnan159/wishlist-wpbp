@@ -2,18 +2,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { HiCheck, HiChevronDown } from 'react-icons/hi2';
 
-const product = [
-	{ name: 'Product' },
-	{ name: 'Arlene Mccoy' },
-	{ name: 'Devon Webb' },
-	{ name: 'Tom Cook' },
-	{ name: 'Tanya Fox' },
-	{ name: 'Hellen Schmidt' },
-	{ name: 'Caroline Schultz' },
-	{ name: 'Mason Heaney' },
-	{ name: 'Claudie Smitham' },
-	{ name: 'Emil Schaefer' },
-];
+const product = [ { name: 'Product' }, { name: 'Category' } ];
 
 function classNames( ...classes ) {
 	return classes.filter( Boolean ).join( ' ' );
@@ -30,12 +19,6 @@ export default function Select( {
 		<Listbox value={ selected } onChange={ setSelected }>
 			{ ( { open } ) => (
 				<>
-					{ /* { label && (
-						<Listbox.Label className="wawl-block wawl-text-sm wawl-font-medium wawl-leading-6 wawl-text-gray-900">
-							{ label }
-						</Listbox.Label>
-					) } */ }
-
 					<div className="wawl-relative">
 						<Listbox.Button
 							className={ [

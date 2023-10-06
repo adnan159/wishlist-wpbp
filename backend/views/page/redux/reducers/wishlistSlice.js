@@ -6,7 +6,12 @@ const initialState = {
 	enable_wishlist_for: 'all_users',
 	default_wishlist_name: 'New list',
 	exclude_type: 'product',
-	exclude_items: [ 1, 2, 3 ],
+	exclude_items: [
+		{
+			id: 17,
+			category_name: 'Clothing',
+		},
+	],
 	item_count: false,
 	guest_user_wishlist_days: 90,
 	enable_for_variation: true,

@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import { selectWishlist, getWishlistSettings, updateWishlistSetting } from '../../../redux/reducers/wishlistSlice';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	getWishlistSettings,
+	selectWishlist,
+	updateWishlistSetting,
+} from '../../../redux/reducers/wishlistSlice';
 import Input from '../../common/Input';
 import RadioButton from '../../common/RadioButton';
 import Search from '../../common/Search';
@@ -9,12 +13,29 @@ import ToggleButton from '../../common/ToggleButton';
 
 import axios from 'axios';
 export default function GlobalSettings() {
-	const globalSettings = useSelector( selectWishlist );
 	const dispatch = useDispatch();
 	const [ toggleValue, setToggleValue ] = useState( false );
+	const globalSettings = useSelector( selectWishlist );
 	const [ selectedInput, setSelectedInput ] = useState(
+		globalSettings.enable_wishlist_for || 'all_users'
+	);
+
+	console.log(
+		'globalSettings.enable_wishlist_for',
 		globalSettings.enable_wishlist_for
 	);
+	const url = ww_admin_view_object.base_rest_url + '/global-settings';
+
+	useEffect( () => {
+		const headers = {
+			'Content-Type': 'application/json',
+			'X-WP-Nonce': ww_admin_view_object.rest_nonce,
+		};
+
+		axios.get( url, { headers } ).then( ( response ) => {
+			dispatch( getWishlistSettings( response.data.data ) );
+		} );
+	}, [] );
 
 	const handleInputChange = ( e ) => {
 		const newValue = e.target.value;
@@ -44,39 +65,6 @@ export default function GlobalSettings() {
 		);
 	};
 
-	const url = ww_admin_view_object.base_rest_url + "/global-settings";
-
-	useEffect(() => {
-
-		const headers = {
-			'Content-Type': 'application/json',
-			'X-WP-Nonce': ww_admin_view_object.rest_nonce
-		};
-
-		axios.get(url, { headers } )
-			.then(response => {
-				dispatch(getWishlistSettings(response.data.data));
-			})
-	}, []);
-
-
-
-
-	const globalSettingsRadio = [
-		{
-			id: '1',
-			title: 'All Users',
-			value: 'allUsers',
-			caurrent: true,
-		},
-		{
-			id: '2',
-			title: 'Login user',
-			value: 'loginUser',
-			current: false,
-		},
-	];
-
 	const globalWishlistSettingsItems = {
 		enable_wishlist_for: {
 			label: 'Enable wishlist for',
@@ -84,16 +72,20 @@ export default function GlobalSettings() {
 				<>
 					<RadioButton
 						name="option"
-						value="all_users"
+						value={ globalSettings.enable_wishlist_for }
 						label="All user"
-						isChecked={ selectedInput === 'all_users' }
+						isChecked={
+							globalSettings.enable_wishlist_for === 'all_users'
+						}
 						onChange={ handleRadioChange }
 					/>
 					<RadioButton
 						name="option"
-						value="login_user"
+						value={ globalSettings.enable_wishlist_for }
 						label="Login user"
-						isChecked={ selectedInput === 'login_user' }
+						isChecked={
+							globalSettings.enable_wishlist_for === 'login_user'
+						}
 						onChange={ handleRadioChange }
 					/>
 				</>

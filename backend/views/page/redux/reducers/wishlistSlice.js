@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Define the initial state based on the provided JSON data
 const initialState = {
-	enable_wishlist_for: 'all_users',
+	enable_wishlist_for: '',
 	default_wishlist_name: 'New list',
 	exclude_type: 'product',
 	exclude_items: [ 1, 2, 3 ],
@@ -57,5 +57,6 @@ const wishlistSlice = createSlice( {
 export const selectWishlist = ( state ) => state.wishlist;
 
 // Export the reducer and actions
-export const { updateWishlistSetting, getWishlistSettings  } = wishlistSlice.actions;
+export const { updateWishlistSetting, getWishlistSettings } =
+	wishlistSlice.actions;
 export default wishlistSlice.reducer;

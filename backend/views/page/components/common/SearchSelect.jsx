@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { HiSearch } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +7,6 @@ import {
 	selectWishlist,
 	updateWishlistSetting,
 } from '../../redux/reducers/wishlistSlice';
-
 const CustomDropdownIndicator = ( props ) => {
 	return (
 		<div className="custom-dropdown-indicator" { ...props }>
@@ -56,24 +56,39 @@ export default function SearchSelect( {
 	// ];
 
 	const [ optionList, setOptionList ] = useState( [] );
+	const url =
+		ww_admin_view_object.base_rest_url +
+		'/search-categories?search-params=t';
 
 	useEffect( () => {
-		fetch(
-			'http://localhost/wishlist/wp-json/wp/wishlist/v1/search-categories?search-params=t'
-		)
-			.then( ( response ) => response.json() )
-			.then( ( data ) => {
-				const categoryList = data.map( ( category ) => ( {
-					value: category.id,
-					label: category.category_name,
-				} ) );
-				setOptionList( categoryList );
-				console.log( categoryList );
-			} )
-			.catch( ( error ) => {
-				console.error( 'Error fetching categories:', error );
-			} );
+		const headers = {
+			'Content-Type': 'application/json',
+			'X-WP-Nonce': ww_admin_view_object.rest_nonce,
+		};
+
+		axios.get( url, { headers } ).then( ( response ) => {
+			// dispatch( getWishlistSettings( response.data.data ) );
+			console.log( 'first', response.data.data );
+		} );
 	}, [] );
+
+	// useEffect( () => {
+	// 	fetch(
+	// 		'http://localhost/wishlist/wp-json/wp/wishlist/v1/search-categories?search-params=t'
+	// 	)
+	// 		.then( ( response ) => response.json() )
+	// 		.then( ( data ) => {
+	// 			const categoryList = data.map( ( category ) => ( {
+	// 				value: category.id,
+	// 				label: category.category_name,
+	// 			} ) );
+	// 			setOptionList( categoryList );
+	// 			console.log( categoryList );
+	// 		} )
+	// 		.catch( ( error ) => {
+	// 			console.error( 'Error fetching categories:', error );
+	// 		} );
+	// }, [] );
 	const customStyles = {
 		input: ( provided ) => ( {
 			...provided,

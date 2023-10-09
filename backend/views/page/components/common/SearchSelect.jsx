@@ -49,17 +49,36 @@ export default function SearchSelect( {
 
 	const [ optionList, setOptionList ] = useState( [] );
 	const url = ww_admin_view_object.base_rest_url + '/search-categories?search-params=t';
+	const fetchData = async () => {
+		try {
+			const headers = {
+				'Content-Type': 'application/json',
+				'X-WP-Nonce': ww_admin_view_object.rest_nonce,
+			};
+
+			axios.get( url, { headers } ).then( ( response ) => {
+				dispatch( updateWishlistSetting( response.data ) );
+				setOptionList( response.data  );
+			} );
+		} catch (error) {
+			console.error('Error fetching data:', error);
+		}
+	};
 
 	useEffect( () => {
-		const headers = {
-			'Content-Type': 'application/json',
-			'X-WP-Nonce': ww_admin_view_object.rest_nonce,
-		};
 
-		axios.get( url, { headers } ).then( ( response ) => {
-			dispatch( updateWishlistSetting( response.data ) );
-			setOptionList( response.data  );
-		} );
+		// const headers = {
+		// 	'Content-Type': 'application/json',
+		// 	'X-WP-Nonce': ww_admin_view_object.rest_nonce,
+		// };
+		//
+		// axios.get( url, { headers } ).then( ( response ) => {
+		// 	dispatch( updateWishlistSetting( response.data ) );
+		// 	setOptionList( response.data  );
+		// } );
+
+		fetchData();
+
 	}, [] );
 
 

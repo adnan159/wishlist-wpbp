@@ -47,18 +47,8 @@ export default function SearchSelect( {
 		);
 	};
 
-	// const optionList = [
-	// 	{ id: 1, category_name: 'beauty' },
-	// 	{ id: 2, category_name: 'Green' },
-	// 	{ id: 3, category_name: 'Yellow' },
-	// 	{ id: 4, category_name: 'Blue' },
-	// 	{ id: 5, category_name: 'White' },
-	// ];
-
 	const [ optionList, setOptionList ] = useState( [] );
-	const url =
-		ww_admin_view_object.base_rest_url +
-		'/search-categories?search-params=t';
+	const url = ww_admin_view_object.base_rest_url + '/search-categories?search-params=t';
 
 	useEffect( () => {
 		const headers = {
@@ -67,28 +57,12 @@ export default function SearchSelect( {
 		};
 
 		axios.get( url, { headers } ).then( ( response ) => {
-			// dispatch( getWishlistSettings( response.data.data ) );
-			console.log( 'first', response.data.data );
+			dispatch( updateWishlistSetting( response.data ) );
+			setOptionList( response.data  );
 		} );
 	}, [] );
 
-	// useEffect( () => {
-	// 	fetch(
-	// 		'http://localhost/wishlist/wp-json/wp/wishlist/v1/search-categories?search-params=t'
-	// 	)
-	// 		.then( ( response ) => response.json() )
-	// 		.then( ( data ) => {
-	// 			const categoryList = data.map( ( category ) => ( {
-	// 				value: category.id,
-	// 				label: category.category_name,
-	// 			} ) );
-	// 			setOptionList( categoryList );
-	// 			console.log( categoryList );
-	// 		} )
-	// 		.catch( ( error ) => {
-	// 			console.error( 'Error fetching categories:', error );
-	// 		} );
-	// }, [] );
+
 	const customStyles = {
 		input: ( provided ) => ( {
 			...provided,

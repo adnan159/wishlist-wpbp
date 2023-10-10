@@ -22,7 +22,7 @@ export default function IconImage( { iconName } ) {
 			formData.append( 'file', file );
 			formData.append( 'title', file.name );
 			fetch(
-				'http://localhost:8888/ascode-develop/wp-json/wp/v2/media/',
+				'/wp-json/wp/v2/media/',
 				{
 					body: formData,
 					method: 'POST',

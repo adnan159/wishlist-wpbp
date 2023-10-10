@@ -1,8 +1,13 @@
 import { Listbox, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { HiCheck, HiChevronDown } from 'react-icons/hi2';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	selectWishlist,
+	updateWishlistSetting,
+} from '../../redux/reducers/wishlistSlice';
 
-const product = [ { name: 'Product' }, { name: 'Category' } ];
+const product = [ { type: 'product' }, { type: 'category' } ];
 
 function classNames( ...classes ) {
 	return classes.filter( Boolean ).join( ' ' );
@@ -13,10 +18,22 @@ export default function Select( {
 	classes = '',
 	size = 'wawl-h-12 wawl-w-72',
 } ) {
-	const [ selected, setSelected ] = useState( product[ 0 ] );
+	const wishlistState = useSelector( selectWishlist );
+	const dispatch = useDispatch();
+
+	const excludeType = wishlistState.exclude_type || null;
+	console.log( 'first selected wishlist', excludeType );
+	const handleSelect = ( newSelected ) => {
+		dispatch(
+			updateWishlistSetting( {
+				...wishlistState,
+				exclude_type: newSelected,
+			} )
+		);
+	};
 
 	return (
-		<Listbox value={ selected } onChange={ setSelected }>
+		<Listbox value={ excludeType } onChange={ handleSelect }>
 			{ ( { open } ) => (
 				<>
 					<div className="wawl-relative">
@@ -29,9 +46,10 @@ export default function Select( {
 						>
 							<span className="wawl-inline-flex wawl-w-full wawl-truncate">
 								<span className="wawl-truncate">
-									{ selected.name }
+									{ excludeType }
 								</span>
 							</span>
+
 							<span className="wawl-pointer-events-none wawl-absolute wawl-inset-y-0 wawl-right-0 wawl-flex wawl-items-center wawl-pr-2">
 								<HiChevronDown
 									className="wawl-h-5 wawl-w-5 wawl-text-gray-400"
@@ -50,7 +68,7 @@ export default function Select( {
 							<Listbox.Options className="wawl-absolute wawl-z-10 wawl-mt-1 wawl-max-h-60 wawl-w-full wawl-overflow-auto wawl-rounded-md wawl-bg-white wawl-py-1 wawl-text-base wawl-drop-shadow-md wawl-ring-1 wawl-ring-transparent wawl-ring-opacity-5 focus:wawl-outline-none sm:wawl-text-sm">
 								{ product.map( ( person ) => (
 									<Listbox.Option
-										key={ person.username }
+										key={ person.type }
 										className={ ( { active } ) =>
 											classNames(
 												active
@@ -59,7 +77,7 @@ export default function Select( {
 												'wawl-relative wawl-cursor-default wawl-select-none wawl-py-2 wawl-pl-3 wawl-pr-9'
 											)
 										}
-										value={ person }
+										value={ person.type }
 									>
 										{ ( { selected, active } ) => (
 											<>
@@ -72,7 +90,7 @@ export default function Select( {
 															'wawl-truncate'
 														) }
 													>
-														{ person.name }
+														{ person.type }
 													</span>
 												</div>
 

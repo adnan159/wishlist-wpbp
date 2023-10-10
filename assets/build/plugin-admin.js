@@ -5345,6 +5345,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _global_settings_GlobalSettings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./global-settings/GlobalSettings */ "./backend/views/page/components/dashboard/global-settings/GlobalSettings.jsx");
 /* harmony import */ var _global_settings_PopupSettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./global-settings/PopupSettings */ "./backend/views/page/components/dashboard/global-settings/PopupSettings.jsx");
 /* harmony import */ var _product_listing_ProductListing__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./product-listing/ProductListing */ "./backend/views/page/components/dashboard/product-listing/ProductListing.jsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 
 
 
@@ -5359,6 +5361,24 @@ __webpack_require__.r(__webpack_exports__);
 function Dashboard() {
   const [active, setActive] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const wishlistSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  const [prevSettings, setPrevSettings] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  const url = ww_admin_view_object.base_rest_url + '/global-settings';
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-WP-Nonce': ww_admin_view_object.rest_nonce
+    };
+    axios__WEBPACK_IMPORTED_MODULE_11__["default"].get(url, {
+      headers
+    }).then(response => {
+      setPrevSettings(response.data.data);
+    });
+  }, []);
+  const handleReset = e => {
+    e.preventDefault();
+    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.getWishlistSettings)(prevSettings));
+  };
   const handleChange = newActive => setActive(newActive);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     active: active,
@@ -5368,9 +5388,7 @@ function Dashboard() {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_global_settings_GlobalSettings__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_global_settings_PopupSettings__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wawl-flex wawl-gap-4 wawl-justify-end wawl-mt-16 wawl-mb-10"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    onClick: () => {
-      window.open();
-    },
+    onClick: handleReset,
     buttonStyle: 'buttonPrimary',
     iconPosition: 'after',
     addBgColor: false,

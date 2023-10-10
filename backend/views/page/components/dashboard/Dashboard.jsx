@@ -31,9 +31,13 @@ export default function Dashboard() {
 		} );
 	}, [] );
 
-	const handleReset = (e) => {
+	const handleResetGlobalSettings = (e) => {
 		e.preventDefault();
 		dispatch( getWishlistSettings(prevSettings) );
+	}
+
+	const handleSaveGlobalSettings = () => {
+
 	}
 
 	const handleChange = ( newActive ) => setActive( newActive );
@@ -45,7 +49,7 @@ export default function Dashboard() {
 					<PopupSettings />
 					<div className="wawl-flex wawl-gap-4 wawl-justify-end wawl-mt-16 wawl-mb-10">
 						<Button
-							onClick={ handleReset }
+							onClick={ handleResetGlobalSettings }
 							buttonStyle={ 'buttonPrimary' }
 							iconPosition={ 'after' }
 							addBgColor={ false }
@@ -55,9 +59,7 @@ export default function Dashboard() {
 							{ 'Reset' }
 						</Button>
 						<Button
-							onClick={ () => {
-								console.log( 'hello world', wishlistSettings );
-							} }
+							onClick={ handleSaveGlobalSettings }
 							buttonStyle={ 'button-primary' }
 							iconPosition={ 'after' }
 							addBgColor={ true }

@@ -4978,6 +4978,37 @@ function SearchSelect({
     } else {
       setDataFetched(true);
     }
+    if (optionSelected.exclude_type === 'product') {
+      const url = ww_admin_view_object.base_rest_url + '/search-product?search-params=' + inputValue;
+      if (inputValue.length >= 2) {
+        const fetchData = async () => {
+          try {
+            const headers = {
+              'Content-Type': 'application/json',
+              'X-WP-Nonce': ww_admin_view_object.rest_nonce
+            };
+            const response = await axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(url, {
+              headers
+            });
+            dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)(response.data));
+            setOptionList(response.data);
+            setDataFetched(true); // Set dataFetched to true when data is fetched
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+
+        // fetchData();
+        if (inputValue) {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fetchData();
+          }, 1000);
+        }
+      }
+    } else {
+      setDataFetched(true);
+    }
   }, [inputValue, optionSelected.exclude_type]);
   const customStyles = {
     input: provided => ({
@@ -5024,7 +5055,7 @@ function SearchSelect({
   };
   const mappedOptionList = optionList.map(option => ({
     value: option.id,
-    label: option.category_name
+    label: option.category_name || option.product_name
   }));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `w-full ${classes} ${size} `

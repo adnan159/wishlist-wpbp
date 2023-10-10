@@ -90,6 +90,42 @@ export default function SearchSelect( {
 		} else {
 			setDataFetched( true );
 		}
+		if ( optionSelected.exclude_type === 'product' ) {
+			const url =
+				ww_admin_view_object.base_rest_url +
+				'/search-product?search-params=' +
+				inputValue;
+
+			if ( inputValue.length >= 2 ) {
+				const fetchData = async () => {
+					try {
+						const headers = {
+							'Content-Type': 'application/json',
+							'X-WP-Nonce': ww_admin_view_object.rest_nonce,
+						};
+
+						const response = await axios.get( url, {
+							headers,
+						} );
+						dispatch( updateWishlistSetting( response.data ) );
+						setOptionList( response.data );
+						setDataFetched( true ); // Set dataFetched to true when data is fetched
+					} catch ( error ) {
+						console.error( 'Error fetching data:', error );
+					}
+				};
+
+				// fetchData();
+				if ( inputValue ) {
+					clearTimeout( timer );
+					timer = setTimeout( () => {
+						fetchData();
+					}, 1000 );
+				}
+			}
+		} else {
+			setDataFetched( true );
+		}
 	}, [ inputValue, optionSelected.exclude_type ] );
 
 	const customStyles = {
@@ -138,7 +174,7 @@ export default function SearchSelect( {
 
 	const mappedOptionList = optionList.map( ( option ) => ( {
 		value: option.id,
-		label: option.category_name,
+		label: option.category_name || option.product_name,
 	} ) );
 
 	return (

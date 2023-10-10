@@ -201,9 +201,9 @@ export default function SearchSelect( {
 					} }
 					onInputChange={ ( newValue ) => {
 						setInputValue( newValue );
-						if ( ! newValue ) {
-							setSelectedOptions( [] );
-						}
+						// if ( ! newValue ) {
+						// 	setSelectedOptions( [] );
+						// }
 					} }
 				/>
 			) : (

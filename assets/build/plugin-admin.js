@@ -5093,9 +5093,9 @@ function SearchSelect({
     },
     onInputChange: newValue => {
       setInputValue(newValue);
-      if (!newValue) {
-        setSelectedOptions([]);
-      }
+      // if ( ! newValue ) {
+      // 	setSelectedOptions( [] );
+      // }
     }
   }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Show nothing"));
 }

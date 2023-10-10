@@ -6,8 +6,8 @@ const initialState = {
 	enable_wishlist_for: '',
 	default_wishlist_name: 'New list',
 	exclude_type: 'product',
-	exclude_items: [ 1, 2, 3 ],
-	item_count: true,
+	exclude_items: [],
+	item_count: false,
 	guest_user_wishlist_days: 90,
 	enable_for_variation: true,
 	enable_for_myaccount: false,
@@ -17,7 +17,8 @@ const initialState = {
 	popup_title: 'Popup title',
 	popup_button_text: 'Button Text',
 	popup_feature_image_enable: false,
-	popup_icon_image: '',
+	popup_icon_image:
+		'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Vector-based_example.svg/2000px-Vector-based_example.svg.png',
 	theme_default_button_style: true,
 	popup_button_color: {
 		background_color: '',
@@ -32,7 +33,8 @@ const initialState = {
 		popup_button_margin: '10px',
 	},
 	popup_notification_text: 'hello',
-	popup_notification_icon: '',
+	popup_notification_icon:
+		'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Vector-based_example.svg/2000px-Vector-based_example.svg.png',
 	popup_notification_button_text: 'hello',
 };
 

@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Img from '../../../asset/img/image.png';
-import { updateWishlistSetting, selectWishlist } from '../../redux/reducers/wishlistSlice';
+import {
+	selectWishlist,
+	updateWishlistSetting,
+} from '../../redux/reducers/wishlistSlice';
 import Button from './Button';
 
 export default function IconImage( { iconName } ) {
-	const popupIcon = useSelector(selectWishlist);
-	const [ icons, setIcons ] = useState( popupIcon[iconName ] || Img );
+	const globalSettings = useSelector( selectWishlist );
+	const [ icons, setIcons ] = useState( globalSettings[ iconName ] || Img );
+
 	const dispatch = useDispatch();
 
 	const onImageChange = ( event ) => {
@@ -14,24 +18,29 @@ export default function IconImage( { iconName } ) {
 			setIcons( URL.createObjectURL( event.target.files[ 0 ] ) );
 
 			var formData = new FormData();
-			let file = ( event.target.files[ 0 ] );
+			let file = event.target.files[ 0 ];
 			formData.append( 'file', file );
 			formData.append( 'title', file.name );
-			fetch('http://localhost:8888/ascode-develop/wp-json/wp/v2/media/',{
-				body:formData,
-				method: 'POST',
-				headers: {
-					'X-WP-Nonce' : ww_admin_view_object.rest_nonce
+			fetch(
+				'http://localhost:8888/ascode-develop/wp-json/wp/v2/media/',
+				{
+					body: formData,
+					method: 'POST',
+					headers: {
+						'X-WP-Nonce': ww_admin_view_object.rest_nonce,
+					},
 				}
-			} ).then( response => {
-				return response.json();
-			}).then( result => {
-				dispatch(
-					updateWishlistSetting( {
-						[ iconName ]: (result.source_url),
-					} )
-				);
-			})
+			)
+				.then( ( response ) => {
+					return response.json();
+				} )
+				.then( ( result ) => {
+					dispatch(
+						updateWishlistSetting( {
+							[ iconName ]: result.source_url,
+						} )
+					);
+				} );
 		}
 	};
 
@@ -40,7 +49,7 @@ export default function IconImage( { iconName } ) {
 	}, [ icons ] );
 
 	const handleRemoveClick = () => {
-		setIcons( [] );
+		setIcons( '' ); // Set icons to an empty string to remove the image
 	};
 
 	const handleUpdateSettings = () => {
@@ -49,31 +58,30 @@ export default function IconImage( { iconName } ) {
 				[ iconName ]: icons,
 			} )
 		);
-		setIcons( icons );
 	};
 
 	return (
 		<div>
 			<div className="wawl-flex wawl-mx-auto wawl-items-center">
-				<div className=" wawl-border wawl-border-gray-300 wawl-h-full wawl-rounded-md wawl-block wawl-mx-auto">
-					{ icons.length > 0 ? (
+				<div className="wawl-border wawl-border-gray-300 wawl-rounded-md wawl-block wawl-mx-auto wawl-object-fit wawl-h-32 wawl-w-36">
+					{ icons ? (
 						<div>
 							<img
-								className="wawl-mx-auto wawl-object-fit wawl-h-32 wawl-w-32 wawl-px-4 wawl-py-2 "
+								className="wawl-mx-auto wawl-object-fit wawl-h-32  wawl-w-36 wawl-px-4 wawl-py-2"
 								src={ icons }
-								alt={ '' }
+								alt=""
 							/>
 						</div>
 					) : (
 						<img
 							className="wawl-mx-auto wawl-object-cover wawl-h-32 wawl-w-auto"
-							src={ popupIcon[iconName] }
+							src={ globalSettings[ iconName ] }
 							alt="Default"
 						/>
 					) }
 				</div>
 				<div className="wawl-pl-4 wawl-grid wawl-gap-4">
-					{ icons.length === 1 ? (
+					{ ! icons ? (
 						<Button
 							onClick={ () => {
 								console.log( icons );
@@ -102,16 +110,18 @@ export default function IconImage( { iconName } ) {
 							Add Image
 						</label>
 					) }
-					<Button
-						onClick={ handleRemoveClick }
-						buttonStyle="button-primary"
-						iconPosition="after"
-						addBgColor={ false }
-						classNames="!wawl-border-gray-300 wawl-text-gray-500"
-						icon=""
-					>
-						Remove
-					</Button>
+					{ icons && (
+						<Button
+							onClick={ handleRemoveClick }
+							buttonStyle="button-primary"
+							iconPosition="after"
+							addBgColor={ false }
+							classNames="!wawl-border-gray-300 wawl-text-gray-500"
+							icon=""
+						>
+							Remove
+						</Button>
+					) }
 				</div>
 			</div>
 		</div>

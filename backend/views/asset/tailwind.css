@@ -646,6 +646,10 @@ video {
   margin-left: 0.75rem;
 }
 
+.wawl-mr-2 {
+  margin-right: 0.5rem;
+}
+
 .wawl-mr-8 {
   margin-right: 2rem;
 }
@@ -768,10 +772,6 @@ video {
 
 .wawl-w-16 {
   width: 4rem;
-}
-
-.wawl-w-32 {
-  width: 8rem;
 }
 
 .wawl-w-36 {
@@ -1020,6 +1020,11 @@ video {
 .wawl-border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.wawl-border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
 .wawl-border-transparent {

@@ -3,6 +3,7 @@
 namespace WooCommerce_Wishlist\Rest;
 use WP_REST_Server;
 use WP_REST_Controller;
+use function cli\err;
 
 class SearchCategories extends WP_REST_Controller {
     public function register_route(){
@@ -45,7 +46,7 @@ class SearchCategories extends WP_REST_Controller {
 
         $total = count( $data );
         $response = rest_ensure_response( $data );
-        $response->add_links( $this->prepare_links( $response ) );
+//        $response->add_links( $this->prepare_links( $response ) );
 
         $response->header( 'X-WP-Total', (int) $total );
         $response->header( 'X-WP-TotalPages', (int) $total );

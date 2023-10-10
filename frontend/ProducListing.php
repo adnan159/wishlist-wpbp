@@ -13,8 +13,8 @@ class ProducListing extends Base {
         echo '<div class="product-icon" style="position: absolute;
                 top: 10px; /* Adjust the position based on your design */
                 left: 90%; /* Adjust the position based on your design */
-                z-index: 1;
-                color: #ff0000; /* Adjust the icon color based on your design */
+                z-index: 20;
+                color: #f4a2a2; /* Adjust the icon color based on your design */
                 font-size: 24px;">
                     <i class="fas fa-heart"></i>
                </div>';

@@ -4914,14 +4914,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_icons_hi__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/hi */ "./node_modules/react-icons/hi/index.esm.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
 /* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
-
 
 
 
@@ -4939,94 +4937,63 @@ const CustomDropdownIndicator = props => {
 };
 function SearchSelect({
   classes = 'wawl-border-red-500',
-  size = 'wawl-h-12 wawl-w-72'
+  size = 'wawl-h-12 wawl-w-72',
+  onChange,
+  value
 }) {
   const optionSelected = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
-  const [selectedOptions, setSelectedOptions] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(optionSelected.exclude_items.map(option => ({
-    value: option.id,
-    label: option.category_name
-  })));
+  const [selectedOptions, setSelectedOptions] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  const [dataUpdated, setDataUpdated] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  const [optionList, setOptionList] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  // const [ optionList, setOptionList ] = useState( [] );
   const [inputValue, setInputValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
-  const handleSelect = selectedValues => {
-    setSelectedOptions(selectedValues);
-    const selectedOptionIds = selectedValues.map(option => ({
-      id: option.value,
-      category: option.label
-    }));
-    dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
-      ...optionSelected,
-      exclude_items: selectedOptionIds
-    }));
-  };
-  let timer;
-  const [dataFetched, setDataFetched] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false); // Track if data is fetched
+  const [dataFetched, setDataFetched] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true);
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (optionSelected.exclude_type === 'category') {
-      const url = ww_admin_view_object.base_rest_url + '/search-categories?search-params=' + inputValue;
-      if (inputValue.length >= 2) {
-        const fetchData = async () => {
-          try {
-            const headers = {
-              'Content-Type': 'application/json',
-              'X-WP-Nonce': ww_admin_view_object.rest_nonce
-            };
-            const response = await axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(url, {
-              headers
-            });
-            dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)(response.data));
-            setOptionList(response.data);
-            setDataFetched(true); // Set dataFetched to true when data is fetched
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
+  // let timer;
+  // useEffect( () => {
+  // 	const endpoint =
+  // 		optionSelected.exclude_type === 'category'
+  // 			? 'search-categories'
+  // 			: 'search-product';
+  // 	const url = `${ ww_admin_view_object.base_rest_url }/${ endpoint }?search-params=${ inputValue }`;
 
-        // fetchData();
-        if (inputValue) {
-          clearTimeout(timer);
-          timer = setTimeout(() => {
-            fetchData();
-          }, 1000);
-        }
-      }
-    } else {
-      setDataFetched(true);
-    }
-    if (optionSelected.exclude_type === 'product') {
-      const url = ww_admin_view_object.base_rest_url + '/search-product?search-params=' + inputValue;
-      if (inputValue.length >= 2) {
-        const fetchData = async () => {
-          try {
-            const headers = {
-              'Content-Type': 'application/json',
-              'X-WP-Nonce': ww_admin_view_object.rest_nonce
-            };
-            const response = await axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(url, {
-              headers
-            });
-            dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)(response.data));
-            setOptionList(response.data);
-            setDataFetched(true); // Set dataFetched to true when data is fetched
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
+  // 	if ( inputValue.length >= 2 ) {
+  // 		const fetchData = async () => {
+  // 			try {
+  // 				const headers = {
+  // 					'Content-Type': 'application/json',
+  // 					'X-WP-Nonce': ww_admin_view_object.rest_nonce,
+  // 				};
 
-        // fetchData();
-        if (inputValue) {
-          clearTimeout(timer);
-          timer = setTimeout(() => {
-            fetchData();
-          }, 1000);
-        }
-      }
-    } else {
-      setDataFetched(true);
-    }
-  }, [inputValue, optionSelected.exclude_type]);
+  // 				const response = await axios.get( url, {
+  // 					headers,
+  // 				} );
+  // 				dispatch( updateWishlistSetting( response.data ) );
+  // 				setOptionList( response.data );
+  // 				setDataFetched( true );
+  // 			} catch ( error ) {
+  // 				console.error( 'Error fetching data:', error );
+  // 			}
+  // 		};
+
+  // 		// fetchData();
+
+  // 		if (
+  // 			optionSelected.exclude_type === 'category' ||
+  // 			optionSelected.exclude_type === 'product'
+  // 		) {
+  // 			fetchData();
+  // 			if ( inputValue ) {
+  // 				clearTimeout( timer );
+  // 				timer = setTimeout( () => {
+  // 					fetchData();
+  // 				}, 1000 );
+  // 			}
+  // 		}
+  // 	}
+  // 	setDataFetched( true );
+  // }, [ inputValue, optionSelected.exclude_type ] );
+
   const customStyles = {
     input: provided => ({
       ...provided,
@@ -5070,17 +5037,100 @@ function SearchSelect({
       }
     })
   };
-  const mappedOptionList = optionList.map(option => ({
-    value: option.id,
-    label: option.category_name || option.product_name
-  }));
+  const optionList = [{
+    id: 20,
+    category_name: 'Accessories'
+  }, {
+    id: 17,
+    category_name: 'Clothing'
+  }, {
+    id: 22,
+    category_name: 'Decor'
+  }, {
+    id: 19,
+    category_name: 'Hoodies'
+  }, {
+    id: 21,
+    category_name: 'Music'
+  }, {
+    id: 18,
+    category_name: 'Tshirts'
+  }];
+  const ProductList = [{
+    id: 39,
+    product_name: 'WordPress Pennant'
+  }, {
+    id: 38,
+    product_name: 'Logo Collection'
+  }, {
+    id: 37,
+    product_name: 'Beanie with Logo'
+  }, {
+    id: 36,
+    product_name: 'T-Shirt with Logo'
+  }, {
+    id: 29,
+    product_name: 'Single'
+  }, {
+    id: 28,
+    product_name: 'Album'
+  }, {
+    id: 27,
+    product_name: 'Polo'
+  }, {
+    id: 26,
+    product_name: 'Long Sleeve Tee'
+  }, {
+    id: 25,
+    product_name: 'Hoodie with Zipper'
+  }, {
+    id: 24,
+    product_name: 'Hoodie with Pocket'
+  }, {
+    id: 23,
+    product_name: 'Sunglasses'
+  }, {
+    id: 22,
+    product_name: 'Cap'
+  }, {
+    id: 21,
+    product_name: 'Belt'
+  }, {
+    id: 20,
+    product_name: 'Beanie'
+  }, {
+    id: 19,
+    product_name: 'T-Shirt'
+  }, {
+    id: 18,
+    product_name: 'Hoodie with Logo'
+  }, {
+    id: 17,
+    product_name: 'Hoodie'
+  }, {
+    id: 16,
+    product_name: 'V-Neck T-Shirt'
+  }];
+  let mappedOptionList; // Use 'let' instead of 'const'
+
+  if (optionSelected.exclude_type === 'product') {
+    mappedOptionList = ProductList.map(option => ({
+      value: option.id,
+      label: option.product_name
+    }));
+  } else {
+    mappedOptionList = optionList.map(option => ({
+      value: option.id,
+      label: option.category_name
+    }));
+  }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `w-full ${classes} ${size} `
-  }, dataFetched ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, dataFetched ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
     options: mappedOptionList,
     placeholder: "Search",
-    value: selectedOptions,
-    onChange: handleSelect,
+    value: value,
+    onChange: onChange,
     isSearchable: true,
     isMulti: true,
     styles: customStyles,
@@ -5089,13 +5139,13 @@ function SearchSelect({
     },
     menuShouldScrollIntoView: false,
     filterOption: (option, input) => {
-      return input.length >= 2 ? option.label.toLowerCase().includes(input.toLowerCase()) : false;
+      return input.length >= 1 ? option.label.toLowerCase().includes(input.toLowerCase()) : false;
     },
     onInputChange: newValue => {
       setInputValue(newValue);
-      // if ( ! newValue ) {
-      // 	setSelectedOptions( [] );
-      // }
+      if (!newValue) {
+        setSelectedOptions([]);
+      }
     }
   }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Show nothing"));
 }
@@ -5431,6 +5481,8 @@ __webpack_require__.r(__webpack_exports__);
 function GlobalSettings() {
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   const [toggleValue, setToggleValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [selectedProducts, setSelectedProducts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  const [selectedCategory, setSelectedCacetory] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const globalSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
   const [selectedInput, setSelectedInput] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(globalSettings.enable_wishlist_for || 'all_users');
   console.log('globalSettings.enable_wishlist_for', globalSettings.enable_wishlist_for);
@@ -5466,6 +5518,34 @@ function GlobalSettings() {
       [settingName]: value
     }));
   };
+  const handleProductSelect = selectedValues => {
+    setSelectedProducts(selectedValues);
+    console.log('selectedValues', selectedValues);
+    if (globalSettings.exclude_type === 'product') {
+      dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+        ...globalSettings,
+        exclude_products: selectedValues.map(option => ({
+          id: option.value,
+          product_name: option.label
+        }))
+      }));
+    }
+  };
+  const handleCategorySelect = selectedValues => {
+    setSelectedCacetory(selectedValues);
+    console.log('selectedValues', selectedValues);
+    if (globalSettings.exclude_type === 'category') {
+      dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
+        ...globalSettings,
+        exclude_categories: selectedValues.map(option => ({
+          id: option.value,
+          category_name: option.label
+        }))
+      }));
+    }
+  };
+  console.log('exclude_type', globalSettings.exclude_type);
+  console.log('exclude_Products', globalSettings.exclude_products);
   const globalWishlistSettingsItems = {
     enable_wishlist_for: {
       label: 'Enable wishlist for',
@@ -5499,7 +5579,13 @@ function GlobalSettings() {
     },
     exclude_type: {
       label: 'Exclude product/category',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_SearchSelect__WEBPACK_IMPORTED_MODULE_6__["default"], null)),
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_7__["default"], null), globalSettings.exclude_type === 'product' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_SearchSelect__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        onChange: handleProductSelect,
+        value: selectedProducts
+      }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_SearchSelect__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        onChange: handleCategorySelect,
+        value: selectedCategory
+      })),
       // options: [ 'Option 1', 'Option 2', 'Option 3' ],
       info: ''
     },
@@ -6301,7 +6387,14 @@ const initialState = {
   enable_wishlist_for: '',
   default_wishlist_name: 'New list',
   exclude_type: 'product',
-  exclude_items: [],
+  exclude_products: [{
+    id: 1,
+    product_name: 'New product'
+  }],
+  exclude_categories: [{
+    id: 1,
+    category_name: 'New category'
+  }],
   item_count: false,
   guest_user_wishlist_days: 90,
   enable_for_variation: true,

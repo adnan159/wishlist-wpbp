@@ -15,6 +15,9 @@ import axios from 'axios';
 export default function GlobalSettings() {
 	const dispatch = useDispatch();
 	const [ toggleValue, setToggleValue ] = useState( false );
+	const [ selectedProducts, setSelectedProducts ] = useState( [] );
+	const [ selectedCategory, setSelectedCacetory ] = useState( [] );
+
 	const globalSettings = useSelector( selectWishlist );
 	const [ selectedInput, setSelectedInput ] = useState(
 		globalSettings.enable_wishlist_for || 'all_users'
@@ -65,6 +68,39 @@ export default function GlobalSettings() {
 		);
 	};
 
+	const handleProductSelect = ( selectedValues ) => {
+		setSelectedProducts( selectedValues );
+		console.log( 'selectedValues', selectedValues );
+		if ( globalSettings.exclude_type === 'product' ) {
+			dispatch(
+				updateWishlistSetting( {
+					...globalSettings,
+					exclude_products: selectedValues.map( ( option ) => ( {
+						id: option.value,
+						product_name: option.label,
+					} ) ),
+				} )
+			);
+		}
+	};
+	const handleCategorySelect = ( selectedValues ) => {
+		setSelectedCacetory( selectedValues );
+		console.log( 'selectedValues', selectedValues );
+		if ( globalSettings.exclude_type === 'category' ) {
+			dispatch(
+				updateWishlistSetting( {
+					...globalSettings,
+					exclude_categories: selectedValues.map( ( option ) => ( {
+						id: option.value,
+						category_name: option.label,
+					} ) ),
+				} )
+			);
+		}
+	};
+
+	console.log( 'exclude_type', globalSettings.exclude_type );
+	console.log( 'exclude_Products', globalSettings.exclude_products );
 	const globalWishlistSettingsItems = {
 		enable_wishlist_for: {
 			label: 'Enable wishlist for',
@@ -114,8 +150,17 @@ export default function GlobalSettings() {
 			component: (
 				<>
 					<Select />
-
-					<SearchSelect />
+					{ globalSettings.exclude_type === 'product' ? (
+						<SearchSelect
+							onChange={ handleProductSelect }
+							value={ selectedProducts }
+						/>
+					) : (
+						<SearchSelect
+							onChange={ handleCategorySelect }
+							value={ selectedCategory }
+						/>
+					) }
 				</>
 			),
 			// options: [ 'Option 1', 'Option 2', 'Option 3' ],

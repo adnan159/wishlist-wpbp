@@ -6,6 +6,7 @@ import {
 	updateWishlistSetting,
 } from '../../../redux/reducers/wishlistSlice';
 import Input from '../../common/Input';
+import Radio from '../../common/Radio';
 import RadioButton from '../../common/RadioButton';
 import SearchSelect from '../../common/SearchSelect';
 import Select from '../../common/Select';
@@ -23,10 +24,10 @@ export default function GlobalSettings() {
 		globalSettings.enable_wishlist_for || 'all_users'
 	);
 
-	console.log(
-		'globalSettings.enable_wishlist_for',
-		globalSettings.enable_wishlist_for
-	);
+	// console.log(
+	// 	'globalSettings.enable_wishlist_for',
+	// 	globalSettings.enable_wishlist_for
+	// );
 	const url = ww_admin_view_object.base_rest_url + '/global-settings';
 
 	useEffect( () => {
@@ -56,6 +57,7 @@ export default function GlobalSettings() {
 				enable_wishlist_for: inputValue,
 			} )
 		);
+		console.log( 'radio input value changed', inputValue );
 	};
 
 	// Callback function to handle the value from ToggleButton
@@ -99,29 +101,28 @@ export default function GlobalSettings() {
 		}
 	};
 
-	console.log( 'exclude_type', globalSettings.exclude_type );
-	console.log( 'exclude_Products', globalSettings.exclude_products );
+	// console.log( 'exclude_type', globalSettings.exclude_type );
+	// console.log( 'exclude_Products', globalSettings.exclude_products );
 	const globalWishlistSettingsItems = {
 		enable_wishlist_for: {
 			label: 'Enable wishlist for',
 			component: (
 				<>
+					<Radio />
 					<RadioButton
 						name="option"
+						id="all_users"
 						value={ globalSettings.enable_wishlist_for }
 						label="All user"
-						isChecked={
-							globalSettings.enable_wishlist_for === 'all_users'
-						}
+						isChecked={ selectedInput === 'all_users' }
 						onChange={ handleRadioChange }
 					/>
 					<RadioButton
 						name="option"
+						id="login_user"
 						value={ globalSettings.enable_wishlist_for }
 						label="Login user"
-						isChecked={
-							globalSettings.enable_wishlist_for === 'login_user'
-						}
+						isChecked={ selectedInput === 'login_user' }
 						onChange={ handleRadioChange }
 					/>
 				</>
@@ -163,7 +164,6 @@ export default function GlobalSettings() {
 					) }
 				</>
 			),
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
 		item_count: {
@@ -176,7 +176,6 @@ export default function GlobalSettings() {
 					isOn={ globalSettings.item_count }
 				/>
 			),
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: 'How many times product was added to a wishlist',
 		},
 		guest_user_wishlist_days: {
@@ -207,7 +206,6 @@ export default function GlobalSettings() {
 					isOn={ globalSettings.enable_for_variation }
 				/>
 			),
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
 		enable_for_myaccount: {
@@ -220,7 +218,6 @@ export default function GlobalSettings() {
 					isOn={ globalSettings.enable_for_myaccount }
 				/>
 			),
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
 		multi_wishlist_settings: {
@@ -233,7 +230,6 @@ export default function GlobalSettings() {
 					isOn={ globalSettings.multi_wishlist_settings }
 				/>
 			),
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: '',
 		},
 		cart_page_wishlist: {
@@ -246,7 +242,6 @@ export default function GlobalSettings() {
 					isOn={ globalSettings.cart_page_wishlist }
 				/>
 			),
-			// options: [ 'Option 1', 'Option 2', 'Option 3' ],
 			info: 'Enable wishlist icon on cart page beside delete button',
 		},
 	};

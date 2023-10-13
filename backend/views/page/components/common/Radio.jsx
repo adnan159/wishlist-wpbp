@@ -1,37 +1,59 @@
-export default function Radio( { items } ) {
-	// const items = [
-	// 	{ id: null, title: 'Option 1', value: 'option1' },
-	// 	{ id: 1, title: 'Option 2', value: 'option2' },
-	// 	{ title: 'Option 3', value: 'option3' },
-	// ];
+/*
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+*/
+const notificationMethods = [
+	{ id: 'email', title: 'Email' },
+	{ id: 'sms', title: 'Phone (SMS)' },
+	{ id: 'push', title: 'Push notification' },
+];
+
+export default function Radio() {
 	return (
-		<fieldset>
-			<div className="wawl-mt-4 wawl-divide-y wawl-divide-gray-200 wawl-border-b wawl-border-t wawl-border-gray-200">
-				{ items.map( ( item, index ) => (
-					<div
-						key={ index }
-						className="wawl-relative wawl-flex wawl-items-start wawl-py-4"
-					>
-						<div className="wawl-min-w-0 wawl-flex-1 wawl-text-sm wawl-leading-6">
+		<div>
+			<label className="text-base font-semibold text-gray-900">
+				Notifications
+			</label>
+			<p className="text-sm text-gray-500">
+				How do you prefer to receive notifications?
+			</p>
+			<fieldset className="mt-4">
+				<legend className="sr-only">Notification method</legend>
+				<div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+					{ notificationMethods.map( ( notificationMethod ) => (
+						<div
+							key={ notificationMethod.id }
+							className="flex items-center"
+						>
+							<input
+								id={ notificationMethod.id }
+								name="notification-method"
+								type="radio"
+								defaultChecked={
+									notificationMethod.id === 'email'
+								}
+								className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+							/>
 							<label
-								htmlFor={ `item-${ item.id }` }
-								className="wawl-select-none wawl-font-medium wawl-text-gray-900"
+								htmlFor={ notificationMethod.id }
+								className="ml-3 block text-sm font-medium leading-6 text-gray-900"
 							>
-								{ item.title }
+								{ notificationMethod.title }
 							</label>
 						</div>
-						<div className="wawl-ml-3 wawl-flex wawl-h-6 wawl-items-center">
-							<input
-								id={ `item-${ item.id }` }
-								name="plan"
-								type="radio"
-								defaultChecked={ item.id === null }
-								className="wawl-h-4 wawl-w-4 wawl-border-gray-300 wawl-text-indigo-600 focus:wawl-ring-indigo-600"
-							/>
-						</div>
-					</div>
-				) ) }
-			</div>
-		</fieldset>
+					) ) }
+				</div>
+			</fieldset>
+		</div>
 	);
 }

@@ -5,6 +5,7 @@ export default function RadioButton( {
 	value,
 	isChecked,
 	onChange,
+	id,
 } ) {
 	const handleRadioChange = ( e ) => {
 		const { id } = e.currentTarget;
@@ -17,7 +18,7 @@ export default function RadioButton( {
 				className="focus:wawl-outline-1 focus:wawl-shadow-none"
 				type="radio"
 				name={ name }
-				id={ value }
+				id={ id }
 				value={ value }
 				checked={ isChecked }
 				onChange={ handleRadioChange }

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Define the initial state based on the provided JSON data
 const initialState = {
-	enable_wishlist_for: '',
+	enable_wishlist_for: 'login_user',
 	default_wishlist_name: 'New list',
 	exclude_type: 'product',
 	exclude_products: [

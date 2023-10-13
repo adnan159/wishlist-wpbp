@@ -4859,71 +4859,6 @@ function PopupBtnCustomStyle({
 
 /***/ }),
 
-/***/ "./backend/views/page/components/common/Radio.jsx":
-/*!********************************************************!*\
-  !*** ./backend/views/page/components/common/Radio.jsx ***!
-  \********************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ Radio; }
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-const notificationMethods = [{
-  id: 'email',
-  title: 'Email'
-}, {
-  id: 'sms',
-  title: 'Phone (SMS)'
-}, {
-  id: 'push',
-  title: 'Push notification'
-}];
-function Radio() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "text-base font-semibold text-gray-900"
-  }, "Notifications"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "text-sm text-gray-500"
-  }, "How do you prefer to receive notifications?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("fieldset", {
-    className: "mt-4"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("legend", {
-    className: "sr-only"
-  }, "Notification method"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0"
-  }, notificationMethods.map(notificationMethod => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: notificationMethod.id,
-    className: "flex items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    id: notificationMethod.id,
-    name: "notification-method",
-    type: "radio",
-    defaultChecked: notificationMethod.id === 'email',
-    className: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: notificationMethod.id,
-    className: "ml-3 block text-sm font-medium leading-6 text-gray-900"
-  }, notificationMethod.title))))));
-}
-
-/***/ }),
-
 /***/ "./backend/views/page/components/common/RadioButton.jsx":
 /*!**************************************************************!*\
   !*** ./backend/views/page/components/common/RadioButton.jsx ***!
@@ -5529,13 +5464,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../redux/reducers/wishlistSlice */ "./backend/views/page/redux/reducers/wishlistSlice.js");
 /* harmony import */ var _common_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/Input */ "./backend/views/page/components/common/Input.jsx");
-/* harmony import */ var _common_Radio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/Radio */ "./backend/views/page/components/common/Radio.jsx");
-/* harmony import */ var _common_RadioButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/RadioButton */ "./backend/views/page/components/common/RadioButton.jsx");
-/* harmony import */ var _common_SearchSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/SearchSelect */ "./backend/views/page/components/common/SearchSelect.jsx");
-/* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
-/* harmony import */ var _common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../common/ToggleButton */ "./backend/views/page/components/common/ToggleButton.jsx");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
-
+/* harmony import */ var _common_RadioButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/RadioButton */ "./backend/views/page/components/common/RadioButton.jsx");
+/* harmony import */ var _common_SearchSelect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/SearchSelect */ "./backend/views/page/components/common/SearchSelect.jsx");
+/* harmony import */ var _common_Select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/Select */ "./backend/views/page/components/common/Select.jsx");
+/* harmony import */ var _common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/ToggleButton */ "./backend/views/page/components/common/ToggleButton.jsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 
 
@@ -5552,19 +5485,14 @@ function GlobalSettings() {
   const [selectedProducts, setSelectedProducts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const [selectedCategory, setSelectedCacetory] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const globalSettings = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.selectWishlist);
-  const [selectedInput, setSelectedInput] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(globalSettings.enable_wishlist_for || 'all_users');
-
-  // console.log(
-  // 	'globalSettings.enable_wishlist_for',
-  // 	globalSettings.enable_wishlist_for
-  // );
+  const [enableWishlistFor, setEnableWishlistFor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(globalSettings.enable_wishlist_for);
   const url = ww_admin_view_object.base_rest_url + '/global-settings';
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     const headers = {
       'Content-Type': 'application/json',
       'X-WP-Nonce': ww_admin_view_object.rest_nonce
     };
-    axios__WEBPACK_IMPORTED_MODULE_10__["default"].get(url, {
+    axios__WEBPACK_IMPORTED_MODULE_9__["default"].get(url, {
       headers
     }).then(response => {
       dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.getWishlistSettings)(response.data.data));
@@ -5577,11 +5505,10 @@ function GlobalSettings() {
     }));
   };
   const handleRadioChange = inputValue => {
-    setSelectedInput(inputValue);
+    setEnableWishlistFor(inputValue);
     dispatch((0,_redux_reducers_wishlistSlice__WEBPACK_IMPORTED_MODULE_3__.updateWishlistSetting)({
       enable_wishlist_for: inputValue
     }));
-    console.log('radio input value changed', inputValue);
   };
 
   // Callback function to handle the value from ToggleButton
@@ -5617,25 +5544,24 @@ function GlobalSettings() {
       }));
     }
   };
-
-  // console.log( 'exclude_type', globalSettings.exclude_type );
-  // console.log( 'exclude_Products', globalSettings.exclude_products );
+  console.log('exclude_type', globalSettings.exclude_type);
+  console.log('exclude_Products', globalSettings.exclude_products);
   const globalWishlistSettingsItems = {
     enable_wishlist_for: {
       label: 'Enable wishlist for',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Radio__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        id: 'all_users',
         name: "option",
-        id: "all_users",
-        value: globalSettings.enable_wishlist_for,
+        value: 'all_users',
         label: "All user",
-        isChecked: selectedInput === 'all_users',
+        isChecked: globalSettings.enable_wishlist_for === 'all_users',
         onChange: handleRadioChange
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_RadioButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        id: 'login_user',
         name: "option",
-        id: "login_user",
-        value: globalSettings.enable_wishlist_for,
+        value: 'login_user',
         label: "Login user",
-        isChecked: selectedInput === 'login_user',
+        isChecked: globalSettings.enable_wishlist_for === 'login_user',
         onChange: handleRadioChange
       })),
       info: ''
@@ -5655,10 +5581,10 @@ function GlobalSettings() {
     },
     exclude_type: {
       label: 'Exclude product/category',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_8__["default"], null), globalSettings.exclude_type === 'product' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_SearchSelect__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_Select__WEBPACK_IMPORTED_MODULE_7__["default"], null), globalSettings.exclude_type === 'product' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_SearchSelect__WEBPACK_IMPORTED_MODULE_6__["default"], {
         onChange: handleProductSelect,
         value: selectedProducts
-      }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_SearchSelect__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_SearchSelect__WEBPACK_IMPORTED_MODULE_6__["default"], {
         onChange: handleCategorySelect,
         value: selectedCategory
       })),
@@ -5666,7 +5592,7 @@ function GlobalSettings() {
     },
     item_count: {
       label: 'Show status for each product',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
         onToggle: value => handleToggle(value, 'item_count'),
         isOn: globalSettings.item_count
       }),
@@ -5688,7 +5614,7 @@ function GlobalSettings() {
     },
     enable_for_variation: {
       label: 'Enable Wishlist for variations product',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
         onToggle: value => handleToggle(value, 'enable_for_variation'),
         isOn: globalSettings.enable_for_variation
       }),
@@ -5696,7 +5622,7 @@ function GlobalSettings() {
     },
     enable_for_myaccount: {
       label: 'Enable wishlist in my account',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
         onToggle: value => handleToggle(value, 'enable_for_myaccount'),
         isOn: globalSettings.enable_for_myaccount
       }),
@@ -5704,7 +5630,7 @@ function GlobalSettings() {
     },
     multi_wishlist_settings: {
       label: 'Multi wishlist settings',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
         onToggle: value => handleToggle(value, 'multi_wishlist_settings'),
         isOn: globalSettings.multi_wishlist_settings
       }),
@@ -5712,7 +5638,7 @@ function GlobalSettings() {
     },
     cart_page_wishlist: {
       label: 'Cart page wishlist',
-      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      component: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_common_ToggleButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
         onToggle: value => handleToggle(value, 'cart_page_wishlist'),
         isOn: globalSettings.cart_page_wishlist
       }),
@@ -6454,7 +6380,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // Define the initial state based on the provided JSON data
 const initialState = {
-  enable_wishlist_for: '',
+  enable_wishlist_for: 'login_user',
   default_wishlist_name: 'New list',
   exclude_type: 'product',
   exclude_products: [{

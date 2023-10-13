@@ -12,13 +12,13 @@
   }
   ```
 */
-const notificationMethods = [
-	{ id: 'email', title: 'Email' },
-	{ id: 'sms', title: 'Phone (SMS)' },
-	{ id: 'push', title: 'Push notification' },
-];
+// const notificationMethods = [
+// 	{ id: 'email', title: 'Email' },
+// 	{ id: 'sms', title: 'Phone (SMS)' },
+// 	{ id: 'push', title: 'Push notification' },
+// ];
 
-export default function Radio() {
+export default function Radio( { radioItems } ) {
 	return (
 		<div>
 			<label className="text-base font-semibold text-gray-900">
@@ -30,13 +30,13 @@ export default function Radio() {
 			<fieldset className="mt-4">
 				<legend className="sr-only">Notification method</legend>
 				<div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
-					{ notificationMethods.map( ( notificationMethod ) => (
+					{ radioItems.map( ( notificationMethod ) => (
 						<div
 							key={ notificationMethod.id }
 							className="flex items-center"
 						>
 							<input
-								id={ notificationMethod.id }
+								id={ notificationMethod.name }
 								name="notification-method"
 								type="radio"
 								defaultChecked={

@@ -642,10 +642,6 @@ video {
   margin-left: 0.5rem;
 }
 
-.wawl-ml-3 {
-  margin-left: 0.75rem;
-}
-
 .wawl-mr-2 {
   margin-right: 0.5rem;
 }
@@ -684,10 +680,6 @@ video {
 
 .wawl-mt-3 {
   margin-top: 0.75rem;
-}
-
-.wawl-mt-4 {
-  margin-top: 1rem;
 }
 
 .wawl-mt-8 {
@@ -734,10 +726,6 @@ video {
   height: 8rem;
 }
 
-.wawl-h-4 {
-  height: 1rem;
-}
-
 .wawl-h-5 {
   height: 1.25rem;
 }
@@ -778,10 +766,6 @@ video {
   width: 9rem;
 }
 
-.wawl-w-4 {
-  width: 1rem;
-}
-
 .wawl-w-40 {
   width: 10rem;
 }
@@ -814,20 +798,12 @@ video {
   width: 100%;
 }
 
-.wawl-min-w-0 {
-  min-width: 0px;
-}
-
 .wawl-max-w-full {
   max-width: 100%;
 }
 
 .wawl-max-w-max {
   max-width: max-content;
-}
-
-.wawl-flex-1 {
-  flex: 1 1 0%;
 }
 
 .wawl-flex-shrink-0 {
@@ -904,10 +880,6 @@ video {
   flex-direction: row;
 }
 
-.wawl-items-start {
-  align-items: flex-start;
-}
-
 .wawl-items-center {
   align-items: center;
 }
@@ -930,17 +902,6 @@ video {
 
 .wawl-gap-8 {
   gap: 2rem;
-}
-
-.wawl-divide-y > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-y-reverse: 0;
-  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
-  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
-}
-
-.wawl-divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-divide-opacity));
 }
 
 .wawl-overflow-auto {
@@ -987,14 +948,6 @@ video {
 
 .wawl-border-4 {
   border-width: 4px;
-}
-
-.wawl-border-b {
-  border-bottom-width: 1px;
-}
-
-.wawl-border-t {
-  border-top-width: 1px;
 }
 
 .\!wawl-border-gray-300 {
@@ -1127,11 +1080,6 @@ video {
   padding-bottom: 0.75rem;
 }
 
-.wawl-py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .wawl-py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -1227,10 +1175,6 @@ video {
   line-height: 1rem;
 }
 
-.wawl-leading-6 {
-  line-height: 1.5rem;
-}
-
 .wawl-text-accent {
   --tw-text-opacity: 1;
   color: rgb(34 87 122 / var(--tw-text-opacity));
@@ -1249,11 +1193,6 @@ video {
 .wawl-text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.wawl-text-indigo-600 {
-  --tw-text-opacity: 1;
-  color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 
 .wawl-text-red-500 {
@@ -1471,11 +1410,6 @@ video {
 .focus\:wawl-ring-gray-200:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(229 231 235 / var(--tw-ring-opacity));
-}
-
-.focus\:wawl-ring-indigo-600:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(79 70 229 / var(--tw-ring-opacity));
 }
 
 .focus\:wawl-ring-offset-0:focus {

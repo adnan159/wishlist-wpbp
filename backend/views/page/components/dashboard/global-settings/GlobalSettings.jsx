@@ -6,13 +6,13 @@ import {
 	updateWishlistSetting,
 } from '../../../redux/reducers/wishlistSlice';
 import Input from '../../common/Input';
-import Radio from '../../common/Radio';
 import RadioButton from '../../common/RadioButton';
 import SearchSelect from '../../common/SearchSelect';
 import Select from '../../common/Select';
 import ToggleButton from '../../common/ToggleButton';
 
 import axios from 'axios';
+
 export default function GlobalSettings() {
 	const dispatch = useDispatch();
 	const [ toggleValue, setToggleValue ] = useState( false );
@@ -20,14 +20,9 @@ export default function GlobalSettings() {
 	const [ selectedCategory, setSelectedCacetory ] = useState( [] );
 
 	const globalSettings = useSelector( selectWishlist );
-	const [ selectedInput, setSelectedInput ] = useState(
-		globalSettings.enable_wishlist_for || 'all_users'
+	const [ enableWishlistFor, setEnableWishlistFor ] = useState(
+		globalSettings.enable_wishlist_for
 	);
-
-	// console.log(
-	// 	'globalSettings.enable_wishlist_for',
-	// 	globalSettings.enable_wishlist_for
-	// );
 	const url = ww_admin_view_object.base_rest_url + '/global-settings';
 
 	useEffect( () => {
@@ -51,13 +46,12 @@ export default function GlobalSettings() {
 	};
 
 	const handleRadioChange = ( inputValue ) => {
-		setSelectedInput( inputValue );
+		setEnableWishlistFor( inputValue );
 		dispatch(
 			updateWishlistSetting( {
 				enable_wishlist_for: inputValue,
 			} )
 		);
-		console.log( 'radio input value changed', inputValue );
 	};
 
 	// Callback function to handle the value from ToggleButton
@@ -101,28 +95,31 @@ export default function GlobalSettings() {
 		}
 	};
 
-	// console.log( 'exclude_type', globalSettings.exclude_type );
-	// console.log( 'exclude_Products', globalSettings.exclude_products );
+	console.log( 'exclude_type', globalSettings.exclude_type );
+	console.log( 'exclude_Products', globalSettings.exclude_products );
 	const globalWishlistSettingsItems = {
 		enable_wishlist_for: {
 			label: 'Enable wishlist for',
 			component: (
 				<>
-					<Radio />
 					<RadioButton
+						id={ 'all_users' }
 						name="option"
-						id="all_users"
-						value={ globalSettings.enable_wishlist_for }
+						value={ 'all_users' }
 						label="All user"
-						isChecked={ selectedInput === 'all_users' }
+						isChecked={
+							globalSettings.enable_wishlist_for === 'all_users'
+						}
 						onChange={ handleRadioChange }
 					/>
 					<RadioButton
+						id={ 'login_user' }
 						name="option"
-						id="login_user"
-						value={ globalSettings.enable_wishlist_for }
+						value={ 'login_user' }
 						label="Login user"
-						isChecked={ selectedInput === 'login_user' }
+						isChecked={
+							globalSettings.enable_wishlist_for === 'login_user'
+						}
 						onChange={ handleRadioChange }
 					/>
 				</>

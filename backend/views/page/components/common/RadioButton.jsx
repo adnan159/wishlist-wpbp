@@ -15,7 +15,7 @@ export default function RadioButton( {
 	return (
 		<>
 			<input
-				className="focus:wawl-outline-1 focus:wawl-shadow-none"
+				className="focus:wm-outline-1 focus:wm-shadow-none"
 				type="radio"
 				name={ name }
 				id={ id }
@@ -24,7 +24,7 @@ export default function RadioButton( {
 				onChange={ handleRadioChange }
 			/>
 			<label
-				className="-wawl-mt-1.5 wawl-ml-2 wawl-text-base"
+				className="-wm-mt-1.5 wm-ml-2 wm-text-base"
 				htmlFor={ value }
 			>
 				{ label }

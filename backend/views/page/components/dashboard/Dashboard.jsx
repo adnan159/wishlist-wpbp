@@ -6,7 +6,6 @@ import {
 	selectWishlist,
 } from '../../redux/reducers/wishlistSlice';
 import Button from '../common/Button';
-import ImageUpload from '../common/ImageUpload';
 import Tab from '../common/Tab';
 import Tabs from '../common/Tabs';
 import GlobalSettings from './global-settings/GlobalSettings';
@@ -43,10 +42,12 @@ export default function Dashboard() {
 	return (
 		<>
 			<Tabs active={ active } onChange={ handleChange }>
-				<Tab title="Global settings">
+				<Tab title="Dashboard">
+					<h1>My wishlist page</h1>
+				</Tab>
+				<Tab title="Settings">
 					<GlobalSettings />
-					<PopupSettings />
-					<div className="wawl-flex wawl-gap-4 wawl-justify-end wawl-mt-16 wawl-mb-10">
+					<div className="wm-flex wm-gap-4 wm-justify-end wm-mt-16 wm-mb-10">
 						<Button
 							onClick={ handleReset }
 							buttonStyle={ 'buttonPrimary' }
@@ -71,14 +72,38 @@ export default function Dashboard() {
 						</Button>
 					</div>
 				</Tab>
-				<Tab title="Product listing page">
+				<Tab title="Pop Up">
+					<PopupSettings />
+					<div className="wm-flex wm-gap-4 wm-justify-end wm-mt-16 wm-mb-10">
+						<Button
+							onClick={ handleReset }
+							buttonStyle={ 'buttonPrimary' }
+							iconPosition={ 'after' }
+							addBgColor={ false }
+							classNames={ '' }
+							icon={ '' }
+						>
+							{ 'Reset' }
+						</Button>
+						<Button
+							onClick={ () => {
+								console.log( 'hello world', wishlistSettings );
+							} }
+							buttonStyle={ 'button-primary' }
+							iconPosition={ 'after' }
+							addBgColor={ true }
+							classNames={ '' }
+							icon={ '' }
+						>
+							{ 'Save' }
+						</Button>
+					</div>
+				</Tab>
+				<Tab title="Shop">
 					<ProductListing />
 				</Tab>
-				<Tab title="Single product page">
-					<h1>Single product page</h1>
-					<ImageUpload />
-				</Tab>
-				<Tab title="My wishlist page">
+
+				<Tab title="Product">
 					<h1>My wishlist page</h1>
 				</Tab>
 			</Tabs>

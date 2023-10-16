@@ -34,18 +34,18 @@ input[type=radio]:checked + label span {
 }
 
 input[type=radio]:checked {
-  border-color: #22577a;
+  border-color: #03d6b3;
 }
 
 input[type=radio]:checked::before {
-  background-color: #22577a;
+  background-color: #03d6b3;
   width: 0.7rem;
   height: 0.7rem;
   margin: 0.3344rem;
 }
 
 input[type=radio]:focus {
-  border-color: #22577a;
+  border-color: #03d6b3;
   outline: none;
   box-shadow: none;
 }

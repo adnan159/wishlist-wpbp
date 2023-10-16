@@ -8,7 +8,7 @@ const CustomDropdownIndicator = ( props ) => {
 	return (
 		<div className="custom-dropdown-indicator" { ...props }>
 			<HiSearch
-				className="wawl-h-5 wawl-w-5 wawl-text-gray-400 wawl-mr-2"
+				className="wm-h-5 wm-w-5 wm-text-gray-400 wm-mr-2"
 				aria-hidden="true"
 			/>
 		</div>
@@ -16,8 +16,8 @@ const CustomDropdownIndicator = ( props ) => {
 };
 
 export default function SearchSelect( {
-	classes = 'wawl-border-red-500',
-	size = 'wawl-h-12 wawl-w-72',
+	classes = 'wm-border-red-500',
+	size = 'wm-h-11 wm-w-72',
 	onChange,
 	value,
 } ) {
@@ -83,10 +83,14 @@ export default function SearchSelect( {
 			outline: 'none',
 			boxShadow: 'none',
 			minWidth: '20px',
+			margin: '0',
 			'&:focus': {
 				...provided[ '&:focus' ],
 				backgroundColor: 'red',
 			},
+		} ),
+		ValueContainer: ( provided ) => ( {
+			padding: '0 8px',
 		} ),
 		multiValueLabel: ( provided ) => ( {
 			...provided,

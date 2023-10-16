@@ -8,8 +8,8 @@ import Preview from './Preview';
 export default function PopupSettings() {
 	return (
 		<>
-			<Page classes="wawl-mt-8 wawl-py-8 wawl-px-16 wawl-border wawl-border-gray-200 wawl-shadow-lg wawl-rounded-lg">
-				<div className=" wawl-col-span-12">
+			<Page classes="wm-mt-8 wm-py-8 wm-px-16 wm-border wm-border-gray-200 wm-shadow-lg wm-rounded-lg">
+				<div className=" wm-col-span-12">
 					<DisclosureWList
 						title={ 'Popup Settings' }
 						children={

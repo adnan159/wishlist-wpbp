@@ -16,7 +16,7 @@ function classNames( ...classes ) {
 export default function Select( {
 	label = '',
 	classes = '',
-	size = 'wawl-h-12 wawl-w-72',
+	size = 'wm-h-11 wm-w-72',
 } ) {
 	const wishlistState = useSelector( selectWishlist );
 	const dispatch = useDispatch();
@@ -36,23 +36,23 @@ export default function Select( {
 		<Listbox value={ excludeType } onChange={ handleSelect }>
 			{ ( { open } ) => (
 				<>
-					<div className="wawl-relative">
+					<div className="wm-relative">
 						<Listbox.Button
 							className={ [
-								'wawl-block wawl-rounded-md wawl-border-0 wawl-py-1.5 !wawl-px-4 wawl-text-gray-400 wawl-ring-0 wawl-ring-transparent   wawl-ring-inset placeholder:!wawl-text-gray-400 focus:!wawl-ring-0 focus:!wawl-ring-inset focus:!wawl-border-none sm:wawl-text-sm sm:wawl-leading-6 wawl-shadow-primary',
+								'wm-block wm-rounded-md wm-border-0 wm-py-1.5 !wm-px-4 wm-text-gray-400 wm-ring-0 wm-ring-transparent   wm-ring-inset placeholder:!wm-text-gray-400 focus:!wm-ring-0 focus:!wm-ring-inset focus:!wm-border-none sm:wm-text-sm sm:wm-leading-6 wm-shadow-primary',
 								classes,
 								size,
 							].join( ' ' ) }
 						>
-							<span className="wawl-inline-flex wawl-w-full wawl-truncate">
-								<span className="wawl-truncate">
+							<span className="wm-inline-flex wm-w-full wm-truncate">
+								<span className="wm-truncate">
 									{ excludeType }
 								</span>
 							</span>
 
-							<span className="wawl-pointer-events-none wawl-absolute wawl-inset-y-0 wawl-right-0 wawl-flex wawl-items-center wawl-pr-2">
+							<span className="wm-pointer-events-none wm-absolute wm-inset-y-0 wm-right-0 wm-flex wm-items-center wm-pr-2">
 								<HiChevronDown
-									className="wawl-h-5 wawl-w-5 wawl-text-gray-400"
+									className="wm-h-5 wm-w-5 wm-text-gray-400"
 									aria-hidden="true"
 								/>
 							</span>
@@ -61,33 +61,33 @@ export default function Select( {
 						<Transition
 							show={ open }
 							as={ Fragment }
-							leave="wawl-transition wawl-ease-in wawl-duration-100"
-							leaveFrom="wawl-opacity-100"
-							leaveTo="wawl-opacity-0"
+							leave="wm-transition wm-ease-in wm-duration-100"
+							leaveFrom="wm-opacity-100"
+							leaveTo="wm-opacity-0"
 						>
-							<Listbox.Options className="wawl-absolute wawl-z-10 wawl-mt-1 wawl-max-h-60 wawl-w-full wawl-overflow-auto wawl-rounded-md wawl-bg-white wawl-py-1 wawl-text-base wawl-drop-shadow-md wawl-ring-1 wawl-ring-transparent wawl-ring-opacity-5 focus:wawl-outline-none sm:wawl-text-sm">
+							<Listbox.Options className="wm-absolute wm-z-10 wm-mt-1 wm-max-h-60 wm-w-full wm-overflow-auto wm-rounded-md wm-bg-white wm-py-1 wm-text-base wm-drop-shadow-md wm-ring-1 wm-ring-transparent wm-ring-opacity-5 focus:wm-outline-none sm:wm-text-sm">
 								{ product.map( ( person ) => (
 									<Listbox.Option
 										key={ person.type }
 										className={ ( { active } ) =>
 											classNames(
 												active
-													? 'wawl-bg-accent wawl-text-white'
-													: 'wawl-text-gray-900',
-												'wawl-relative wawl-cursor-default wawl-select-none wawl-py-2 wawl-pl-3 wawl-pr-9'
+													? 'wm-bg-accent wm-text-white'
+													: 'wm-text-gray-900',
+												'wm-relative wm-cursor-default wm-select-none wm-py-2 wm-pl-3 wm-pr-9'
 											)
 										}
 										value={ person.type }
 									>
 										{ ( { selected, active } ) => (
 											<>
-												<div className="wawl-flex">
+												<div className="wm-flex">
 													<span
 														className={ classNames(
 															selected
-																? 'wawl-font-semibold'
-																: 'wawl-font-normal',
-															'wawl-truncate'
+																? 'wm-font-semibold'
+																: 'wm-font-normal',
+															'wm-truncate'
 														) }
 													>
 														{ person.type }
@@ -98,13 +98,13 @@ export default function Select( {
 													<span
 														className={ classNames(
 															active
-																? 'wawl-text-white'
-																: 'wawl-text-accent',
-															'wawl-absolute wawl-inset-y-0 wawl-right-0 wawl-flex wawl-items-center wawl-pr-4'
+																? 'wm-text-white'
+																: 'wm-text-accent',
+															'wm-absolute wm-inset-y-0 wm-right-0 wm-flex wm-items-center wm-pr-4'
 														) }
 													>
 														<HiCheck
-															className="wawl-h-5 wawl-w-5"
+															className="wm-h-5 wm-w-5"
 															aria-hidden="true"
 														/>
 													</span>

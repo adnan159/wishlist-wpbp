@@ -18,10 +18,10 @@ export default function InputField( {
 } ) {
 	return (
 		<>
-			<div className="" ctx-group ctx-flex ctx-relative>
+			<div className="" wm-group wm-flex wm-relative>
 				{ label && (
 					<label
-						className="ctx-inline-flex ctx-mt-1 ctx-text-gray-500"
+						className="wm-inline-flex wm-mt-1 wm-text-gray-500"
 						htmlFor="input-field"
 					>
 						{ label }
@@ -38,7 +38,7 @@ export default function InputField( {
 					readOnly={ readOnly }
 					autoComplete="off"
 					placeholder={ placeholder }
-					className="ctx-block ctx-rounded-md !ctx-border-gray-300 ctx-shadow-sm sm:ctx-text-sm"
+					className="wm-block wm-rounded-md !wm-border-gray-300 wm-shadow-sm sm:wm-text-sm"
 					onChange={ onChange && onChange }
 					onFocus={ onFocus && onFocus }
 					onBlur={ onBlur && onBlur }

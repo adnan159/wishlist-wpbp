@@ -2,13 +2,13 @@ import { Disclosure } from '@headlessui/react';
 
 export default function DisclosureWList( { title, children } ) {
 	return (
-		<div className="wawl-w-full">
-			<div className="wawl-w-full wawl-max-w-full wawl-p-2 wawl-mx-auto wawl-bg-white wawl-rounded-2xl">
+		<div className="wm-w-full">
+			<div className="wm-w-full wm-max-w-full wm-p-2 wm-mx-auto wm-bg-white wm-rounded-2xl">
 				<Disclosure>
 					{ ( { open } ) => (
 						<>
 							<Disclosure.Button className="">
-								<h2 className="wawl-text-[25px] wawl-font-semibold wawl-gray-800">
+								<h2 className="wm-text-[25px] wm-font-semibold wm-gray-800">
 									{ title }
 								</h2>
 

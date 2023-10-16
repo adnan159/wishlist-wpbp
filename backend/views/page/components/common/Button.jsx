@@ -14,15 +14,15 @@ export default function Button( {
 } ) {
 	const buttons = {
 		buttonPrimary:
-			'wawl-px-5 wawl-py-3 wawl-text-sm wawl-rounded-[0.1375rem] wawl-leading-4 ',
+			'wm-px-5 wm-py-3 wm-text-sm wm-rounded-[0.1375rem] wm-leading-4 ',
 
 		buttonDefault:
-			'wawl-rounded-md wawl-px-4 wawl-w-full wawl-py-2 wawl-text-sm wawl-text-red-500 ',
+			'wm-rounded-md wm-px-4 wm-w-full wm-py-2 wm-text-sm wm-text-red-500 ',
 	};
 
 	const getClassNames = ( style ) => {
 		let classNamesArr = [
-			'wawl-items-center wawl-border wawl-border-accent wawl-shadow-sm wawl-font-medium focus:wawl-outline-accent ',
+			'wm-items-center wm-border wm-border-accent wm-shadow-sm wm-font-medium focus:wm-outline-accent ',
 		];
 
 		if ( buttons[ style ] ) {
@@ -34,7 +34,7 @@ export default function Button( {
 		// Add background color and additional classNames if required
 		if ( addBgColor && style !== 'buttonPrimary' ) {
 			classNamesArr.push(
-				'wawl-bg-accent wawl-text-white hover:wawl-opacity-95 '
+				'wm-bg-accent wm-text-white hover:wm-opacity-95 '
 			);
 		}
 

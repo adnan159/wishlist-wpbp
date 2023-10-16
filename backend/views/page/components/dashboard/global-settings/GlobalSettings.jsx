@@ -182,7 +182,7 @@ export default function GlobalSettings() {
 					className={
 						'ctx-block ctx-w-72 sm:ctx-w-[15.5rem] xl:ctx-w-72'
 					}
-					size={ 'wawl-w-40 wawl-h-12' }
+					size={ 'wm-w-40 wm-h-11' }
 					placeholder={ 'Enter Days' }
 					name="guest_user_wishlist_days"
 					type={ 'text' }
@@ -250,24 +250,31 @@ export default function GlobalSettings() {
 	};
 	console.log( list );
 	return (
-		<div className="wawl-mt-8 wawl-py-8 wawl-px-16 wawl-border wawl-border-gray-200 wawl-shadow-lg wawl-rounded-lg">
-			<div className=" wawl-pb-6 ">
-				<h2 className="wawl-text-[25px] wawl-font-semibold ctx-gray-800">
+		<div className="wm-mt-8 wm-py-8 wm-px-16 wm-border wm-border-gray-200 wm-shadow-lg wm-rounded-lg">
+			<div className=" wm-pb-6 ">
+				<h2 className="wm-text-[25px] wm-font-semibold ctx-gray-800">
 					Global Settings
 				</h2>
 			</div>
 			{ Object.keys( globalWishlistSettingsItems ).map( ( itemKey ) => (
 				<div key={ itemKey }>
-					<div className="wawl-flex wawl-flex-row wawl-justify-start wawl-mt-12">
-						<div className="wawl-basis-1/4">
-							<h3 className="wawl-text-base wawl-font-medium">
+					<div className="wm-flex wm-flex-row wm-justify-start wm-mt-12">
+						<div className="wm-basis-1/4">
+							<h3 className="wm-text-base wm-font-medium">
 								{ globalWishlistSettingsItems[ itemKey ].label }
 							</h3>
-							<p className="wawl-mt-3 wawl-text-gray-400 wawl-text-xs">
-								{ globalWishlistSettingsItems[ itemKey ].info }
-							</p>
+							{ globalWishlistSettingsItems[ itemKey ].info ? (
+								<p className="wm-mt-3 wm-text-gray-400 wm-text-xs">
+									{
+										globalWishlistSettingsItems[ itemKey ]
+											.info
+									}
+								</p>
+							) : (
+								''
+							) }
 						</div>
-						<div className="wawl-basis-3/4 wawl-flex wawl-gap-8 wawl-justify-start">
+						<div className="wm-basis-3/4 wm-flex wm-gap-8 wm-justify-start">
 							{ globalWishlistSettingsItems[ itemKey ].component }
 						</div>
 					</div>
@@ -276,15 +283,15 @@ export default function GlobalSettings() {
 
 			{ /* { globalSettings.map( ( item, index ) => (
 				<div
-					className="wawl-flex wawl-flex-row wawl-justify-start  wawl-mt-12 "
+					className="wm-flex wm-flex-row wm-justify-start  wm-mt-12 "
 					key={ index }
 				>
-					<div className=" wawl-basis-1/4">
-						<h3 className="wawl-text-base wawl-font-medium">
+					<div className=" wm-basis-1/4">
+						<h3 className="wm-text-base wm-font-medium">
 							{ item.label }
 						</h3>
 					</div>
-					<div className="  wawl-basis-3/4 wawl-flex wawl-gap-8 wawl-justify-start ">
+					<div className="  wm-basis-3/4 wm-flex wm-gap-8 wm-justify-start ">
 						{ item.type.includes( 'radio' ) && (
 							<RadioButton
 								items={ globalSettingsRadio }

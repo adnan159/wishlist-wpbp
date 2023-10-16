@@ -62,25 +62,25 @@ export default function IconImage( { iconName } ) {
 
 	return (
 		<div>
-			<div className="wawl-flex wawl-mx-auto wawl-items-center">
-				<div className="wawl-border wawl-border-gray-300 wawl-rounded-md wawl-block wawl-mx-auto wawl-object-fit wawl-h-32 wawl-w-36">
+			<div className="wm-flex wm-mx-auto wm-items-center">
+				<div className="wm-border wm-border-gray-300 wm-rounded-md wm-block wm-mx-auto wm-object-fit wm-h-32 wm-w-36">
 					{ icons ? (
 						<div>
 							<img
-								className="wawl-mx-auto wawl-object-fit wawl-h-32  wawl-w-36 wawl-px-4 wawl-py-2"
+								className="wm-mx-auto wm-object-fit wm-h-32  wm-w-36 wm-px-4 wm-py-2"
 								src={ icons }
 								alt=""
 							/>
 						</div>
 					) : (
 						<img
-							className="wawl-mx-auto wawl-object-cover wawl-h-32 wawl-w-auto"
+							className="wm-mx-auto wm-object-cover wm-h-32 wm-w-auto"
 							src={ globalSettings[ iconName ] }
 							alt="Default"
 						/>
 					) }
 				</div>
-				<div className="wawl-pl-4 wawl-grid wawl-gap-4">
+				<div className="wm-pl-4 wm-grid wm-gap-4">
 					{ ! icons ? (
 						<Button
 							onClick={ () => {
@@ -92,15 +92,15 @@ export default function IconImage( { iconName } ) {
 							style={ {
 								backgroundColor: 'color',
 							} }
-							classNames="!wawl-border-gray-300 wawl-text-gray-400"
+							classNames="!wm-border-gray-300 wm-text-gray-400"
 							icon=""
 						>
 							Add Image
 						</Button>
 					) : (
-						<label className="wawl-px-5 wawl-py-3 wawl-text-sm wawl-rounded-[0.1375rem] wawl-leading-4 wawl-items-center wawl-border wawl-border-gray-300 wawl-text-gray-500">
+						<label className="wm-px-5 wm-py-3 wm-text-sm wm-rounded-[0.1375rem] wm-leading-4 wm-items-center wm-border wm-border-gray-300 wm-text-gray-500">
 							<input
-								className="wawl-hidden wawl-w-11"
+								className="wm-hidden wm-w-11"
 								type="file"
 								name="images"
 								onChange={ onImageChange }
@@ -116,7 +116,7 @@ export default function IconImage( { iconName } ) {
 							buttonStyle="button-primary"
 							iconPosition="after"
 							addBgColor={ false }
-							classNames="!wawl-border-gray-300 wawl-text-gray-500"
+							classNames="!wm-border-gray-300 wm-text-gray-500"
 							icon=""
 						>
 							Remove

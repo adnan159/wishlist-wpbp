@@ -7,7 +7,7 @@ export default function ProductListing() {
 	return (
 		<>
 			<Page
-				classes="wawl-mt-8 wawl-py-8 wawl-px-6 wawl-border wawl-border-gray-200 wawl-shadow-lg wawl-rounded-lg"
+				classes="wm-mt-8 wm-py-8 wm-px-6 wm-border wm-border-gray-200 wm-shadow-lg wm-rounded-lg"
 				title="Product Listing Page"
 			>
 				<PageLeft>

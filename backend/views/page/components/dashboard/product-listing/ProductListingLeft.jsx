@@ -163,14 +163,14 @@ export default function ProductListingLeft() {
 	return (
 		<>
 			<Page classes="">
-				<div className="wawl-col-span-12">
-					<div className="wawl-py-8 wawl-px-6 wawl-border wawl-border-gray-200 wawl-rounded-lg">
+				<div className="wm-col-span-12">
+					<div className="wm-py-8 wm-px-6 wm-border wm-border-gray-200 wm-rounded-lg">
 						{ Object.keys( productListingItems ).map(
 							( itemKey ) => (
 								<div key={ itemKey }>
 									{ productListingItems[ itemKey ].title && (
-										<div className="wawl-w-full">
-											<h2 className="wawl-text-xl wawl-font-semibold wawl-mt-20 -wawl-mb-8">
+										<div className="wm-w-full">
+											<h2 className="wm-text-xl wm-font-semibold wm-mt-20 -wm-mb-8">
 												{
 													productListingItems[
 														itemKey
@@ -180,16 +180,16 @@ export default function ProductListingLeft() {
 										</div>
 									) }
 
-									<div className="wawl-flex wawl-justify-between wawl-my-8">
-										<div className="wawl-basis-2/5">
-											<h3 className="wawl-text-base wawl-font-medium">
+									<div className="wm-flex wm-justify-between wm-my-8">
+										<div className="wm-basis-2/5">
+											<h3 className="wm-text-base wm-font-medium">
 												{
 													productListingItems[
 														itemKey
 													].label
 												}
 											</h3>
-											<p className="wawl-mt-3 wawl-text-gray-400 wawl-text-xs">
+											<p className="wm-mt-3 wm-text-gray-400 wm-text-xs">
 												{
 													productListingItems[
 														itemKey
@@ -197,7 +197,7 @@ export default function ProductListingLeft() {
 												}
 											</p>
 										</div>
-										<div className="wawl-basis wawl-basis-3/5 wawl-flex wawl-gap-8 wawl-justify-start">
+										<div className="wm-basis wm-basis-3/5 wm-flex wm-gap-8 wm-justify-start">
 											{
 												productListingItems[ itemKey ]
 													.component

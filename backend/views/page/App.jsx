@@ -7,9 +7,9 @@ const App = () => {
 
 	return (
 		<>
-			<div className="wawl-border wawl-border-[#E2E2E2] wawl-bg-white wawl-p-14">
+			<div className="wm-border wm-border-[#E2E2E2] wm-bg-white wm-p-14">
 				<div>
-					<h3 className="wawl-font-bold wawl-text-xl">
+					<h3 className="wm-font-bold wm-text-xl">
 						Wishlist Settings
 					</h3>
 				</div>

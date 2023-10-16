@@ -4,7 +4,7 @@ export default function Input( {
 	value = '',
 	placeholder = '',
 	classes = '',
-	size = 'wawl-h-12 wawl-w-72',
+	size = 'wm-h-11 wm-w-72',
 	required = false,
 	onChange,
 } ) {
@@ -12,7 +12,7 @@ export default function Input( {
 		<div className="">
 			<input
 				className={ [
-					'wawl-block wawl-rounded-md wawl-border-0 wawl-py-1.5 !wawl-px-4 wawl-text-gray-900 wawl-ring-1 wawl-ring-inset placeholder:!wawl-text-gray-400 focus:!wawl-ring-1 focus:!wawl-ring-inset focus:!wawl-ring-gray-200 focus:!wawl-border-none sm:wawl-text-sm sm:wawl-leading-6 wawl-shadow-lg',
+					'wm-block wm-rounded-md wm-border-0 wm-py-1.5 !wm-px-4 wm-text-gray-900 wm-ring-1 wm-ring-inset placeholder:!wm-text-gray-400 focus:!wm-ring-1 focus:!wm-ring-inset focus:!wm-ring-gray-200 focus:!wm-border-none sm:wm-text-sm sm:wm-leading-6 wm-shadow-lg',
 					classes,
 					size,
 				].join( ' ' ) }

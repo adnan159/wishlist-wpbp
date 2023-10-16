@@ -14,12 +14,12 @@ export default function InputColor( { name, value, onChange } ) {
 		<div className="color-input-container">
 			{ ! value ? (
 				<span className="pen-icon" onClick={ handleToggleIcon }>
-					<HiMiniEyeDropper className="wawl-text-gray-400" />
+					<HiMiniEyeDropper className="wm-text-gray-400" />
 				</span>
 			) : null }
 			<input
 				ref={ inputRef }
-				className="wawl-h-10 wawl-w-10 wawl-bg-gray-400"
+				className="wm-h-10 wm-w-10 wm-bg-gray-400"
 				type="color"
 				name={ name }
 				value={ value || `#ffffff` }

@@ -11,7 +11,7 @@ export default function InputCSS( {
 		<>
 			<div className="color-input-container">
 				<input
-					className="wawl-h-8 wawl-w-16 wawl-text-center wawl-bg-gray-400"
+					className="wm-h-8 wm-w-16 wm-text-center wm-bg-gray-400"
 					type="text"
 					id={ id }
 					name={ name }

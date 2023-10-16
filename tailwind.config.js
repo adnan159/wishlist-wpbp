@@ -34,7 +34,7 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: '#2C2C2C',
-				accent: '#22577A',
+				accent: '#03D6B3',
 				default: '#4B6F23',
 			},
 			boxShadow: {
